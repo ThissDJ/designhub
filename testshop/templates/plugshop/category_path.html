@@ -1,0 +1,20 @@
+{% spaceless %}
+<div class="container">
+
+		<a href="/">Home</a>
+
+<span class="seperator">/</span>
+
+        <a href="{% url plugshop-product-list %}">{{root|default:"Designs"}}</a>
+
+    {% for c in category.get_ancestor_list %}
+        <span class="seperator">/</span>
+        
+            <a href="{{c.get_absolute_url}}">{{c.name}}</a>
+    {% endfor %}
+    {% if product %}
+    <span class="seperator">/</span>
+        <span class="seperator">{{product}} </span>
+    {% endif %}
+</div>
+{% endspaceless %}

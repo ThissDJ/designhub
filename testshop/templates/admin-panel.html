@@ -1,0 +1,24 @@
+{% spaceless %}
+
+<div id="admin-panel">
+    <ul>
+    	<li>
+    		<a href="#" id="hide-admin">Hide me</a>
+    	</li>
+    	<li>
+    		<a href="/admin-designer/add/">Add designers</a>
+    	</li>
+    	<li>
+    		<a href="{% url admin:shop_product_add %}" target="_blank">Add products</a>
+    	</li>
+    </ul>
+</div>
+<div id="show-admin-panel">
+    <ul>
+    	<li>
+    		<a href="#" id="show-admin">&nbsp;
+            </a>
+    	</li>
+    </ul>
+</div>
+{% endspaceless %}

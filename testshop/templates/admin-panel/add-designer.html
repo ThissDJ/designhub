@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block extrastyle %}
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="container">
+	<div class="row special body-row">
+		<div class="tweleve columns">
+			<h1>Plz Complete the designer adding form</h1>
+			{% if form.is_multipart %}
+			    <form enctype="multipart/form-data" method="POST" action="" class="model-edit"  id="designer-add">
+			{% else %}
+			    <form method="POST" action="" id="designer-add">
+			{% endif %}
+				{% csrf_token %}
+			    {{form}}
+			    <div>
+			    	<input type="submit">
+			    </div>
+			    
+			</form>
+    	</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+  {% if user.is_active and user.is_staff %}
+     <script src="{{MEDIA_URL}}js/update-model.js"></script>
+  {% endif %}
+
+{% endblock extrajs %}

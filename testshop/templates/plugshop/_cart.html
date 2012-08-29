@@ -1,0 +1,85 @@
+{% load plugshop filename setting checkout_cart1%}
+<div class="container">
+	<h2>Cart:</h2>
+			    {% if request.cart|length %}
+			    <table border="0" cellspacing="5" cellpadding="5">
+			    	<tr>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    			Thumnail
+			    		</td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Product
+                        </td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Quantity
+                        </td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Price
+                        </td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Add
+                        </td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Decrease
+                        </td>
+			    		<td style="padding-left:5px;padding-right:5px;">
+			    		    Clear
+                        </td>
+			    	</tr>
+			        {% for cart_item in request.cart %}
+			            <tr>
+				    		<td style="padding-left:5px;padding-right:5px;">
+				    			<a href="{{cart_item.product.get_absolute_url}}"><img class="onhover-dec-opacity" src="{{MEDIA_URL}}{% setting UPLOAD_URI %}{{ cart_item.product.images.all.0.fpath.name|filename:".50x50"}}"></a>
+				    		</td>
+			                <td style="padding-left:5px;padding-right:5px;">
+			                    <a href="{{cart_item.product.get_absolute_url}}">{{cart_item.product}}</a> {% if cart_item.size %}<p style="color:#bbb;">Size:{{cart_item.size}}</p>{% endif %}
+			                </td>
+			                <td style="padding-left:5px;padding-right:5px;">{{cart_item.quantity}}</td>
+			                <td style="padding-left:5px;padding-right:5px;">{{cart_item.price_total}}</td>
+			                <td style="padding-left:5px;padding-right:5px;">
+			
+			                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
+			                        {% plugshop_action cart_item.product "add" 1 %}
+			                        <input type="hidden" name="size" value="{{cart_item.size}}">
+			                        <p>
+			                            <input type="submit" value="+">
+			                        </p>
+			                    </form>
+			                </td>
+			                <td style="padding-left:5px;padding-right:5px;">
+			                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
+			                        {% plugshop_action cart_item.product "remove" 1 %}
+			                        <input type="hidden" name="size" value="{{cart_item.size}}">
+			                        <p>
+			                            <input type="submit" value="-">
+			                        </p>
+			                    </form>
+			                </td>
+			                <td style="padding-left:5px;padding-right:5px;">
+			                    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
+			                        {% plugshop_action cart_item.product "remove_product" %}
+			                        <input type="hidden" name="size" value="{{cart_item.size}}">
+			                        <p>
+			                            <input type="submit" value="x">
+			                        </p>
+			                    </form>
+			                </td>
+			            </tr>
+			        {% endfor %}
+			    </table>
+			    <div>
+			        Total: {{request.cart.price_total}}
+			    </div>
+			    
+			    <form action="{% url plugshop-cart %}" method="post">{% csrf_token %}
+			        <p>
+			            <input type="hidden" name="_action" value="remove_all">
+			            <input type="submit" value="empty">
+			        </p>
+			    </form>
+			    {% autoescape off %}
+			    {{ request.cart|checkout_cart1:"" }}
+			    {% endautoescape %}
+			    {% endif %}
+</div>
+<div class="push"></div>

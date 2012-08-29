@@ -1,0 +1,9 @@
+{% load mptt_tags %}
+    {% recursetree categories %}
+		<li class="subtitle_container">
+            <a href="{{ node.get_absolute_url }}" class="subtitle  en"  rel="{{node.img}}">
+            	{{node.name}}
+            </a>
+            {% if not node.is_leaf_node %}<ul>{{ children }}</ul>{% endif %}
+        </li>
+    {% endrecursetree %}

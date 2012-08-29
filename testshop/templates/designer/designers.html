@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load mptt_tags filename setting %}
+{% block extrastyle %}
+{% endblock extrastyle %}
+{% block title %}All designers | Design Hub{% endblock %}
+{% block extrahead %}
+<meta name="description" content="See all designers | Design Hub:A platform for idea realization" />
+<meta name="keywords" content="Designers,Design Hub" />
+{% endblock %}
+{% block content %}
+{% spaceless %}
+    {% block breadcrumbs %}
+        {% include "designer/subnavigation.html"%}
+    {% endblock breadcrumbs %}  
+<div class="container" style="margin-top:0px;margin-bottom:20px;padding-top:20px;padding-bottom:20px;">
+    {% spaceless %}
+     <div class="pic-list-container">
+		<div class="row">
+	 	{% for d in designers %}
+	 	<div style="width:33.3%;float:left;">
+<!--/designer/{{d.slug}}/ -->			 		<a href="javascript:void(0);"  onClick="alert('Coming soon in September!');" class="designer-thumb pic-container-a hover-tip" data-slug="{{d.slug}}"  title="{{d}}">
+	 			<div class="tip-content-when-hover">Sample</div>
+	 			<img src="{{MEDIA_URL}}{% setting UPLOAD_URI %}{{ d.avatar.name|filename:".200x200"}}" width=200 height=200>
+	 		</a>
+	 	</div> 
+	 	{% endfor %}
+	     </div>
+	 </div>
+    {% endspaceless %}
+</div>
+<div class="push"></div>
+{% endspaceless %}
+{% endblock content %}
+{% block extrajs %}
+  {% if user.is_active and user.is_staff %}
+       <script src="{{MEDIA_URL}}js/edit-model-widget.js"></script>
+  {% endif %}
+
+{% endblock extrajs %}

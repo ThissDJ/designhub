@@ -1,0 +1,85 @@
+{% spaceless %}
+<div class="container">
+	<div class="pull-right nav1">
+	  	  			<a href="/#aboutus" class="inline-block">About us</a> &nbsp;/&nbsp; 
+	  	  			<a href="{% url how-dhub-works %}" class="inline-block">How we work</a> &nbsp;/&nbsp; 
+	  	  			<a href="{% url how-dhub-works %}#faq" class="inline-block">FAQ</a> &nbsp;/&nbsp;
+	  	  			{% if user.is_authenticated %}
+                    <a href="/accounts/logout/?next={{request.path}}"  class="inline-block">Logout</a> &nbsp;/&nbsp; 
+                    {% else %}
+	  	  			<div class="hovershow-container inline-block">	
+	  	  				<a href="/accounts/login/?next={{request.path}}"  class="nav1-child">Login</a> &nbsp;/&nbsp; 
+	  	  			    <ul style="display:none;" class="hovershow-content wide-width">
+	  	  			    	<li class="small-line-height">or connect with</li>{% load url from future %}
+	  	  			    	{% for name in social_auth.backends.oauth2 %}
+							    <li><a rel="nofollow" href="{% url "socialauth_begin" name %}?next={{request.path}}">{{ name|title }}</a></li>
+							{% endfor %}
+	  	  			    </ul>
+                    </div>                    
+	  	  			{% endif %}
+	  	  			<div id="language-button-container" class="hovershow-container inline-block">		
+	  	  			    <a href="javascript:void(0);" class="nav1-child">Language</a>
+	  	  			    <ul id="languages-container" style="display:none;" class="hovershow-content">
+	  	  			    	<li><a href="javascript:void();">English</a></li>
+	  	  			    	<li><a href="javascript:void();">繁体</a></li>
+	  	  			    	<li><a href="javascript:void();">简体</a></li>
+	  	  			    </ul>
+                    </div>
+                    &nbsp;/&nbsp; 
+	  	  			<a href="javascript:void(0);" class="inline-block">Delivery</a> &nbsp;/&nbsp; 
+	  	  			<div id="cart-button-container" class="hovershow-container inline-block">
+	  	  			<a href="{% url 'plugshop-cart' %}" class="nav1-child last-nav1-child">Cart </a>
+                      {% include "_cart.html" %}   
+                    </div> 	
+    </div> 
+</div>
+<div class="container" style="position:relative;background-color:#fffff;">
+	<div class="center">
+	    <a href="/" title="home"><img src="{{MEDIA_URL}}img/weblogo.png"></a>
+	</div>
+	<div id="sns-icons">
+		<a href="http://www.facebook.com/pages/Design-Hub/445993645420664" class="sns-share facebook" title="Our Page in Facebook">&nbsp;</a>
+  		<a href="javascript:void(0);" class="sns-share twitter" title="Share us in Twitter">&nbsp;</a>
+	</div>
+</div>
+<div class="container">
+	<div class="navbar">
+	  <div class="navbar-inner">
+	    <div class="container">
+	      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	      </a>
+	      <div class="nav-collapse nav2">
+	        <ul class="nav">
+	          <li class="nav_children">
+	          	<a href="{% url 'plugshop-product-list' %}" class="nav_children_title wt_subnav">Designs</a>
+				<div class="preview inactive undisplayed right">
+					<img src=""/>
+				</div>
+				<ul class="subnav0 speech-bubble">
+                    {% include "category_list.html" with categories=categories %}
+				</ul>
+	          </li>
+	          <li class="nav_children">
+	          	<a href="{% url 'plugshop-designer-list' %}" class="nav_children_title wt_subnav">Designers</a>
+				<div class="preview inactive undisplayed">
+					<img src=""/>
+				</div>
+				<ul class="subnav0  speech-bubble">
+                    {% include "designer_list.html" with designers=designers %}
+				</ul>
+	          </li>
+	        </ul>
+	        <ul class="nav pull-right">
+	          <li><a href="javascript:void(0);" class="nav_children_title" title="Coming soon">Ideas</a></li>
+	           <li><a href="/" class="nav_children_title">Join Us</a></li>
+	         </ul>
+	      </div><!--/.nav-collapse -->
+	    </div>
+	  </div>
+	</div>
+</div>
+{% endspaceless %}

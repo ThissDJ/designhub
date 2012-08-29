@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% block breadcrumbs %}
+        {% include "plugshop/category_path.html" with category=category %}
+    {% endblock breadcrumbs %}  
+
+    {% block shop-content %}
+    {% endblock shop-content %}
+{% endblock content %}
+

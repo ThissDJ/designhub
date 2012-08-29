@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load url from future %}
+
+{% block javascript %}
+    $(function(){
+        $('input[type=submit]').click(function(){
+            if($(this).next().val()==''){
+            $(this).next().val('/' + $("#id_username").val()) ;
+            }
+            //alert($(this).next().val());
+            });
+    });
+{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div  style="text-align:center;">
+		{% if form.errors %}
+		<div   >
+			<p>用户名和密码不匹配；请重试</p>
+		</div>
+		{% endif %}
+		<form method="post" action="{% url 'django.contrib.auth.views.login' %}">
+		{% csrf_token %}
+			<div class="login-input" >
+				    <h1>User name</h1>
+				    {{ form.username }}
+				    <h1>Password</h1>
+
+					{{ form.password }}
+			</div>
+			<div  >
+				<input type="submit" value="login" class="btn"/>
+			</div>
+			<input type="hidden" name="next" value="{{next}}" />
+		</form>
+	</div>
+</div>
+<div class="container" style="text-align:center;margin-top:20px; margin-bottom:30px;">
+	<h3>or connect with</h3> {% load url from future %}
+	{% for name in social_auth.backends.oauth2 %}
+	    <h1><a rel="nofollow" href="{% url "socialauth_begin" name %}?next={{next}}">{{ name|title }}</a></h1>
+	{% endfor %}
+</div>
+<div class="push"></div>
+{% endblock %}

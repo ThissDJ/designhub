@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block extrastyle %}
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="container">
+	<div class="row special body-row">
+		<div class="tweleve columns">
+		    <p>Are you sure that you would like to delete this designer's profile?</p>
+		    <div id="comment_preview"></div>
+		    
+		    <form method="POST" action=".">
+		    	{% csrf_token %}
+		    	<ul>
+			        <li><input type="submit" value="Yes" /></li>
+			        <li><a href="{{ next }}">No</a></li>
+		        </ul>
+		    </form>
+    	</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+  {% if user.is_active and user.is_staff %}
+     <script src="{{MEDIA_URL}}js/update-model.js"></script>
+  {% endif %}
+
+{% endblock extrajs %}

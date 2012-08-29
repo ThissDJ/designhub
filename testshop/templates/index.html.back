@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/index.css">
+{% endblock extrastyle %}
+
+{% block content %}
+<div class="container">
+	<div class="row special body-row" id="slider-and-join-us">
+		<div class="eight columns">
+			<div class="row">
+				<div class="twelve columns">
+					<div id="featured-designer-today-title">
+						<h1>Designer of TODAY</h1>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="twelve columns" id="featured-designer-today">
+				 	<div class="feature_pic_container slides">
+			           <div class="slides_container">
+			                <div class='slide'>
+			                    <img src="{{MEDIA_URL}}img/features/designers/designer_1.jpg"/>
+								<div class="caption unhovering">
+									<p><a href="#">Dude</a></p>
+								</div>
+			                </div>
+			                <div class='slide'>
+			                    <img src="{{MEDIA_URL}}img/features/designers/designer_4.jpg"/>
+								<div class="caption unhovering">
+									<p><a href="#">Designer2</a></p>
+								</div>
+			                </div>
+			                <div class='slide'>
+			                    <img src="{{MEDIA_URL}}img/features/designers/designer_3.jpg"/>
+								<div class="caption unhovering">
+									<p><a href="#">Designer3</a></p>
+								</div>
+			                </div>
+			            </div>
+				 	</div>
+				</div>
+			</div>
+		</div>
+		<div class="four columns special left-border-dotted" id="join-us">
+			<a href="javascript:void(0);" id="join-us-a">&nbsp;</a>
+		</div>
+	</div>
+	<div class="row special body-row" id="featured-today">
+		<div class="row">
+	  		<div class="twelve columns special top-border-dotted">
+	  		</div>
+    	</div>
+		<div class="row">
+			<div class="twelve columns">
+				<div id="featured-today-title">
+					<h1>Featured TODAY</h1>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="twelve columns">
+				<div class="pic-list-container">
+					 <div class="row">
+					 	{% for i in sampleJpg %}
+					 	<div class="four columns">
+					 		<a href="javascript:void(0);" class="pic-container-a">
+					 			<img src="{{MEDIA_URL}}img/sampleProducts/JPEG/{{i}}">
+					 		</a>
+					 	</div> 
+					 	{% endfor %}
+					 </div>
+				</div>
+			</div>
+    	</div>
+	</div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+  <script src="{{MEDIA_URL}}js/libs/slides.min.jquery.js"></script>
+  <script src="{{MEDIA_URL}}js/index.js"></script>
+{% endblock extrajs %}

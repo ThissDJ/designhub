@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load mptt_tags %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery-ui-1.8.21.custom/jquery-ui-1.8.21.custom.css">
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/index.css">
+{% endblock extrastyle %}
+{% block title %}How Design Hub works and FAQ | DesignHub, A Platform For Local Creativity{% endblock %}
+{% block extrahead %}
+<meta name="description" content="How Design Hub works and FAQ" />
+<meta name="keywords" content="platform, designers, design, Hongkong,HK, local, creativity, Design Hub" />
+{% endblock %}
+{% block content %}
+<div class="container" style="padding-bottom:30px;">
+    <div style="text-align:center;background:#fff;padding-top:0px;padding-bottom:30px;">
+    	<img src="{{ MEDIA_URL }}img/howdhubworks.png">
+    	<div style="width:100%;margin-top:40px;margin-bottom:40px;border-top:2px dotted #bbb;"></div>
+    	<h1 id="faq">FAQ</h1>
+    	<br>
+    	<div style="text-align:left;width:80%;padding-left:10%;padding-right:10%;overflow:hidden;">
+    		<div style="float:left;width:450px;">
+    			<h2>For Designers With No Product But Ideas</h2>
+    			<br>
+    			<p>1. What's next after leaving my contact?</p>
+    			<p>A:  Our team will contact you within 2 working days to arrange in-person meeting.</p>
+    			<br>
+    			<p>2.When will I receive the funds?</p>
+    			<p>A: Our team will discuss details with you during the meeting. Funds will be released within 1 week after the meeting.</p>
+    			<br>
+    			<p>3. Do I have to sign a contract with you when I get the fund? What's the main content of that contract?</p>
+    			<p>A: Yes,a contract will be signed for mutual interest. We guarantee you own 100% of your design and brand.</p>
+    			<br>
+    			<p>4. How much is the funds?</p>
+    			<p>A:It's an item-based funding. We will fund designer for specific designs.</p>
+    			<br>
+    			<p>5: What should be my role in manufacturing?</p>
+    			<p>A: Designers will be responsible for monitoring the process of manufacturing. Our team will provide assistance during the whole process.</p>
+    			<br>
+    			<p>6: Any cost of selling my designs on Design Hub?</p>
+    			<p>A: $0 cost of selling on Design Hub.</p>
+    			<br>
+    			<p>7: What are your criteria in choosing designs?</p>
+    			<p>A: Originality.</p>
+    			<br>
+    		</div>
+    		<div  style="float:right;width:450px;">
+    			<h2>For Designers And Artists With Products/Artworks</h2>
+    			<br>
+    			<p>1. What's next after leaving my contact?</p>
+    			<p>A:  Our team will contact you within 2 working days to arrange in-person meeting.</p>
+    			<br>
+    			<p>2.What's the meeting about?</p>
+    			<p>A: Our team will discuss the details of partnership with you and plan for next step.</p>
+    			<br>
+    			<p>3. Do I have to sign a contract with you? What's the main content of that contract?</p>
+    			<p>A: Yes,a contract will be signed for mutual interest. We guarantee you own 100% of your designs/artworks and brand.</p>
+    			<br>
+    			<p>4: Any cost of selling my works on Design Hub?</p>
+    			<p>A: $0 cost of selling on Design Hub.</p>
+    			<br>
+    			<p>5: What are your criteria in choosing designs/artworks?</p>
+    			<p>A: Originality.</p>
+    			<br>
+    			<p>6: What else can I achieve through Design Hub?</p>
+    			<p>A: Design Hub serves as a platform for local creativity. We encourage interaction between designers & artists and the public.</p>
+    			<br>
+    		</div>
+    	</div>
+    	
+    </div>
+</div>
+<div class="push"></div>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{{MEDIA_URL}}js/libs/jquery-ui-1.8.21.custom.min.js"></script>
+<script src="{{MEDIA_URL}}js/libs/jquery.form.js"></script>
+<script src="{{MEDIA_URL}}js/index.js"></script>
+{% endblock extrajs %}

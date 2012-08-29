@@ -1,0 +1,167 @@
+*{
+	margin:0;padding:0;
+	font-family: 'MingLiU';
+	background:#FFF;
+}
+a{
+	text-decoration: none;
+	font-size:14px;
+}
+a p,a{
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+/**取消li前面的修饰**/
+li{list-style-type:none;}
+/** clears floats*/.\-clearfix:after {content: ".";display: block;height: 0;clear: both;visibility: hidden;}.msie7 .\-clearfix,.msie6 .\-clearfix {zoom: 1;}
+
+.middle_container{
+	display:block;
+	width:960px;
+	margin:auto;
+	/*overflow:hidden;*/
+}
+.topline{
+	height:2px;
+	background:#bbb;
+}
+.width100{
+	display:block;
+	width:100%;
+}
+#header100{
+	height:117px;
+}
+#shared_header{
+	display:block;
+	width:100%;
+	height:117px;
+}
+#shared_header .logo_container{
+	width:192px;
+	height:102px;
+    padding-top:10px;
+    padding-bottom:5px;
+}
+#shared_header .top_left{
+	position:absolute;
+}
+#shared_header .nav_container{
+	width:576px;
+}
+#shared_header .nav_container,#shared_header .nav_container li.nav_children{
+	height:117px;
+}
+#shared_header .logo_container,#shared_header .nav_container,#shared_header .nav_container li.nav_children{
+	float:left;
+}
+#shared_header .nav_container li.nav_children{
+	width:191px;
+	text-align:center;
+	margin-left:1px;
+	position:relative;
+}
+#shared_header .nav_container li.nav_children a.nav_children_title{
+	position:relative;
+	padding:88px 0px 3px;
+	height:26px;
+	display:block;
+}
+#shared_header .nav_container li a{
+	color:#555;
+	font-weight:bold;
+	text-transform: uppercase;
+	letter-spacing:-1px;
+}
+
+#shared_header li.cur_menu,#shared_header li.cur_menu a,#shared_header li.cur_menu a p{
+	background:#bbb;
+}
+#shared_header li.cur_menu a{
+	color:#fff;
+}
+
+#shared_header li.nav_children a.wt_subnav span.arrow{
+	width:11px;
+	margin:0px 90px 0px 90px;
+	display:block;
+	height:6px;
+	background:url('/media/img/menu-arrow.png') 0 0 no-repeat;
+}
+#shared_header .nav_container li a.nav_children_title:hover{
+	background:#bbb;
+	color:#fff;
+	/*
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(255,255,255,0.5)), color-stop(29%, rgba(255,255,255,0.2)), color-stop(61%, rgba(0,0,0,0.05)), to(rgba(0,0,0,0.15)));
+	background-image: -moz-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 29%, rgba(0,0,0,0.05) 61%, rgba(0,0,0,0.15));
+	background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 29%, rgba(0,0,0,0.05) 61%, rgba(0,0,0,0.15));
+	background-image: -o-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 29%, rgba(0,0,0,0.05) 61%, rgba(0,0,0,0.15));
+	background-image: -ms-linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 29%, rgba(0,0,0,0.05) 61%, rgba(0,0,0,0.15));
+	background-image: linear-gradient(top, rgba(255,255,255,0.5), rgba(255,255,255,0.2) 29%, rgba(0,0,0,0.05) 61%, rgba(0,0,0,0.15));
+	*/
+}
+
+	
+
+#shared_header .nav_container li.nav_children a.wt_subnav:hover span.arrow{
+	/*border:1px red solid;*/
+	background-position:0 -6px;
+}
+#shared_header .nav_container li.nav_children ul.subnav0{
+	z-index:999;
+	position:absolute;
+	top:126px;
+	margin-top:1px;
+	color:red;
+	height:auto;
+	width:188px;
+	line-height:20px;
+	left:0px;
+	/*border: 3px solid rgba(255, 255, 0, .3);
+    -webkit-background-clip: padding-box; /* for Safari */
+    /*background-clip: padding-box; *//* for IE9+, Firefox 4+, Opera, Chrome */
+}
+
+#shared_header .nav_container li.nav_children ul a{
+	color:yellow;
+}
+#shared_header .nav_container li.nav_children ul li,#shared_header .nav_container li.nav_children ul li a{
+	z-index:999;
+	background:#bbb;
+}
+
+.speech-bubble {
+    position:relative;
+    width: 325px;
+    background-color:#FFF;
+    color: #666;
+    font: normal 12px "Segoe UI", Arial, Sans-serif;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    border: 2px solid rgba(0,0,0,0.095);
+}
+
+.speech-bubble:before,
+.speech-bubble:after {
+    content: "\0020";
+    display:block;
+    position:absolute;
+    top:-8px;
+    left:83px;
+    z-index:2;
+    overflow:hidden;
+    border: solid 10px transparent;
+    border-top: 0;
+    border-bottom-color:#bbb;
+}
+.speech-bubble:before {
+    top:-12px;
+    z-index:1;
+    border-bottom-color:rgba(0,0,0,0.095);
+}
+ul.subnav0.unhovering{
+	display:none;
+}
