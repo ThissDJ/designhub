@@ -1,8 +1,0 @@
-heihei
-{{username}}
-{{password}}
-http://localhost:8000/accounts/activate/{{activation_key}}/
-
-{{expiration_days}}
-
-{{site}}

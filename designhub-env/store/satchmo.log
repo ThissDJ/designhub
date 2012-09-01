@@ -1,0 +1,94 @@
+Fri, 31 Aug 2012 07:37:53 root         INFO     Satchmo Started
+Fri, 31 Aug 2012 05:37:53 keyedcache   WARNING  No KEY_PREFIX found in settings.CACHES['default'], using SITE_ID.  Please update your settings to add a CACHES
+Fri, 31 Aug 2012 05:37:53 keyedcache   WARNING  No TIMEOUT found in settings.CACHES['default'], so we used 300. Please update your settings to add a TIMEOUT and avoid this warning.
+Fri, 31 Aug 2012 05:37:53 configuration DEBUG    Could not load default shipping module configuration: fedex_web_services
+Fri, 31 Aug 2012 05:37:53 shop.listeners DEBUG    Added default shop listeners
+Fri, 31 Aug 2012 05:37:53 satchmo_toolbar DEBUG    Satchmo toolbar ready
+Fri, 31 Aug 2012 05:37:53 iterchoices  DEBUG    Management command: handler
+Fri, 31 Aug 2012 05:37:53 iterchoices  DEBUG    Called model choices initialization function <shipping_choices>
+Fri, 31 Aug 2012 05:37:54 iterchoices  DEBUG    Management command: handler
+Fri, 31 Aug 2012 05:37:54 iterchoices  DEBUG    Called model choices initialization function <labelled_gateway_choices>
+Fri, 31 Aug 2012 05:37:54 satchmo_store.urls DEBUG    Adding local serving of media files '/static/media/' at: /home/designhub/webapps/designhub/designhub-env/store/../../../mediasa/media/
+Fri, 31 Aug 2012 05:37:54 payment.urls DEBUG    Found payment processor: PAYPAL, adding urls at ^paypal/
+Fri, 31 Aug 2012 05:55:26 configuration DEBUG    new setting PAYMENT_PAYPAL.LIVE
+Fri, 31 Aug 2012 05:55:26 configuration INFO Fri, 31 Aug 2012 05:57:33 configuration INFO     Deleted setting PAYMENT_PAYPAL.LIVE
+Fri, 31 Aug 2012 05:57:33 configuration INFO     Deleted setting PAYMENT_PAYPAL.POST_URL
+Fri, 31 Aug 2012 06:10:22 configuration INFO     Updated setting PAYMENT_PAYPAL.CURRENCY_CODE = HKD
+Fri, 31 Aug 2012 06:21:29 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:22:27 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:22:33 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:22:34 root         DEBUG    subtypes = ('ConfigurableProduct',)
+Fri, 31 Aug 2012 06:22:34 product.utils DEBUG    Serialized Options neat-book: ({'id': 3, 'items': (<Option: u'Hard cover'>, <Option: u'Soft cover'>, <Option: u'On tape'>), 'name': u'Book type', 'description': u''},)
+Fri, 31 Aug 2012 06:22:34 product.views DEBUG    finding product template: ['product/detail_configurableproduct.html', 'product/product.html']
+Fri, 31 Aug 2012 06:22:34 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:22:37 shop.views.cart DEBUG    FORM: <QueryDict: {u'addcart': [u'Add to cart'], u'csrfmiddlewaretoken': [u'2d3b0f9418096083ebdd2f9f72cea19f'], u'productname': [u'neat-book_hard'], u'3': [u'hard'], u'quantity': [u'2']}>
+Fri, 31 Aug 2012 06:22:37 shop.views.cart DEBUG    found product: A really neat book (Hard cover)
+Fri, 31 Aug 2012 06:22:37 shop.views.cart DEBUG    product neat-book_hard is active
+Fri, 31 Aug 2012 06:22:38 shop.listeners DEBUG    caught cart changed signal - remove_order_on_cart_update
+Fri, 31 Aug 2012 06:22:39 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:22:39 shop.templatetags.satchmo_cart DEBUG    sub details
+Fri, 31 Aug 2012 06:22:58 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:23:00 root         DEBUG    subtypes = ('ConfigurableProduct',)
+Fri, 31 Aug 2012 06:23:00 product.utils DEBUG    Serialized Options dj-rocks: ({'id': 1, 'items': (<Option: u'Small'>, <Option: u'Medium'>, <Option: u'Large'>), 'name': u'sizes', 'description': u''}, {'id': 2, 'items': (<Option: u'Black'>, <Option: u'White'>, <Option: u'Blue'>), 'name': u'colors', 'description': u''})
+Fri, 31 Aug 2012 06:23:00 product.views DEBUG    finding product template: ['product/detail_configurableproduct.html', 'product/product.html']
+Fri, 31 Aug 2012 06:23:00 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:23:06 shop.views.cart DEBUG    FORM: <QueryDict: {u'addcart': [u'Add to cart'], u'productname': [u'dj-rocks_l_b'], u'1': [u'L'], u'2': [u'B'], u'csrfmiddlewaretoken': [u'2d3b0f9418096083ebdd2f9f72cea19f'], u'quantity': [u'3']}>
+Fri, 31 Aug 2012 06:23:06 shop.views.cart DEBUG    found product: Django Rocks shirt (Large/Black)
+Fri, 31 Aug 2012 06:23:06 shop.views.cart DEBUG    product dj-rocks_l_b is active
+Fri, 31 Aug 2012 06:23:06 shop.listeners DEBUG    caught cart changed signal - remove_order_on_cart_update
+Fri, 31 Aug 2012 06:25:57 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:25:57 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:25:58 satchmo_store.shop.models DEBUG    Order #1, recalc: sub_total=$73.00, shipping=$20.00, discount=$0.00, tax=$0.00
+Fri, 31 Aug 2012 06:25:58 payment.modules.base DEBUG    Creating pending PAYPAL payment of 0.00 for Order #1: LI Junjie
+Fri, 31 Aug 2012 06:25:58 satchmo_store.shop.models DEBUG    Pending Payment - creating linked payment
+Fri, 31 Aug 2012 06:31:05 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:31:11 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:31:13 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:31:24 satchmo_store.accounts.views DEBUG    The user has no cart in the current session.
+Fri, 31 Aug 2012 06:31:24 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:31:52 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:06 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:33 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:32:33 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:34:00 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:34:07 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:34:08 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 12:18:11 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+p.models DEBUG    Order #1, recalc: sub_total=$73.00, shipping=$0.00, discount=$0.00, tax=$0.00
+Fri, 31 Aug 2012 06:25:53 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:25:53 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:25:58 root         DEBUG    :::Updating Cart Shopping Cart (2012-08-31 06:22:37.993620) for LI Junjie
+Fri, 31 Aug 2012 06:25:58 payment.modules.base DEBUG    Found pending payment: Order Pending Payment #1
+Fri, 31 Aug 2012 06:25:58 payment.modules.base DEBUG    Deleting 1 expired pending payment entries for order #1
+Fri, 31 Aug 2012 06:25:58 payment.modules.base DEBUG    Creating pending PAYPAL payment of 0.00 for Order #1: LI Junjie
+Fri, 31 Aug 2012 06:25:58 satchmo_store.shop.models DEBUG    Pending Payment - creating linked payment
+Fri, 31 Aug 2012 06:25:58 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:30:53 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:31:43 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:22 root         DEBUG    subtypes = ()
+Fri, 31 Aug 2012 06:32:22 product.views DEBUG    finding product template: ['product/product.html']
+Fri, 31 Aug 2012 06:32:22 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:24 shop.views.cart DEBUG    FORM: <QueryDict: {u'addcart': [u'Add to cart'], u'csrfmiddlewaretoken': [u'2d3b0f9418096083ebdd2f9f72cea19f'], u'productname': [u'PY-Rocks'], u'quantity': [u'1']}>
+Fri, 31 Aug 2012 06:32:24 shop.views.cart DEBUG    found product: Python Rocks shirt
+Fri, 31 Aug 2012 06:32:24 shop.views.cart DEBUG    product PY-Rocks is active
+Fri, 31 Aug 2012 06:32:24 shop.listeners DEBUG    caught cart changed signal - remove_order_on_cart_update
+Fri, 31 Aug 2012 06:32:24 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:24 shop.templatetags.satchmo_cart DEBUG    sub details
+Fri, 31 Aug 2012 06:32:26 satchmo_store.contact.forms INFO     Sending form_init signal: <class 'satchmo_store.contact.forms.ContactInfoForm'>
+Fri, 31 Aug 2012 06:32:26 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:32:32 satchmo_store.contact.forms INFO     Sending form_init signal: <class 'satchmo_store.contact.forms.ContactInfoForm'>
+Fri, 31 Aug 2012 06:32:32 satchmo_store.contact.forms DEBUG    Saving contact info for LI Junjie
+Fri, 31 Aug 2012 06:32:33 satchmo_store.shop.models DEBUG    Order #2, recalc: sub_total=$19.50, shipping=$0.00, discount=$0.00, tax=$0.00
+Fri, 31 Aug 2012 06:32:35 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:32:35 configuration DEBUG    Getting shipping methods: ['shipping.modules.per']
+Fri, 31 Aug 2012 06:32:35 satchmo_store.shop.models DEBUG    Order #2, recalc: sub_total=$19.50, shipping=$4.00, discount=$0.00, tax=$0.00
+Fri, 31 Aug 2012 06:32:35 payment.modules.base DEBUG    Creating pending PAYPAL payment of 0.00 for Order #2: LI Junjie
+Fri, 31 Aug 2012 06:32:35 satchmo_store.shop.models DEBUG    Pending Payment - creating linked payment
+Fri, 31 Aug 2012 06:32:36 root         DEBUG    :::Updating Cart Shopping Cart (2012-08-31 06:32:24.161063) for LI Junjie
+Fri, 31 Aug 2012 06:32:36 payment.modules.base DEBUG    Found pending payment: Order Pending Payment #2
+Fri, 31 Aug 2012 06:32:36 payment.modules.base DEBUG    Deleting 1 expired pending payment entries for order #2
+Fri, 31 Aug 2012 06:32:36 payment.modules.base DEBUG    Creating pending PAYPAL payment of 0.00 for Order #2: LI Junjie
+Fri, 31 Aug 2012 06:32:36 satchmo_store.shop.models DEBUG    Pending Payment - creating linked payment
+Fri, 31 Aug 2012 06:32:36 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:33:41 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)
+Fri, 31 Aug 2012 06:34:11 shop.templatetags.satchmo_util WARNING  No url found for satchmo_set_language (OK if running tests)

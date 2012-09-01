@@ -1,0 +1,11 @@
+product
+l10n
+docs
+tax
+shipping
+static
+satchmo_ext
+satchmo_utils
+satchmo_skeleton
+satchmo_store
+payment

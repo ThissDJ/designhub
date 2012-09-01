@@ -1,8 +1,0 @@
-/designs/
-/designs/fashion/
-/designs/lifestyle/
-/designs/art/
-
-
-/designers/
-
