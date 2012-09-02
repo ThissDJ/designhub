@@ -7,9 +7,10 @@
 		<div class='list-item-wrapper'><a href='javascript:void(0);' class="no-underline social list-item" style='background-position: 0 -896px;'>&nbsp;</a></div>
 	</div>
 	<div class='list-item-container nav1' style='float:right;'>
-		<div class='list-item-wrapper'><a class='list-item'  href='javascript:void(0);'>Login</a></div><span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>About Us</a></div>
-		<span class="seperator">/</span><div class='list-item-wrapper'><a class='list-item'  href='javascript:void(0);'>Language</a></div><span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>Worldwide Delivery</a></div>
-		<span class="seperator">/</span><div class='list-item-wrapper'><a class='list-item'  href='javascript:void(0);'>FAQ</a></div><span class="seperator">/</span>
+		<div class='list-item-wrapper'><a class='list-item'  href='javascript:void(0);'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='javascript:void(0);'>Sign Up</a></div>
+		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>About Us</a></div>
+		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>Worldwide Delivery</a></div>
+		<span class="seperator">/</span>
 		{% url satchmo_cart as carturl %}
 	    {% if carturl %}<div class='list-item-wrapper'><a href="{{ carturl }}">{% trans "Cart" %}</a></div>{% endif %}
 	    {% if not cart.is_empty %}
@@ -24,23 +25,13 @@
 	<div style='text-align:center;margin-top:20px;'>
 		<a href="/"><img src='{{MEDIA_URL}}img/weblogo.png'></a>
 	</div>
-	<div class='nav-bar'>
-		<div style='float:left;'  class='list-item-container nav2 left-side'>			
-    		<div class='list-item-wrapper hover-show-btn category-item-first-level'>
-    			<a class='list-item white-font' href='javascript:void(0);'>Fashion</a>
-    			<div id="fashion-hover-show-container" class='hover-show-container list-item-container nav3' style="display:none;">
-                </div>
-    		</div>
-    		<div class='list-item-wrapper  category-item-first-level'><a class='list-item white-font'  href='javascript:void(0);'>Lifestyle</a></div>
-    		<div class='list-item-wrapper  category-item-first-level'><a class='list-item white-font'  href='javascript:void(0);'>Art</a></div>
-	    </div>
-    	<div style='float:right;'  class='list-item-container nav2 right-side'>
-    		<div class='list-item-wrapper'><a class='list-item white-font'  href='javascript:void(0);'>Designers</a></div>
-    		<div class='list-item-wrapper'><a class='list-item white-font'  href='javascript:void(0);'>Artists</a></div>
-    		<div class='list-item-wrapper'><a class='list-item white-font'  href='javascript:void(0);'>Ideas</a></div>
-    	</div>
-    </div>
-    <div class='clearfix'></div>
+    <div id="navbar-header0" class="navbar navbar-static">
+      <div class="navbar-inner">
+        <div class="container" style="width: auto;">
+
+        </div>
+      </div>
+    </div> <!-- /navbar-example -->
 </div>
 <div class="hide" id="category-list-info">
     {% if category.id %}
@@ -53,6 +44,19 @@
         {% endif %}
     {% endif %}
 </div>
+<style type="text/css">
+	ul.nav li.dropdown:hover ul.dropdown-menu.dropdown-menu-firstlevel{
+	    display: block;    
+	}
+
+	a.menu:after, .dropdown-toggle:after {
+	  content: none;
+	}
+	
+	.navbar .dropdown-menu.dropdown-menu-firstlevel {
+	 margin-top: 0px;
+	}
+</style>
 <script type="text/javascript">
 function getElementsByClass( searchClass, domNode, tagName) { 
 	if (domNode == null) domNode = document;
@@ -68,24 +72,60 @@ function getElementsByClass( searchClass, domNode, tagName) {
 	return el;
 } 
 var categoryListInfoNode = document.getElementById('category-list-info').childNodes[0];
-var fashionHoverShowContainer = document.getElementById('fashion-hover-show-container');
+var navbarHeader0ContainerNode = document.getElementById('navbar-header0').childNodes[0].childNodes[0];
 var categoryNum = 3;
-var categoryListLeftPart = getElementsByClass('category-item-first-level');
-for(var i = 0; i < categoryNum; i++){
-	categoryListLeftPart[i].childNodes[0].innerHTML = categoryListInfoNode.childNodes[i].childNodes[0].innerHTML;
-	categoryListLeftPart[i].childNodes[0].href = categoryListInfoNode.childNodes[i].childNodes[0].href;
-	if(categoryListInfoNode.childNodes[i].childNodes.length > 1){
-		var subCategoryListItemTmplList = ["<div class='list-item-wrapper'><a class='list-item white-font'  href='","'>",'</a></div>'];
-		var subCategoryListHtmlList = [];
-		var subCategoryListInfoNode = categoryListInfoNode.childNodes[i].childNodes[1];
-		for(var j = 0;j < subCategoryListInfoNode.childNodes.length; j++){
-			var subCategoryListItemHtml = subCategoryListItemTmplList[0] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].href 
-			                                + subCategoryListItemTmplList[1] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].innerHTML 
-			                                +  subCategoryListItemTmplList[2];
-			subCategoryListHtmlList.push(subCategoryListItemHtml);
-		}
-		fashionHoverShowContainer.innerHTML = subCategoryListHtmlList.join("<div class='list-item-wrapper white-font'>|</div>");
+var newCategoryNode = navbarHeader0ContainerNode.appendChild(categoryListInfoNode);
+newCategoryNode.className = 'nav';
+newCategoryNode.setAttribute('role','navigation');
+for(var i = 0; i < newCategoryNode.childNodes.length; i++){
+	if(newCategoryNode.childNodes[i].childNodes.length > 1){
+	    newCategoryNode.childNodes[i].className = 'dropdown';
+	    newCategoryNode.childNodes[i].childNodes[0].setAttribute('role','button');
+        // newCategoryNode.childNodes[i].childNodes[0].setAttribute('class','dropdown-toggle');
+        // newCategoryNode.childNodes[i].childNodes[0].setAttribute('data-toggle','dropdown');
+        // newCategoryNode.childNodes[i].childNodes[0].setAttribute('href','#');
+        newCategoryNode.childNodes[i].childNodes[0].innerHTML += '<b class="caret"></b>';
+        
+        newCategoryNode.childNodes[i].childNodes[1].setAttribute('role','menu');
+        newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel');
+        for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
+        	if(newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes.length > 1){
+        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu');
+        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[1].setAttribute('class','dropdown-menu');
+        	}
+        }
 	}
+}
+navbarHeader0ContainerNode.innerHTML += [
+          '<ul class="nav pull-right">',
+           ' <li id="fat-menu" class="dropdown">',
+             ' <a href="javascript:void(0);" id="drop3" role="button">Talents</a>',
+             ' </li>',
+            ' <li id="fat-menu" class="dropdown">',
+             ' <a href="javascript:void(0);" id="drop3" role="button">Sale</a>',
+             ' </li>',
+            ' <li id="fat-menu" class="dropdown">',
+             ' <a href="javascript:void(0);" id="drop3" role="button">Ideas</a>',
+           ' </li>',
+         ' </ul>'].join('');
+
+// var categoryListLeftPart = getElementsByClass('category-item-first-level');
+for(var i = 0; i < categoryNum; i++){
+	
+	// categoryListLeftPart[i].childNodes[0].innerHTML = categoryListInfoNode.childNodes[i].childNodes[0].innerHTML;
+	// categoryListLeftPart[i].childNodes[0].href = categoryListInfoNode.childNodes[i].childNodes[0].href;
+	// if(categoryListInfoNode.childNodes[i].childNodes.length > 1){
+		// var subCategoryListItemTmplList = ["<div class='list-item-wrapper'><a class='list-item white-font'  href='","'>",'</a></div>'];
+		// var subCategoryListHtmlList = [];
+		// var subCategoryListInfoNode = categoryListInfoNode.childNodes[i].childNodes[1];
+		// for(var j = 0;j < subCategoryListInfoNode.childNodes.length; j++){
+			// var subCategoryListItemHtml = subCategoryListItemTmplList[0] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].href 
+			                                // + subCategoryListItemTmplList[1] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].innerHTML 
+			                                // +  subCategoryListItemTmplList[2];
+			// subCategoryListHtmlList.push(subCategoryListItemHtml);
+		// }
+		// fashionHoverShowContainer.innerHTML = subCategoryListHtmlList.join("<div class='list-item-wrapper white-font'>|</div>");
+	// }
 }
 </script>
 {% endspaceless %}

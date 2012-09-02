@@ -48,7 +48,7 @@ satchmo.thumbnails = new Array();
 	    		<ul class="pagination">
 	    			{% for pic in product.productimage_set.all %}
 					    {% thumbnail pic.picture "100x100" as image %}
-					    <li><a href="#" class="product-detail-thumnail">
+					    <li><a href="#" class="product-detail-thumnail" style='background:transparent;'>
 					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 					    </a></li>
 					    {% endthumbnail %}
@@ -123,7 +123,12 @@ satchmo.thumbnails = new Array();
     			<p>{{ product.translated_description }}</p>
     			
         </div>
+        <div class="clearfix" ></div>
+        <br><br>
+		{% block productfooter %}
+		{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+		{% plugin_point "product_footer" %}
+		{% endblock %}
     </div>
-    <div class="clearfix" ></div>
 
 {% endblock %}

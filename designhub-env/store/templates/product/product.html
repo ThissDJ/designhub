@@ -40,7 +40,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 	    		<ul class="pagination">
 	    			{% for pic in product.productimage_set.all %}
 					    {% thumbnail pic.picture "100x100" as image %}
-					    <li><a href="#" class="product-detail-thumnail">
+					    <li><a href="#" class="product-detail-thumnail" style='background:transparent;'>
 					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 					    </a></li>
 					    {% endthumbnail %}
@@ -52,7 +52,8 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     	<div style="width:300px;float:right;">
     			<h1>{{ product.translated_name }}</h1>
                 <br>
-    			<h2>HK{{ product|discount_price:sale|currency }}{% if object.original_price %} <small style="text-decoration: line-through;">Retail price:{{object.original_price}} HKD</small>{%endif%}</h2>
+                {% if sale %}<strike id="fullprice" style="display: block;">HK{{ product|discount_price:""|currency }}</strike>{% endif %}
+    			<h2>HK{{ product|discount_price:sale|currency }}</h2>
                 <br>
 				{% with product.translated_attributes as atts %}{% if atts %}
 				<p class="productattributes">
@@ -91,14 +92,15 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     			<h2>Product Description</h2>
     			
         </div>
+        <div class="clearfix" ></div>
+        <br><br>
+		{% block productfooter %}
+		{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+		{% plugin_point "product_footer" %}
+		{% endblock %}
     </div>
-    <div class="clearfix" ></div>
+    
 
-
-	{% block productfooter %}
-	{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
-	{% plugin_point "product_footer" %}
-	{% endblock %}
     {% endblock %}
 {% endblock %}
 {% block extrajs %}

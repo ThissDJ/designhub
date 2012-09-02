@@ -65,7 +65,7 @@
                     <button class="btn" id="id_update_submit"   type="submit">{% trans 'Update' %}</button>
                 </form>
 		      </td>
-		      <td><span style="line-height:80px;">{{ cartitem|discount_line_total:sale|currency }}</span></td>
+		      <td><span style="line-height:80px;">HK{{ cartitem|discount_line_total:sale|currency }}</span></td>
 		      <td>
 	            <form style='margin-top:25px;' action="{% url satchmo_cart_remove %}" method="post">{% csrf_token %}
 	                <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
@@ -81,7 +81,7 @@
         		<span style="line-height:40px;font-weight:bold;">{% trans "Cart Total" %}:</span>
         	</td>
             <td>
-            	<span style="line-height:40px;">{{ cart|discount_cart_total:sale|currency }}</span>
+            	<span style="line-height:40px;">HK{{ cart|discount_cart_total:sale|currency }}</span>
             </td>
             <td>
             </td>
