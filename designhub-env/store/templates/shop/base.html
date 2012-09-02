@@ -1,0 +1,33 @@
+{% load i18n satchmo_category satchmo_google satchmo_util satchmo_currency satchmo_discounts app_plugins normalize_decimal %}
+{% block doctype %}<!DOCTYPE html>
+<html lang="en">
+{% endblock %}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
+    {% block extra-head %}{% endblock %}
+    {% block stylesheet %}<link rel="stylesheet" href="{{ STATIC_URL }}css/style.20120831.css" />{% endblock %}
+    <title>{% block title %}{{ shop_name }}{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
+    {% plugin_point "page_head" %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.css">
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+</head>
+{% block body %}
+<body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
+    <div class="wrapper">
+	{% block header %}{% include "header0.html" with category=category %}{% endblock %}
+	{% block content %}
+	{% endblock content %}
+	<div class='push'></div>
+	</div>
+	{% block footer %}{% include "footer0.html" %}{% endblock %}
+    <script src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
+    <script src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
+    <script src="{{ MEDIA_URL }}js/main.js"></script>
+    {% block extrajs %}{% endblock %}
+</body>
+{% endblock %}
+</html>

@@ -1,0 +1,11 @@
+{% load i18n %}
+{% spaceless %}
+<div class="container">
+	<a href="{{ shop_base }}/">{% trans "Home" %}</a>
+	{% for name, url in product.category.all.0.get_url_name %}
+	    <span class="seperator">/</span>
+	    <a href="{{ url }}">{{ name }}</a>
+	{% endfor %}
+	<span class="seperator">/</span><span>{{ product.translated_name }}</span>
+</div>
+{% endspaceless %}

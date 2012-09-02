@@ -1,0 +1,129 @@
+{% extends "product/product.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_util %}
+{% load satchmo_currency satchmo_category%}
+{% load satchmo_discounts satchmo_tax %}
+{% load app_plugins %}
+{% load satchmo_thumbnail %}
+
+{% block extra-head %}
+
+{% include "shop/_jquery.html" %}
+{% include "shop/_jquery_form.html" %}
+<script type="text/javascript" src="{{ STATIC_URL }}js/satchmo_product.js"></script>
+{% blackbird_logging %}
+<script type="text/javascript">{# Javascript which is generated uniquely for each page #}
+satchmo.default_view_tax = {% if default_view_tax %}true{% else %}false{% endif %};
+
+satchmo.variations = {{ details|as_json }};
+
+satchmo.set_option_ids([{% for option_group in options %}{{ option_group.id }}{% if not forloop.last %},{% endif %}{% endfor %}]);
+
+$(function() {
+    satchmo.update_price();
+    $('.priced').change(function() { satchmo.update_price() });
+});
+
+// generate thumbnails for all alternate images
+satchmo.thumbnails = new Array();
+{{ details|js_thumbnail_array:"width=280,height=280" }}
+</script>
+{% endblock %}
+
+{% block productdetail %}
+    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-top:10px;padding-bottom:20px;">
+    	<div style="width:630px;float:left;">
+	    	<div id="product">
+	    		<div class="slides_container">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "630x630" as image %}
+					    <a class="clickNext" href="javascript:void(0);"  target="_blank">
+					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+					    </a>
+					    {% endthumbnail %}
+					{% endfor %}
+	    		</div>
+	    		<ul class="pagination">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "100x100" as image %}
+					    <li><a href="#" class="product-detail-thumnail">
+					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+					    </a></li>
+					    {% endthumbnail %}
+					{% endfor %}	    			
+	    		</ul>
+	    	</div>
+	    	<div class="clearfix"></div>
+    	</div>
+    	<div style="width:300px;float:right;">
+    			<h1>{{ product.translated_name }}</h1>
+                <br>
+    			<!--{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}: --><h2>{% spaceless %}
+				{% if sale %}<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>{% endif %}
+				<span id="price">HK{{ product|discount_price:sale|currency }}</span>
+				{% endspaceless %}</h2>
+                <br>
+				{% with product.translated_attributes as atts %}{% if atts %}
+				<p class="productattributes">
+				{% for att in product.translated_attributes %}
+				{{ att.description }}: {{ att.value }}<br/>
+				{% endfor %}
+				</p>
+				{% endif %}{% endwith %}
+				
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				<form class='well form-horizontal' id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+				{% if options %}
+				<p>{% trans "Please choose your options" %}:</p>
+				{% endif %}
+				
+				{% for option_group in options %}
+				    <div class="control-group">
+			        	<label class="control-label" for="size" style='width:50px;text-transform:capitalize;' >{{ option_group.name }}:</label>
+			        	<div class="controls" style='margin-left:60px;'>
+			        		<select id="{{option_group.id}}" class='span2' name="{{ option_group.id }}">
+							    {% for choice in option_group.items %}
+							     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
+							        {% if choice.price_change %}
+							            {% option_price choice %}
+							        {% endif %}
+							     </option>
+							    {% endfor %}
+	                        </select>
+	                    </div>
+                    </div>
+				{% endfor %}
+				<!--
+				{% trans "Quantity" %} <input class='span2' type="text" size="2" name="quantity" id="quantity" value="1" class="priced" />-->
+                <div class="control-group">
+                	<label class="control-label" for="quantity" style='width:50px;' >Quantity:</label>
+		        	<div class="controls" style='margin-left:60px;' >
+		        		<select id="quantity" class="span1" name="quantity">
+				            <option>1</option>
+				            <option>2</option>
+				            <option>3</option>
+				            <option>4</option>
+				            <option>5</option>
+	                    </select>
+	               </div>
+				</div>
+				<div class="control-group">
+					<div class="controls" style='margin-left:60px;'>
+						<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+						<button class="btn btn-large btn-danger" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+						<!--<input id="addcart" type="submit" name="addcart" value="{% trans "Add to cart" %}" />-->
+				    </div>
+				</div>
+				{% plugin_point "product_add_buttons" %}
+				{% plugin_point "product_form" %}
+				</form>
+    			<h2>Product Description</h2>
+    			<p>{{ product.translated_description }}</p>
+    			
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+
+{% endblock %}

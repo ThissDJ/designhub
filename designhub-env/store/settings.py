@@ -21,7 +21,10 @@ TIME_ZONE = 'US/Pacific'
 # http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
 # http://blogs.law.harvard.edu/tech/stories/storyReader$15
 LANGUAGE_CODE = 'en-us'
-
+LANGUAGES = (
+            ('en', "English"),
+            ('zh', 'Chinese'),
+            )
 SITE_ID = 1
 
 # Absolute path to the directory that holds media.
@@ -32,27 +35,27 @@ SITE_ID = 1
 #
 # from satchmo_utils.thumbnail import normalize_path
 # MEDIA_ROOT = normalize_path(os.path.join(DIRNAME, 'static/'))
-MEDIA_ROOT = os.path.join(DIRNAME, '../../../mediasa/media/')
+MEDIA_ROOT = os.path.join(DIRNAME, 'static/')
 
 # URL that handles the media served from MEDIA_ROOT.
 # Example: "http://media.lawrence.com"
-MEDIA_URL="/static/media/"
+MEDIA_URL="/media/"
 
 # STATIC_ROOT can be whatever different from other dirs
-STATIC_ROOT = os.path.join(DIRNAME, '../../../mediasa/')
+STATIC_ROOT = os.path.join(DIRNAME, 'static-collect/')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-        #os.path.join(DIRNAME, 'static/'),
+        os.path.join(DIRNAME, 'static/'),
 )
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'  # remove for Django 1.4 as deprecated
+ADMIN_MEDIA_PREFIX = '/media/'  # remove for Django 1.4 as deprecated
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'btqf3uk&n6du@^z7nmz4$-nyv8_rvw$p_55$#4y^i18@i%vn$s'
+SECRET_KEY = '21il=e#b0q-0pnr2mi($kvcrd39%bb@g6i2=@bf$bp*^pl%cl_'
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -72,7 +75,7 @@ MIDDLEWARE_CLASSES = (
     "threaded_multihost.middleware.ThreadLocalMiddleware",
     "satchmo_store.shop.SSLMiddleware.SSLRedirect",
     #"satchmo_ext.recentlist.middleware.RecentProductMiddleware",
-    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 #this is used to add additional config variables to each request
@@ -133,8 +136,7 @@ INSTALLED_APPS = (
     #'satchmo_ext.product_feeds',
     #'satchmo_ext.brand',
     'payment',
-#    'payment.modules.dummy',
-    'payment.modules.paypal',
+    'payment.modules.dummy',
     #'payment.modules.purchaseorder',
     #'payment.modules.giftcertificate',
     #'satchmo_ext.wishlist',
@@ -145,7 +147,7 @@ INSTALLED_APPS = (
     #'shipping.modules.tieredquantity',
     #'satchmo_ext.tieredpricing',
     #'typogrify',            # dependency on  http://code.google.com/p/typogrify/
-    #'debug_toolbar',
+    'debug_toolbar',
     'app_plugins',
     'store.localsite',
 )
@@ -155,15 +157,16 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-#DEBUG_TOOLBAR_CONFIG = {
-#    'INTERCEPT_REDIRECTS' : False,
-#}
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS' : False,
+}
 
 #### Satchmo unique variables ####
-#from django.conf.urls.defaults import patterns, include
+from django.conf.urls.defaults import patterns, include
 SATCHMO_SETTINGS = {
     'SHOP_BASE' : '',
     'MULTISHOP' : False,
+    'SHOP_URLS' : patterns('', (r'^i18n/', include('l10n.urls')),)
     #'SHOP_URLS' : patterns('satchmo_store.shop.views',)
 }
 

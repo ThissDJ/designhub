@@ -1,0 +1,68 @@
+/*=======================================================================
+
+	❤❤❤ Gumby by Digital Surgeons. ❤❤❤
+	
+	*** This is where you should keep all of your TEXT styles ***
+ 
+ ========================================================================*/
+ 
+/*
+@font-face {
+	font-family: 'RalewayThin';
+	src: url('http://www.adele.tv/raleway_thin-webfont-webfont.eot');
+	src: local('鈽�'), url('http://www.adele.tv/raleway_thin-webfont-webfont.woff') format('woff'), url('http://www.adele.tv/raleway_thin-webfont-webfont.ttf') format('truetype'), url('http://www.adele.tv/raleway_thin-webfont-webfont.svg#webfontq0mP4GYg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'CodeLightRegular';
+	src: url('http://www.adele.tv/code_light-webfont.eot');
+	src: local('鈽�'), url('http://www.adele.tv/code_light-webfont.woff') format('woff'), url('http://www.adele.tv/code_light-webfont.ttf') format('truetype'), url('http://www.adele.tv/code_light-webfont.svg#webfontf7OCY1oQ') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	letter-spacing:5em!important;
+}
+*/
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat);
+
+.nav2{
+	font-family: 'Montserrat', sans-serif;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ /* ==|== media queries ======================================================
+    PLACEHOLDER Media Queries for Responsive Design.
+    These override the primary ('mobile first') styles
+    Modify as content requires.
+    ========================================================================== */
+ 
+ @media only screen and (min-width: 480px) {
+   /* Style adjustments for viewports 480px and over go here */
+ 
+ }
+ 
+ @media only screen and (min-width: 768px) {
+   /* Style adjustments for viewports 768px and over go here */
+ 
+ }

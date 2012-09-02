@@ -1,0 +1,130 @@
+{% extends "product/base.html" %}
+{% comment %}
+-------------------------------------------------------------------
+This is the base product detail page.
+To modify the templates of specific types of products, such as
+ProductVariations or CustomProducts, look for product/detail_xxx.html
+-------------------------------------------------------------------
+{% endcomment %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% load app_plugins %}
+
+{% block extra-head %}
+{% if product.meta %}
+    <meta name="description" content="{{product.meta}}">
+{% endif %}
+{% endblock %}
+
+
+{% block content %}
+    {% block breadcrumbs-category %}
+        {% include "product/product_path.html" with product=product %}
+	{% endblock breadcrumbs-category %}
+    {% block productdetail %}
+    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-top:10px;padding-bottom:20px;">
+    	<div style="width:630px;float:left;">
+	    	<div id="product">
+	    		<div class="slides_container">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "630x630" as image %}
+					    <a class="clickNext" href="javascript:void(0);"  target="_blank">
+					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+					    </a>
+					    {% endthumbnail %}
+					{% endfor %}
+	    		</div>
+	    		<ul class="pagination">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "100x100" as image %}
+					    <li><a href="#" class="product-detail-thumnail">
+					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+					    </a></li>
+					    {% endthumbnail %}
+					{% endfor %}	    			
+	    		</ul>
+	    	</div>
+	    	<div class="clearfix"></div>
+    	</div>
+    	<div style="width:300px;float:right;">
+    			<h1>{{ product.translated_name }}</h1>
+                <br>
+    			<h2>HK{{ product|discount_price:sale|currency }}{% if object.original_price %} <small style="text-decoration: line-through;">Retail price:{{object.original_price}} HKD</small>{%endif%}</h2>
+                <br>
+				{% with product.translated_attributes as atts %}{% if atts %}
+				<p class="productattributes">
+				{% for att in product.translated_attributes %}
+				{{ att.description }}: {{ att.value }}<br/>
+				{% endfor %}
+				</p>
+				{% endif %}{% endwith %}
+				
+				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+				<form id="options"  class='well form-horizontal' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+	                <div class="control-group">
+	                	<label class="control-label" for="quantity" style='width:50px;' >Quantity:</label>
+			        	<div class="controls" style='margin-left:60px;' >
+			        		<select id="quantity" class="span1" name="quantity">
+					            <option>1</option>
+					            <option>2</option>
+					            <option>3</option>
+					            <option>4</option>
+					            <option>5</option>
+		                    </select>
+		               </div>
+					</div>
+					<div class="control-group">
+						<div class="controls" style='margin-left:60px;'>
+							<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+							<button class="btn btn-large btn-danger" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+							<!--<input id="addcart" type="submit" name="addcart" value="{% trans "Add to cart" %}" />-->
+					    </div>
+					</div>
+				<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+				{% plugin_point "product_add_buttons" %}
+				{% plugin_point "product_form" %}
+				</form>
+                
+    			<h2>Product Description</h2>
+    			
+        </div>
+    </div>
+    <div class="clearfix" ></div>
+
+
+	{% block productfooter %}
+	{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+	{% plugin_point "product_footer" %}
+	{% endblock %}
+    {% endblock %}
+{% endblock %}
+{% block extrajs %}
+<script type="text/javascript" src="{{MEDIA_URL}}js/slides.min.jquery.js"></script>
+<script type="text/javascript">
+var productid = {{product.id}};
+</script>
+<script type="text/javascript">
+//alert(filenameWithSize('aadf.jpg','100x100'));
+(function ($) {
+
+	$('#product').slides({
+		preload: true,
+		preloadImage: '{{ MEDIA_URL }}img/loading.gif',
+		effect: 'slide, fade',
+		crossfade: true,
+		slideSpeed: 350,
+		fadeSpeed: 500,
+		generateNextPrev: true,
+		generatePagination: false
+	});
+	$("#product a.clickNext").live('click',function(){
+		$("#product a.next").click();
+		return false;
+	});
+})(jQuery);
+
+</script>
+{% endblock %}

@@ -1,0 +1,83 @@
+.in-here-you-can-bar{
+  width:400px;
+  overflow:hidden;
+  background: #ffffff;
+  border-radius: 5px;
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7), 0px 0px 10px 0px rgba(255, 255, 255, 0.7);
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7), 0px 0px 10px 0px rgba(255, 255, 255, 0.7);
+  -o-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7), 0px 0px 10px 0px rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7), 0px 0px 10px 0px rgba(255, 255, 255, 0.7);
+  padding:5px;
+  margin-top:15px;
+  margin-left:10%;
+}
+.roundborder2{
+  border-radius: 2px;
+}
+.icon-container{
+	float:left;
+	width:auto;
+	border:1px #bbb solid;
+	overflow:hidden;
+	height:auto;
+	padding:5px;
+}
+.in-here-you-can-bar-content{
+	float:left;
+    margin-left:2%;
+}
+#joinus-leaflet-container .left-container{
+	float:left;
+}
+#joinus-leaflet-container .right-container{
+	float:right;
+	width:550px;
+}
+#joinus-form-container{
+  background: #ddd;
+  border-radius: 5px;
+  padding:5%;
+  margin-right:10%;
+  margin-top:20px;
+  
+}
+
+#joinus-form-container label.control-label{
+	line-height:24px;
+	font-size:24px;
+	color:#555;
+}
+
+#joinus-form-container input{
+	font-size:150%;
+	height:24px;
+    line-height:24px;
+    padding-left:3%;padding-right:3%;
+}
+
+.flat-button {
+  width: 218px;
+  height: 58px;
+  border-radius: 30px;
+  color: rgb(255, 255, 255);
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  display: table;
+  background-color: rgb(187, 187, 187);
+  float: none;
+  border: none;
+  font-style: normal;
+  box-shadow: rgb(85, 85, 85) 0px 1px 2px 0px;
+  -webkit-box-shadow: rgb(85, 85, 85) 0px 1px 2px 0px;
+  margin-left:auto;margin-right:auto;
+}
+.flat-button span {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  text-shadow: none;
+}
+.aboutus-lines{
+	line-height:30px;
+}

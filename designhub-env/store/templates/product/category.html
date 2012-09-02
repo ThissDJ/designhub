@@ -1,0 +1,64 @@
+{% extends "product/base.html" %}
+{% load i18n %}
+{% load thumbnail %}
+{% load satchmo_category %}
+
+{% block extra-head %}
+{% if category.meta %}
+    <meta name="description" content="{{ category.meta|escape }}">
+{% endif %}
+{% endblock %}
+
+
+{% block content-product %}
+    <div class='container'>
+		<div id="product_category">
+		
+		{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
+		    {% if category.main_image %}
+		            {% thumbnail category.main_image.picture "200x200" as image %}
+		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		           {% endthumbnail %}
+		    {% endif %}
+		    {% for product in products %} 
+		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
+		            <div style="width:33.3%;float:left;">
+		            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+		            		<div class="tip-content-when-hover">
+		            			Sample
+		            	        
+		            	    </div>
+		            	    {% thumbnail product.main_image.picture "200x200" as image %}
+		                        <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		                    {% endthumbnail %}
+		                </a>
+		            </div>
+		        {% if forloop.last %} </div>{% endif %}
+		    {% endfor %}
+		{% if child_categories %}
+		        {% for cat in child_categories %}
+		            <!--<h4>{{cat.translated_name}}</h4>-->
+		            {% if cat.translated_description %}<!--<p class="product_category_description">{{ cat.translated_description }}</p>-->{% endif %}
+		            {% for product in cat.active_products %}
+		                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
+				            <div style="width:33.3%;float:left;">
+				            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+				            		<div class="tip-content-when-hover">
+				            			Sample
+				            	        
+				            	    </div>
+				            	    {% thumbnail product.main_image.picture "200x200" as image %}
+				                        <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+				                    {% endthumbnail %}
+				                </a>
+				            </div>
+		                {% if forloop.last %}</div>{% endif %}
+		            {% endfor %}
+		        {% endfor %}
+		{% endif %}
+		{% if sale %}
+		{% include "product/some_discount_eligible.html" %}
+		{% endif %}
+		</div>
+	</div>
+{% endblock %}
