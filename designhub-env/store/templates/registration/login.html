@@ -2,10 +2,7 @@
 {% load i18n %}
 
 {% block content %}
-<div class="container">
-    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
-</div>
-<div class="container" style="padding-top:20px;">
+<div class="container" style="padding-top:10px;">
 {% if form.non_field_errors %}
 <p class="error">{% for err in form.non_field_errors %}{{ err }}{% if not forloop.last %}<br/>{% endif %}
 {% endfor %}</p>

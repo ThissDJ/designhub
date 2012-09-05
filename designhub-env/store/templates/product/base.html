@@ -1,10 +1,11 @@
 {% extends "shop/base.html" %}
 {% load satchmo_category %}
-{% block content %}
+{% block breadcrumbs-inner %}
 	{% block breadcrumbs-category %}
 	    {% include "product/category_path.html" with category=category %}
 	{% endblock breadcrumbs-category %}
+{% endblock breadcrumbs-inner %}
+{% block content %}
 	{% block content-product %}
-	
 	{% endblock content-product %}
 {% endblock content %}

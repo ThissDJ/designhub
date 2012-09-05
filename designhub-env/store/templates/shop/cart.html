@@ -7,12 +7,11 @@
 {% load satchmo_discounts %}
 {% load normalize_decimal %}
 {% load thumbnail %}
-{% block content %}
-<div class="container">
-    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
-	<span class="seperator">/</span>
+{% block breadcrumbs-inner %}
+    <span class="seperator">/</span>
 	<span>Cart</span>
-</div>
+{% endblock breadcrumbs-inner %}
+{% block content %}
 <div class="container" style="padding-top:10px;">
 {% if error_message %}
 <div class="error">{{ error_message }}</div>

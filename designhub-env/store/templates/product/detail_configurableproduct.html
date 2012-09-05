@@ -31,7 +31,9 @@ satchmo.thumbnails = new Array();
 {{ details|js_thumbnail_array:"width=280,height=280" }}
 </script>
 {% endblock %}
-
+{% block breadcrumbs-category %}
+    {% include "product/product_path.html" with product=product %}
+{% endblock breadcrumbs-category %}
 {% block productdetail %}
     <div class="container" style="margin-top:10px;margin-bottom:20px;padding-top:10px;padding-bottom:20px;">
     	<div style="width:630px;float:left;">

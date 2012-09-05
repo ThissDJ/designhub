@@ -11,7 +11,6 @@
 
 
 {% block content-product %}
-    <div class='container'>
 		<div id="product_category">
 		
 		{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
@@ -61,5 +60,4 @@
 		{% include "product/some_discount_eligible.html" %}
 		{% endif %}
 		</div>
-	</div>
 {% endblock %}

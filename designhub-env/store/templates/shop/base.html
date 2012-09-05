@@ -8,7 +8,7 @@
 	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
     {% block extra-head %}{% endblock %}
-    {% block stylesheet %}<link rel="stylesheet" href="{{ STATIC_URL }}css/style.20120831.css" />{% endblock %}
+    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20120831.css" />{% endblock %}
     <title>{% block title %}{{ shop_name }}{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
     {% plugin_point "page_head" %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.css">
@@ -19,8 +19,17 @@
 <body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
     <div class="wrapper">
 	{% block header %}{% include "header0.html" with category=category %}{% endblock %}
+	{% block breadcrumbs %}
+	<div class="container">
+	    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
+	    {% block breadcrumbs-inner %}
+		{% endblock breadcrumbs-inner %}
+	</div>
+	{% endblock breadcrumbs %}
+	<div class='container' style='margin-top:10px;margin-bottom:50px;'>
 	{% block content %}
 	{% endblock content %}
+	</div>
 	<div class='push'></div>
 	</div>
 	{% block footer %}{% include "footer0.html" %}{% endblock %}

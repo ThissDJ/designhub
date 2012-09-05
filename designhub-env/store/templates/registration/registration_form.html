@@ -1,13 +1,10 @@
 {% extends "shop/base.html" %}
 {% load i18n %}
-
+{% block breadcrumbs-inner %}
+    <span class="seperator">/</span>
+    <span>{% trans "Registration" %}</span>
+{% endblock breadcrumbs-inner %}
 {% block content %}
-<div class="container">
-    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
-	<span class="seperator">/</span>
-	<span>{% trans "Registration" %}</span>
-</div>
-<div class="container" style="padding-top:10px;">
 <h3>{% trans "Please Enter Your Account Information" %}</h3>
 
 <table>
@@ -43,5 +40,4 @@
 <tr><td></td><td><input type="submit" value="{% trans "Create Account" %}"/></td></tr>
 </form>
 </table>
-</div>
 {% endblock %}

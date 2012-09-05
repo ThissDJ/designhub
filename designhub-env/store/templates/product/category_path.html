@@ -1,8 +1,5 @@
 {% load i18n %}
 {% spaceless %}
-<div class="container">
-    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
 	{% for parent in category.parents %} <span class="seperator">/</span><a href="{{ parent.get_absolute_url }}">{{ parent.translated_name }}</a>{% endfor %}
 	<span class="seperator">/</span><span>{{ category.translated_name }}</span>
-</div>
 {% endspaceless %}

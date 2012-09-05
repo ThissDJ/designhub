@@ -4,11 +4,13 @@
 html,body{
 	height: 100%;
 }
+
 html{
 	/*background-color:#fff;*/
 }
 body{
 	background:url(../img/site-bg5.jpg);
+	padding-left:0px;padding-right:0px;
 }
 a,input,p,textarea,div{
 	font-size:12px;

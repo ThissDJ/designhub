@@ -7,13 +7,19 @@
 		<div class='list-item-wrapper'><a href='javascript:void(0);' class="no-underline social list-item" style='background-position: 0 -896px;'>&nbsp;</a></div>
 	</div>
 	<div class='list-item-container nav1' style='float:right;'>
-		<div class='list-item-wrapper'><a class='list-item'  href='javascript:void(0);'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='javascript:void(0);'>Sign Up</a></div>
+		{% if user.is_active %}
+		<span style='color:#bbb'>Hi,</span><div class='list-item-wrapper'><a class='list-item'  href='{% url satchmo_account_info %}'>{{user.last_name}}</a></div>
+		<span class="seperator">/</span>
+		<div class='list-item-wrapper'><a class='list-item'  href='{% url auth_logout %}'>Logout</a></div>
+		{% else %}
+		<div class='list-item-wrapper'><a class='list-item'  href='{% url auth_login %}'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='{% url registration_register %}'>Sign Up</a></div>
+		{% endif %}
 		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>About Us</a></div>
 		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>Worldwide Delivery</a></div>
 		<span class="seperator">/</span>
 		{% url satchmo_cart as carturl %}
 	    {% if carturl %}<div class='list-item-wrapper'><a href="{{ carturl }}">{% trans "Cart" %}</a></div>{% endif %}
-	    {% if not cart.is_empty %}
+	    {% if not cart.is_empty and cart%}
 	        <div class='list-item-wrapper'>
             &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})&nbsp;</div>
             {% url satchmo_checkout-step1 as checkouturl %}
@@ -105,27 +111,9 @@ navbarHeader0ContainerNode.innerHTML += [
              ' <a href="javascript:void(0);" id="drop3" role="button">Sale</a>',
              ' </li>',
             ' <li id="fat-menu" class="dropdown">',
-             ' <a href="javascript:void(0);" id="drop3" role="button">Ideas</a>',
+             ' <a href="javascript:void(0);" id="drop3" role="button" title="coming soon!">Ideas</a>',
            ' </li>',
          ' </ul>'].join('');
 
-// var categoryListLeftPart = getElementsByClass('category-item-first-level');
-for(var i = 0; i < categoryNum; i++){
-	
-	// categoryListLeftPart[i].childNodes[0].innerHTML = categoryListInfoNode.childNodes[i].childNodes[0].innerHTML;
-	// categoryListLeftPart[i].childNodes[0].href = categoryListInfoNode.childNodes[i].childNodes[0].href;
-	// if(categoryListInfoNode.childNodes[i].childNodes.length > 1){
-		// var subCategoryListItemTmplList = ["<div class='list-item-wrapper'><a class='list-item white-font'  href='","'>",'</a></div>'];
-		// var subCategoryListHtmlList = [];
-		// var subCategoryListInfoNode = categoryListInfoNode.childNodes[i].childNodes[1];
-		// for(var j = 0;j < subCategoryListInfoNode.childNodes.length; j++){
-			// var subCategoryListItemHtml = subCategoryListItemTmplList[0] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].href 
-			                                // + subCategoryListItemTmplList[1] + categoryListInfoNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].innerHTML 
-			                                // +  subCategoryListItemTmplList[2];
-			// subCategoryListHtmlList.push(subCategoryListItemHtml);
-		// }
-		// fashionHoverShowContainer.innerHTML = subCategoryListHtmlList.join("<div class='list-item-wrapper white-font'>|</div>");
-	// }
-}
 </script>
 {% endspaceless %}
