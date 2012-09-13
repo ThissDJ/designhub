@@ -52,8 +52,8 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     	<div style="width:300px;float:right;">
     			<h1>{{ product.translated_name }}</h1>
                 <br>
-                {% if sale %}<strike id="fullprice" style="display: block;">HK{{ product|discount_price:""|currency }}</strike>{% endif %}
-    			<h2>HK{{ product|discount_price:sale|currency }}</h2>
+                {% if sale %}<strike id="fullprice" style="display: block;">{{ product|discount_price:""|currency }}</strike>{% endif %}
+    			<h2>{{ product|discount_price:sale|currency }}</h2>
                 <br>
 				{% with product.translated_attributes as atts %}{% if atts %}
 				<p class="productattributes">
@@ -94,6 +94,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
         </div>
         <div class="clearfix" ></div>
         <br><br>
+        {% include "product/designer.html" %}
 		{% block productfooter %}
 		{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
 		{% plugin_point "product_footer" %}

@@ -1,0 +1,14 @@
+{% load thumbnail %}
+{% spaceless %}
+        {% if product.mynewproduct.designer %}
+        <div>
+        	<h4>{{product.mynewproduct.designer.name}}</h4>
+        	<p>{{product.mynewproduct.designer.description}}</p>
+		    {% if product.mynewproduct.designer.main_image %}
+		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x200"  crop="center" as image %}
+		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		           {% endthumbnail %}
+		    {% endif %}
+        </div>
+        {% endif %}
+{% endspaceless %}
