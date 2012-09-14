@@ -82,6 +82,18 @@ MIDDLEWARE_CLASSES = (
 # NOTE: If you enable the recent_products context_processor, you MUST have the
 # 'satchmo_ext.recentlist' app installed.
 TEMPLATE_CONTEXT_PROCESSORS = (
+#    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+#    'django.core.context_processors.media',
+#    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
         'satchmo_store.shop.context_processors.settings',
         'django.contrib.auth.context_processors.auth',
         #'satchmo_ext.recentlist.context_processors.recent_products',
@@ -134,7 +146,7 @@ INSTALLED_APPS = (
     #'product.modules.downloadable',
     #'product.modules.subscription',
     #'satchmo_ext.product_feeds',
-    #'satchmo_ext.brand',
+#    'satchmo_ext.brand',
     'payment',
     'payment.modules.dummy',
     #'payment.modules.purchaseorder',
@@ -150,12 +162,14 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'app_plugins',
     'store.localsite',
+    'south',
+    'social_auth',
 )
 
-AUTHENTICATION_BACKENDS = (
-    'satchmo_store.accounts.email-auth.EmailBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
+#AUTHENTICATION_BACKENDS = (
+#    'satchmo_store.accounts.email-auth.EmailBackend',
+#    'django.contrib.auth.backends.ModelBackend',
+#)
 
 DEBUG_TOOLBAR_CONFIG = {
     'INTERCEPT_REDIRECTS' : False,
@@ -171,6 +185,98 @@ SATCHMO_SETTINGS = {
 }
 
 SKIP_SOUTH_TESTS=True
+#### currency setting ####
+L10N_SETTINGS = {
+  'currency_formats' : {
+     'HKD' : {'symbol': u'HK$', 'positive' : u"HK$%(val)0.2f", 'negative': u"HK$(%(val)0.2f)",
+               'decimal' : '.'},
+  },
+  'default_currency' : 'HKD',
+  'show_admin_translations': False,
+  'allow_translation_choice': False,
+}
+#### social network ####
 
+AUTHENTICATION_BACKENDS = (
+    'satchmo_store.accounts.email-auth.EmailBackend',
+#    'django.contrib.auth.backends.ModelBackend',
+#    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+#    'social_auth.backends.google.GoogleOAuthBackend',
+#    'social_auth.backends.google.GoogleOAuth2Backend',
+#    'social_auth.backends.google.GoogleBackend',
+#    'social_auth.backends.yahoo.YahooBackend',
+#    'social_auth.backends.browserid.BrowserIDBackend',
+#    'social_auth.backends.contrib.linkedin.LinkedinBackend',
+#    'social_auth.backends.contrib.livejournal.LiveJournalBackend',
+#    'social_auth.backends.contrib.orkut.OrkutBackend',
+#    'social_auth.backends.contrib.foursquare.FoursquareBackend',
+#    'social_auth.backends.contrib.github.GithubBackend',
+#    'social_auth.backends.contrib.dropbox.DropboxBackend',
+#    'social_auth.backends.contrib.flickr.FlickrBackend',
+#    'social_auth.backends.contrib.instagram.InstagramBackend',
+#    'social_auth.backends.contrib.vkontakte.VKontakteBackend',
+#    'social_auth.backends.contrib.skyrock.SkyrockBackend',
+#    'social_auth.backends.contrib.yahoo.YahooOAuthBackend',
+#    'social_auth.backends.OpenIDBackend',
+#    'social_auth.backends.contrib.bitbucket.BitbucketBackend',
+#    'social_auth.backends.contrib.mixcloud.MixcloudBackend',
+#    'social_auth.backends.contrib.live.LiveBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TWITTER_CONSUMER_KEY         = ''
+TWITTER_CONSUMER_SECRET      = ''
+FACEBOOK_APP_ID              = '360543177361884'
+FACEBOOK_API_SECRET          = '5ffc6cdbaacac76a3d6112dd00a63835'
+LINKEDIN_CONSUMER_KEY        = ''
+LINKEDIN_CONSUMER_SECRET     = ''
+ORKUT_CONSUMER_KEY           = ''
+ORKUT_CONSUMER_SECRET        = ''
+GOOGLE_CONSUMER_KEY          = ''
+GOOGLE_CONSUMER_SECRET       = ''
+GOOGLE_OAUTH2_CLIENT_ID      = ''
+GOOGLE_OAUTH2_CLIENT_SECRET  = ''
+FOURSQUARE_CONSUMER_KEY      = ''
+FOURSQUARE_CONSUMER_SECRET   = ''
+GITHUB_APP_ID                = ''
+GITHUB_API_SECRET            = ''
+DROPBOX_APP_ID               = ''
+DROPBOX_API_SECRET           = ''
+FLICKR_APP_ID                = ''
+FLICKR_API_SECRET            = ''
+INSTAGRAM_CLIENT_ID          = ''
+INSTAGRAM_CLIENT_SECRET      = ''
+VK_APP_ID                    = ''
+VK_API_SECRET                = ''
+BITBUCKET_CONSUMER_KEY       = ''
+BITBUCKET_CONSUMER_SECRET    = ''
+LIVE_CLIENT_ID               = ''
+LIVE_CLIENT_SECRET           = ''
+SKYROCK_CONSUMER_KEY         = ''
+SKYROCK_CONSUMER_SECRET      = ''
+YAHOO_CONSUMER_KEY           = ''
+YAHOO_CONSUMER_SECRET        = ''
+MIXCLOUD_CLIENT_ID           = ''
+MIXCLOUD_CLIENT_SECRET       = ''
+
+#LOGIN_URL          = '/login-form/'
+#LOGIN_REDIRECT_URL = '/logged-in/'
+#LOGIN_ERROR_URL    = '/login-error/'
+
+SOCIAL_AUTH_COMPLETE_URL_NAME  = 'socialauth_complete'
+SOCIAL_AUTH_ASSOCIATE_URL_NAME = 'socialauth_associate_complete'
+
+SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
+
+SOCIAL_AUTH_EXTRA_DATA = False
+
+SOCIAL_AUTH_SESSION_EXPIRATION = False
+
+EMAIL_HOST = 'smtp.webfaction.com'
+EMAIL_HOST_USER = 'dhub'
+EMAIL_HOST_PASSWORD = 'dhub4'
+DEFAULT_FROM_EMAIL = 'info@designhub.hk'
+SERVER_EMAIL = 'info@designhub.hk'
 # Load the local settings
 from local_settings import *
