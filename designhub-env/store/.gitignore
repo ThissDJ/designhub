@@ -1,3 +1,5 @@
-settings.py
-wsgi.py
+*.log
 *.db
+*.pot
+*.pyc
+local_settings.py
