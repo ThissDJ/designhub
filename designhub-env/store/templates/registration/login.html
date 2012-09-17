@@ -25,6 +25,10 @@
      {% if accounturl %} value="{% url satchmo_account_info %}" /> {% endif %}
 {% endif %}
 </form>
+<h4>or connect with</h4> 
+{% for name in social_auth.backends.oauth2 %}
+    <a rel="nofollow" href="{% url socialauth_begin name %}?next={{next}}"><h1>{{ name|title }}</h1></a>
+{% endfor %}
 {% comment %} We jump through hoops with the urls so it doesn't bomb with django's built in unit tests.{% endcomment %}
 {% url registration_register as registration_register %}
 {% url auth_password_reset as auth_password_reset %}

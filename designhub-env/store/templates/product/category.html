@@ -19,6 +19,8 @@
 		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 		           {% endthumbnail %}
 		    {% endif %}
+                    {% load pagination_tags %}
+                    {% autopaginate products 40 %}
 		    {% for product in products %} 
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
 		            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
@@ -50,6 +52,7 @@
 		            </div>
 		        {% if forloop.last %} </div>{% endif %}
 		    {% endfor %}
+                    {% paginate %}
 		{% if child_categories %}
 		        {% for cat in child_categories %}
 		            <!--<h4>{{cat.translated_name}}</h4>-->

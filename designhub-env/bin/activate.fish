@@ -32,7 +32,7 @@ end
 # unset irrelavent variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/designhub/webapps/designhub/designhub-env"
+set -gx VIRTUAL_ENV "/home/designhub/webapps/designhub/designhub/designhub-env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

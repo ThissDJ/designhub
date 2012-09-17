@@ -39,7 +39,7 @@ deactivate () {
 # unset irrelavent variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/designhub/webapps/designhub/designhub-env"
+VIRTUAL_ENV="/home/designhub/webapps/designhub/designhub/designhub-env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

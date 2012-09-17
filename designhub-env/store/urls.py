@@ -14,3 +14,7 @@ urlpatterns += patterns('',
     url(r'^social/fb/', facebook_view, name='fb_app'),
     url(r'', include('social_auth.urls')),
 )
+from django.views.generic.simple import redirect_to
+urlpatterns +=patterns('',
+    url(r'^accounts/profile/$',redirect_to, {'url': '/accounts/'})
+)
