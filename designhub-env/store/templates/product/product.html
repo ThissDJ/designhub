@@ -94,7 +94,18 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
         </div>
         <div class="clearfix" ></div>
         <br><br>
-        {% include "product/designer.html" %}
+        <div style='width:60%;float:left;'>
+        	{% include "product/designer.html" %}
+        </div>
+        <div style='width:40%;float:left;'>
+        	{% if user.is_active %}
+        	{% include "product/comments/form.html" %}
+        	{% else %}
+        	{% include "product/comments/login_form.html" %}
+        	{% endif %}
+        	{% include "product/comments/comments_list.html" %}
+        </div>
+        <div class="clearfix" ></div>
 		{% block productfooter %}
 		{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
 		{% plugin_point "product_footer" %}

@@ -1,0 +1,35 @@
+{% load comments %}
+{% get_comment_form for product as form %}
+<form class="form-inline" action="{% comment_form_target %}" method="POST">{% csrf_token %}
+	<legend style='color:#555;'>Say Something to The Designer</legend>
+    
+	<input type="hidden" name="next" value="{{ product.get_absolute_url }}" />
+	{% for field in form %}
+    {% ifnotequal field.name "url" %}
+	    {% if field.is_hidden %}
+	      {{ field }}
+	    {% else %}
+		  {% ifequal field.name "comment" %}
+		  <span
+	        {% if field.errors %} class="error"{% endif %}
+	        {% if field.errors %}{{ field.errors }}{% endif %}
+	        
+	        >{{ field }}
+	        <script type="text/javascript">
+	            var commentTextArea = document.getElementById('id_comment');
+	            commentTextArea.setAttribute('rows',3);
+	        </script>
+	        <style>
+	        	#id_comment{
+	        		width:300px;
+	        	}
+	        </style>
+	      </span>
+		  {% endifequal %}
+	    {% endif %}
+	{% endifnotequal %}
+  {% endfor %}
+    <button type="submit submit-post" class="btn"  name="submit">Post</button>
+    <!--<input type="submit" name="submit" class="submit-post" value="Post"> -->
+    <!--<input type="submit" name="submit" class="submit-preview" value="Preview">-->
+</form>

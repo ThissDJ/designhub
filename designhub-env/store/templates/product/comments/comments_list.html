@@ -1,0 +1,8 @@
+{% load comments %}
+{% get_comment_list for product as comment_list %}
+{% for comment in comment_list %}
+    <p>
+    	<span style='font-weight:bold'>{{comment.user.username}}:</span><span style='margin-left:5px;'>{{comment.comment}}</span>
+    	<span style='display:inline-block;float:right;text-align:right;font-style:italic;'>{{comment.submit_date}}</span>
+    </p>
+{% endfor %}

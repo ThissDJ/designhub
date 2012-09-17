@@ -1,0 +1,5 @@
+
+<form action="." method="POST" style='text-align:center'>{% csrf_token %}
+	<legend style='color:#555;text-align:left;'>Say Something to The Designer</legend>
+    <a class='btn' href='{% url auth_login %}?next={{ product.get_absolute_url }}'>Login First</a>
+</form>

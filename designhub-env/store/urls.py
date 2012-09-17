@@ -5,6 +5,7 @@ from satchmo_store.urls import urlpatterns
 from localsite.views import home, done, logout, error, form, form2
 from localsite.facebook import facebook_view
 urlpatterns += patterns('',
+    url(r'^comments/', include('django.contrib.comments.urls')),
     url(r'^social/$', home, name='home'),
     url(r'^social/done/$', done, name='done'),
     url(r'^social/error/$', error, name='error'),

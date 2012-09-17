@@ -14,9 +14,9 @@
 			{% endif %}
 		</a></div>
 		<span class="seperator">/</span>
-		<div class='list-item-wrapper'><a class='list-item'  href='{% url auth_logout %}'>Logout</a></div>
+		<div class='list-item-wrapper'><a class='list-item'  href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_logout %}?next={{ request.get_full_path }}{% else %}{% url auth_logout %}{% endifnotequal %}'>Logout</a></div>
 		{% else %}
-		<div class='list-item-wrapper'><a class='list-item'  href='{% url auth_login %}'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='{% url registration_register %}'>Sign Up</a></div>
+		<div class='list-item-wrapper'><a class='list-item'  href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_login %}?next={{ request.get_full_path }}{% else %}{{ request.get_full_path }}{% endifnotequal %}'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='{% url registration_register %}'>Sign Up</a></div>
 		{% endif %}
 		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>About Us</a></div>
 		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>Worldwide Delivery</a></div>
