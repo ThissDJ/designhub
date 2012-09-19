@@ -1,0 +1,6 @@
+{% load i18n %}
+{% spaceless %}
+    <span style='color:#bbb;margin-right:10px;text-decoration:underline;'>Order by</span>
+	<a href="{{ request.path }}?order_by=price_inc" title='price increasing'>price<span style='font-weight:bold;'>&uarr;</span></a><span class="seperator">/</span>
+	<a href="{{ request.path }}?order_by=price_dec" title='price decreasing'>price<span style='font-weight:bold;'>&darr;</span></a>
+{% endspaceless %}
