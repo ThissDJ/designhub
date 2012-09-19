@@ -60,24 +60,99 @@ def category_view(request, slug, parent_slugs='', template='product/category.htm
      - slug: slug of category
      - parent_slugs: ignored
     """
-    try:
-        category =  Category.objects.get_by_site(slug=slug)
-        products = list(category.active_products())
-        sale = find_best_auto_discount(products)
+    if request.GET.has_key('order_by') and request.GET['order_by']:
+        orderBy= request.GET['order_by']
+        if orderBy == 'price_inc':
+            try:
+                category =  Category.objects.get_by_site(slug=slug)
+                #products = list(category.active_products())
+                products = list(category.active_products())
+                if len(products):
+                    productsAndPrice = []
+                    for p in products:
+                        price = p.unit_price
+                        productsAndPrice.append([price,p])
+                    productsAndPrice.sort()
+                    sortedProducts = []
+                    for pp in productsAndPrice:
+                        sortedProducts.append(pp[1])
+                    products = sortedProducts
+                sale = find_best_auto_discount(products)
+            except Category.DoesNotExist:
+                return bad_or_missing(request, _('The category you have requested does not exist.'))
+        
+            child_categories = category.get_all_children()
+        
+            ctx = {
+                'category': category,
+                'child_categories': child_categories,
+                'sale' : sale,
+                'products' : products,
+                'order_by' : 'price_inc'
+            }
+            index_prerender.send(Product, request=request, context=ctx, category=category, object_list=products)
+            return render_to_response(template, context_instance=RequestContext(request, ctx))
+        else:
+            try:
+                category =  Category.objects.get_by_site(slug=slug)
+                #products = list(category.active_products())
+                products = list(category.active_products())
+                if len(products):
+                    productsAndPrice = []
+                    for p in products:
+                        price = -p.unit_price
+                        productsAndPrice.append([price,p])
+                    productsAndPrice.sort()
+                    sortedProducts = []
+                    for pp in productsAndPrice:
+                        sortedProducts.append(pp[1])
+                    products = sortedProducts
+                sale = find_best_auto_discount(products)
+            except Category.DoesNotExist:
+                return bad_or_missing(request, _('The category you have requested does not exist.'))
+        
+            child_categories = category.get_all_children()
+        
+            ctx = {
+                'category': category,
+                'child_categories': child_categories,
+                'sale' : sale,
+                'products' : products,
+                'order_by' : 'price_dec'
+            }
+            index_prerender.send(Product, request=request, context=ctx, category=category, object_list=products)
+            return render_to_response(template, context_instance=RequestContext(request, ctx))
 
-    except Category.DoesNotExist:
-        return bad_or_missing(request, _('The category you have requested does not exist.'))
+    else:
+        try:
+            category =  Category.objects.get_by_site(slug=slug)
+            #products = list(category.active_products())
+            products = list(category.active_products())
+    #        productsAndPrice = []
+    #        for p in products:
+    #            price = p.unit_price
+    #            productsAndPrice.append([price,p])
+    #        productsAndPrice.sort()
+    #        sortedProducts = []
+    #        for pp in productsAndPrice:
+    #            sortedProducts.append(pp[1])
+    #        products = sortedProducts
+            sale = find_best_auto_discount(products)
+    
+        except Category.DoesNotExist:
+            return bad_or_missing(request, _('The category you have requested does not exist.'))
+    
+        child_categories = category.get_all_children()
+    
+        ctx = {
+            'category': category,
+            'child_categories': child_categories,
+            'sale' : sale,
+            'products' : products,
+        }
+        index_prerender.send(Product, request=request, context=ctx, category=category, object_list=products)
+        return render_to_response(template, context_instance=RequestContext(request, ctx))
 
-    child_categories = category.get_all_children()
-
-    ctx = {
-        'category': category,
-        'child_categories': child_categories,
-        'sale' : sale,
-        'products' : products,
-    }
-    index_prerender.send(Product, request=request, context=ctx, category=category, object_list=products)
-    return render_to_response(template, context_instance=RequestContext(request, ctx))
 
 
 def display_featured(num_to_display=None, random_display=None):
