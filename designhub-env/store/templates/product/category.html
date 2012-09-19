@@ -14,80 +14,147 @@
 {% block content-product %}
 		<div id="product_category">
 		{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
-		    {% if category.main_image %}
-		            {% thumbnail category.main_image.picture "200x200" as image %}
-		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-		           {% endthumbnail %}
-		    {% endif %}
-                    {% load pagination_tags %}
-                    {% autopaginate products 40 %}
-		    {% for product in products %} 
-		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
-		            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
-		            		<!--<div class="tip-content-when-hover">
-		            			Sample
-		            	 </div>-->
-		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
-		            	        {% if product.productimage_set.all.count > 1 %}
-		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-		            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
-		            	            {% endthumbnail %}
-		            	        {% else %}
-		            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-		            	        {% endif %}
-		                    {% endthumbnail %}
-		                </a>
-		                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
-		                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
-		                	<span class='product-name-index'>{{product.name}}</span>
-		                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-						    <span class='product-original-price-index'>
-						    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-						    </span>
-						    {% endifnotequal %}
-							<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-							
-		                </a>
-		            </div>
-		        {% if forloop.last %} </div>{% endif %}
-		    {% endfor %}
-                    {% paginate %}
+	    {% if category.main_image %}
+	            {% thumbnail category.main_image.picture "200x200" as image %}
+	           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+	           {% endthumbnail %}
+	    {% endif %}
+                
+	    {% for product in products %} 
+	        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
+	            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+	            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+	            		<!--<div class="tip-content-when-hover">
+	            			Sample
+	            	 </div>-->
+	            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+	            	        {% if product.productimage_set.all.count > 1 %}
+	            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+	            	            {% endthumbnail %}
+	            	        {% else %}
+	            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+	            	        {% endif %}
+	                    {% endthumbnail %}
+	                </a>
+	                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
+	                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
+	                	<span class='product-name-index'>{{product.name}}</span>
+	                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+					    <span class='product-original-price-index'>
+					    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+					    </span>
+					    {% endifnotequal %}
+						<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+						
+	                </a>
+	            </div>
+	        {% if forloop.last %} </div>{% endif %}
+	    {% endfor %}
+                   
 		{% if child_categories %}
 		        {% for cat in child_categories %}
 		            <!--<h4>{{cat.translated_name}}</h4>-->
 		            {% if cat.translated_description %}<!--<p class="product_category_description">{{ cat.translated_description }}</p>-->{% endif %}
-		            {% for product in cat.active_products %}
-		                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-				            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
-				            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
-				            		<!--<div class="tip-content-when-hover">
-				            			Sample
-				            	 </div>-->
-				            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
-				            	        {% if product.productimage_set.all.count > 1 %}
-				            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-				            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
-				            	            {% endthumbnail %}
-				            	        {% else %}
-				            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-				            	        {% endif %}
-				                    {% endthumbnail %}
-				                </a>
-				                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
-				                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
-				                	<span class='product-name-index'>{{product.name}}</span>
-				                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-								    <span class='product-original-price-index'>
-								    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-								    </span>
-								    {% endifnotequal %}
-									<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-									
-				                </a>
-				            </div>
-		                {% if forloop.last %}</div>{% endif %}
-		            {% endfor %}
+		            {% if order_by %}
+			            {% ifequal order_by 'price_inc' %}
+				            {% for product in cat.active_products_price_inc %}
+				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
+						            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+						            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+						            		<!--<div class="tip-content-when-hover">
+						            			Sample
+						            	 </div>-->
+						            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+						            	        {% if product.productimage_set.all.count > 1 %}
+						            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+						            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+						            	            {% endthumbnail %}
+						            	        {% else %}
+						            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+						            	        {% endif %}
+						                    {% endthumbnail %}
+						                </a>
+						                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
+						                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
+						                	<span class='product-name-index'>{{product.name}}</span>
+						                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+										    <span class='product-original-price-index'>
+										    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+										    </span>
+										    {% endifnotequal %}
+											<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+											
+						                </a>
+						            </div>
+				                {% if forloop.last %}</div>{% endif %}
+				            {% endfor %}
+				        {% else %}
+				            {% for product in cat.active_products_price_dec %}
+				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
+						            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+						            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+						            		<!--<div class="tip-content-when-hover">
+						            			Sample
+						            	 </div>-->
+						            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+						            	        {% if product.productimage_set.all.count > 1 %}
+						            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+						            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+						            	            {% endthumbnail %}
+						            	        {% else %}
+						            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+						            	        {% endif %}
+						                    {% endthumbnail %}
+						                </a>
+						                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
+						                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
+						                	<span class='product-name-index'>{{product.name}}</span>
+						                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+										    <span class='product-original-price-index'>
+										    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+										    </span>
+										    {% endifnotequal %}
+											<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+											
+						                </a>
+						            </div>
+				                {% if forloop.last %}</div>{% endif %}
+				            {% endfor %}
+				        {% endifequal %}
+		            {% else %}
+			            {% for product in cat.active_products %}
+			                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
+					            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+					            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+					            		<!--<div class="tip-content-when-hover">
+					            			Sample
+					            	 </div>-->
+					            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+					            	        {% if product.productimage_set.all.count > 1 %}
+					            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+					            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+					            	            {% endthumbnail %}
+					            	        {% else %}
+					            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+					            	        {% endif %}
+					                    {% endthumbnail %}
+					                </a>
+					                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
+					                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
+					                	<span class='product-name-index'>{{product.name}}</span>
+					                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+									    <span class='product-original-price-index'>
+									    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+									    </span>
+									    {% endifnotequal %}
+										<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+										
+					                </a>
+					            </div>
+			                {% if forloop.last %}</div>{% endif %}
+			            {% endfor %}
+		            {% endif %}
 		        {% endfor %}
 		{% endif %}
 		</div>

@@ -3,6 +3,9 @@
 {% block breadcrumbs-inner %}
 	{% block breadcrumbs-category %}
 	    {% include "product/category_path.html" with category=category %}
+	    <div style='float:right'>
+	    	{% include "product/ordering.html"%}
+	    </div>
 	{% endblock breadcrumbs-category %}
 {% endblock breadcrumbs-inner %}
 {% block content %}
