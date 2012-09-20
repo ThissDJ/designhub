@@ -22,7 +22,7 @@
                 
 	    {% for product in products %} 
 	        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-	            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+	            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
 	            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 	            		<!--<div class="tip-content-when-hover">
 	            			Sample
@@ -60,7 +60,7 @@
 			            {% ifequal order_by 'price_inc' %}
 				            {% for product in cat.active_products_price_inc %}
 				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-						            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+						            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
 						            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 						            		<!--<div class="tip-content-when-hover">
 						            			Sample
@@ -92,7 +92,7 @@
 				        {% else %}
 				            {% for product in cat.active_products_price_dec %}
 				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-						            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+						            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
 						            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 						            		<!--<div class="tip-content-when-hover">
 						            			Sample
@@ -125,7 +125,7 @@
 		            {% else %}
 			            {% for product in cat.active_products %}
 			                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-					            <div style="width:25%;float:left;" class='toggleImage-container product-index-container'>
+					            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
 					            	<a href="{{ product.get_absolute_url }}" onClick="alert('Coming soon in September!');" class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 					            		<!--<div class="tip-content-when-hover">
 					            			Sample
