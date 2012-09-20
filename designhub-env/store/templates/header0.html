@@ -1,39 +1,45 @@
 {% load satchmo_category i18n normalize_decimal satchmo_discounts satchmo_currency%}
 {% spaceless %}
 <div class='container header'>
-	<div style='float:left;' class='list-item-container nav1'>
-		<div class='list-item-wrapper' style="float:left;padding-top:3px;padding-bottom:0px;"><iframe src="http://www.facebook.com/plugins/like.php?href=http%3A%2F%2Fwww.designhub.hk&layout=button_count&amp;show_faces=true&amp; width=450&amp;action=like&amp;colorscheme=light&amp;height=0&amp;" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:20px;margin-bottom:0px;padding-bottom:0px;" allowtransparency="true"></iframe></div>
-		<div class='list-item-wrapper'><a  href='javascript:void(0);' class="no-underline social list-item" style='background-position: 0 -288px;'>&nbsp;</a></div>
-		<div class='list-item-wrapper'><a href='javascript:void(0);' class="no-underline social list-item" style='background-position: 0 -896px;'>&nbsp;</a></div>
-	</div>
-	<div class='list-item-container nav1' style='float:right;'>
-		{% if user.is_active %}
-		<span style='color:#bbb'>Hi,</span><div class='list-item-wrapper'><a class='list-item'  href='{% url satchmo_account_info %}'>
-			{% if user.last_name %}{{user.last_name}}
-			{% else %}{{user.username}}
-			{% endif %}
-		</a></div>
-		<span class="seperator">/</span>
-		<div class='list-item-wrapper'><a class='list-item'  href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_logout %}?next={{ request.get_full_path }}{% else %}{% url auth_logout %}{% endifnotequal %}'>Logout</a></div>
-		{% else %}
-		<div class='list-item-wrapper'><a class='list-item'  href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_login %}?next={{ request.get_full_path }}{% else %}{{ request.get_full_path }}{% endifnotequal %}'>Login</a></div><span style='color:#bbb'>or</span><div class='list-item-wrapper'><a  class='list-item' href='{% url registration_register %}'>Sign Up</a></div>
-		{% endif %}
-		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>About Us</a></div>
-		<span class="seperator">/</span><div class='list-item-wrapper'><a href='javascript:void(0);'>Worldwide Delivery</a></div>
-		<span class="seperator">/</span>
-		{% url satchmo_cart as carturl %}
-	    {% if carturl %}<div class='list-item-wrapper'><a href="{{ carturl }}">{% trans "Cart" %}</a></div>{% endif %}
-	    {% if not cart.is_empty and cart%}
-	        <div class='list-item-wrapper'>
-            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})&nbsp;</div>
-            {% url satchmo_checkout-step1 as checkouturl %}
-            {% if checkouturl %}<div class='list-item-wrapper'><a href="{{ checkouturl }}">&nbsp;{% trans "Check out" %}</a>&nbsp;</div>{% endif %}
-            
-	    {% endif %}
-	</div>
-	<div class='clearfix'></div>
-	<div style='text-align:center;margin-top:20px;'>
-		<a href="/"><img src='{{MEDIA_URL}}img/weblogo.png'></a>
+	<div style='width:100%;position:relative;overflow:hidden;margin-top:15px;margin-bottom:10px;height:100px;'>
+		<div style='text-align:center;width:379px;top:0px;left:300px;position:absolute;'>
+			<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='320'></a>
+		</div>
+		<div style='position:absolute;left:0px;top:18px;text-align:left;'>
+            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank'><button class='facbook-home-page sns'></button></a>
+            <a class='sns-button-wrapper' href='javascript:void(0);' target='_blank'><button class='twitter-home-page sns'></button></a>
+		</div>
+		<div style='position:absolute;right:0px;top:18px;line-height:15px;'>
+			<div class='nav1-right'>
+				<p class='nav1-right-ele'>
+				{% if user.is_active %}
+				<span style='color:#bbb'>Hi,</span><a class='list-item'  href='{% url satchmo_account_info %}'>
+					{% if user.last_name %}{{user.last_name}}
+					{% else %}{{user.username}}
+					{% endif %}
+				</a>
+				<span class="seperator">/</span>
+				<a href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_logout %}?next={{ request.get_full_path }}{% else %}{% url auth_logout %}{% endifnotequal %}'>Logout</a>
+				{% else %}
+				<a class='list-item'  href='{% ifnotequal request.path "/accounts/login/"  %}{% url auth_login %}?next={{ request.get_full_path }}{% else %}{{ request.get_full_path }}{% endifnotequal %}'>Login</a><span style='color:#bbb;margin:0px 5px;'>or</span><a  class='list-item' href='{% url registration_register %}'>Sign Up</a>
+				{% endif %}
+				</p>
+				<p class='nav1-right-ele'>
+					<a href='javascript:void(0);'>About Us</a>
+					<span class="seperator">/</span>
+					<a href='javascript:void(0);'>Worldwide Delivery</a>
+				</p>
+				<p class='nav1-right-ele'>
+					{% url satchmo_cart as carturl %}
+				    {% if carturl %}<a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
+				    {% if not cart.is_empty and cart%}
+			            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
+			            {% url satchmo_checkout-step1 as checkouturl %}
+			            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
+				    {% endif %}
+				</p>
+			</div>
+		</div>
 	</div>
     <div id="navbar-header0" class="navbar navbar-static">
       <div class="navbar-inner">
