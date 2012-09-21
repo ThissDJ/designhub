@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox.css" />
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox-thumbs.css" />
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.mCustomScrollbar.css" />
+<style>
+#fancybox-thumbs{
+width:80px;
+}
+</style>
 {% endblock %}
 {% comment %}
 -------------------------------------------------------------------
@@ -48,8 +53,8 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 	    		</div>
 	    		<div class="slides_container">
 	    			{% for pic in product.productimage_set.all %}
-	    			    {% thumbnail pic.picture "400x400" as image %}
-					    {% thumbnail pic.picture "630x630" as image_b %}
+	    			    {% thumbnail pic.picture "400x400" crop='center'  as image %}
+					    {% thumbnail pic.picture "750x750" as image_b %}
 					    <a class="fancybox-thumb" rel="fancybox-thumb" href="{{ image_b.url }}">
 					    	<img src="{{ image.url }}"/>
 					    </a>
@@ -170,7 +175,7 @@ var productid = {{product.id}};
 	});
 
     (function($){
-        $(document).ready(function(){
+        $(window).load(function(){ 
             $(".content").mCustomScrollbar();
         });
     })(jQuery);

@@ -54,8 +54,8 @@ satchmo.thumbnails = new Array();
 	    		</div>
 	    		<div class="slides_container">
 	    			{% for pic in product.productimage_set.all %}
-	    			    {% thumbnail pic.picture "400x400" as image %}
-					    {% thumbnail pic.picture "630x630" as image_b %}
+	    			    {% thumbnail pic.picture "400x400" crop='center' as image %}
+					    {% thumbnail pic.picture "750x750" as image_b %}
 					    <a class="fancybox-thumb" rel="fancybox-thumb" href="{{ image_b.url }}">
 					    	<img src="{{ image.url }}"/>
 					    </a>
