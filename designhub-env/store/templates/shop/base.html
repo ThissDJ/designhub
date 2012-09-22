@@ -9,7 +9,9 @@
 	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
     {% block extra-head %}{% endblock %}
-    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20120913.css" />{% endblock %}
+    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20120913.css" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.qtip.css" />
+    {% endblock %}
     <title>{% block title %}{{ shop_name }}{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
     {% plugin_point "page_head" %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.css">
@@ -34,9 +36,29 @@
 	<div class='push'></div>
 	</div>
 	{% block footer %}{% include "footer0.html" %}{% endblock %}
-    <script src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
-    <script src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
-    <script src="{{ MEDIA_URL }}js/main.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.qtip.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/main.js"></script>
+    <script type="text/javascript" >
+    	(function ($) {
+	        $('.qtip-title-tip').qtip({
+				position: {
+					my: 'top left',
+					target: 'mouse',
+					viewport: $(window), // Keep it on-screen at all times if possible
+					adjust: {
+						x: 10,  y: 10
+					}
+				},
+				hide: {
+					fixed: true // Helps to prevent the tooltip from hiding ocassionally when tracking!
+				},
+	        	style:{classes: 'ui-tooltip-dark'}
+	        });
+		})(jQuery);
+    </script>
     {% block extrajs %}{% endblock %}
 </body>
 {% endblock %}

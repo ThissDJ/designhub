@@ -37,8 +37,8 @@ satchmo.thumbnails = new Array();
 {% block productdetail %}
     <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;">
 
-    	<div style="width:630px;float:left;">
-   		<div id="product">
+        <div style="width:540px;float:left;margin-bottom:100px;">
+    		<div id="product">
     			<div class='content' >
 	    	    <ul class="pagination">
 	    			{% for pic in product.productimage_set.all %}
@@ -54,9 +54,9 @@ satchmo.thumbnails = new Array();
 	    		</div>
 	    		<div class="slides_container">
 	    			{% for pic in product.productimage_set.all %}
-	    			    {% thumbnail pic.picture "400x400" crop='center' as image %}
+	    			    {% thumbnail pic.picture "400x400" crop='center'  as image %}
 					    {% thumbnail pic.picture "750x750" as image_b %}
-					    <a class="fancybox-thumb" rel="fancybox-thumb" href="{{ image_b.url }}">
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{ image_b.url }}">
 					    	<img src="{{ image.url }}"/>
 					    </a>
 					    {% endthumbnail %}
@@ -64,73 +64,155 @@ satchmo.thumbnails = new Array();
 					{% endfor %}
 	    		</div>
 	    	</div>
+	    	<link href='http://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
+	    	<style>
+	    		.sharing-label,.sharing-method, .say-something2designer{
+	    			font-family: 'Nothing You Could Do', cursive;
+	    		}
+	    		.say-something2designer{
+	    			font-size:18px;
+	    		}
+	    		.sharing-label{
+	    			margin-right:10px;
+	    		}
+	    		.sharing-method{
+	    			margin-right:8px;
+	    		}
+	    	</style>
+	    	<script>
+	    		function sendMail() {
+				    var link = "mailto:?"
+				             +"subject=" + escape("Share A Cool Stuff {{product.name}}")
+				             + "&body=" + escape('http://{{ request.META.HTTP_HOST }}{{request.get_full_path}} ' + '{{product.description}}')
+				    ;
+				
+				    window.location.href = link;
+				}
+	    	</script>
 	    	<div class="clearfix"></div>
+	    	<div style='margin-top:20px;margin-left:130px;'>
+	    		<span class='sharing-label'>Share via:</span>
+	    		<a class='sharing-method qtip-title-tip' title='Send to your friends' onclick="sendMail(); return false" href='javascript:void(0);'  target="_blank">Email</a>
+	    		<a class='sharing-method qtip-title-tip' title='share this cool design with your friends in Facebook'  target="_blank" href='http://www.facebook.com/sharer.php?u=http%3A%2F%2F{{ request.META.HTTP_HOST }}{{request.get_full_path}}&t=DesignHub%20for%20local%creativity'>Facebook</a>
+	    		<a class='sharing-method qtip-title-tip' title='share this cool design in Sina Weibo | 在微博上分享這次發現'  target="_blank" href='http://service.t.sina.com.cn/share/share.php?url=http%3A%2F%2F{{ request.META.HTTP_HOST }}{{request.get_full_path}}&title={{product.mynewproduct.brand.name}}%20%7C%20{{product.name}}%20by%20{{product.mynewproduct.designer.name}}'>Weibo</a>
+	    		<a class='sharing-method qtip-title-tip' title='Tweet me' target="_blank" href='http://twitter.com/intent/tweet?url=http://{{ request.META.HTTP_HOST }}{{request.get_full_path}}&text={{product.description}};I love this design!&via=DesignHub.hk&related=designhub'>Twitter</a>
+	    	</div>
     	</div>
-    	<div style="width:300px;float:right;">
-    			<h1>{{ product.translated_name }}</h1>
-                <br>
-    			<!--{% trans "Price" %}{% if default_view_tax %} {% trans '(incl. tax)' %}{% endif %}: -->
-                {% spaceless %}
-				{% if sale %}<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>{% endif %}
-				<h2><span id="price">{{ product|discount_price:sale|currency }}</span></h2>
-				{% endspaceless %}
-                <br>
-				{% with product.translated_attributes as atts %}{% if atts %}
-				<p class="productattributes">
-				{% for att in product.translated_attributes %}
-				{{ att.description }}: {{ att.value }}<br/>
-				{% endfor %}
-				</p>
-				{% endif %}{% endwith %}
-				
-				{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-				<form class='well form-horizontal' id="options" action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
-				{% if options %}
-				<p>{% trans "Please choose your options" %}:</p>
-				{% endif %}
-				
-				{% for option_group in options %}
-				    <div class="control-group">
-			        	<label class="control-label" for="size" style='width:50px;text-transform:capitalize;' >{{ option_group.name }}:</label>
-			        	<div class="controls" style='margin-left:60px;'>
-			        		<select id="{{option_group.id}}" class='span2' name="{{ option_group.id }}">
+    	<div style="width:420px;float:right;margin-bottom:100px;">
+    		<div style='width:320px;margin-left:auto;margin-right:auto'>
+    			<h3 style='text-align:center;'>{{ product.translated_name }}</h3>
+                <h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>
+                <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='#' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
+                <div style='height:45px;'></div>
+                {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+                
+    			<div style='margin-bottom:35px;'>
+					{% with product.translated_attributes as atts %}{% if atts %}
+					<span class="productattributes">
+					{% for att in product.translated_attributes %}
+					{{ att.description }}: {{ att.value }}
+					{% endfor %}
+					</span>
+					{% endif %}{% endwith %}
+					
+					{% if sale %}
+						<span style='text-align:center;'>
+							<strike id="fullprice" style="display: block;margin-bottom:7px;">{{ product|discount_price:""|currency }}</strike>
+					    </span>
+					{% endif %}
+	                <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+	                	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>	
+		        		{% for option_group in options %}
+		        		    <select id="{{option_group.id}}" class='span1' name="{{ option_group.id }}"style='font-size:12px;line-height:24px;' >
 							    {% for choice in option_group.items %}
-							     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
-							        {% if choice.price_change %}
-							            {% option_price choice %}
-							        {% endif %}
-							     </option>
+							        {% ifequal forloop.counter 1 %}
+									     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ option_group.name }}:{{ choice.translated_name }}
+									        {% if choice.price_change %}
+									            {% option_price choice %}
+									        {% endif %}
+									     </option>
+									{% else %}
+									     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
+									        {% if choice.price_change %}
+									            {% option_price choice %}
+									        {% endif %}
+									     </option>
+									{% endifequal %}
 							    {% endfor %}
 	                        </select>
-	                    </div>
-                    </div>
-				{% endfor %}
-				<!--
-				{% trans "Quantity" %} <input class='span2' type="text" size="2" name="quantity" id="quantity" value="1" class="priced" />-->
-                <div class="control-group">
-                	<label class="control-label" for="quantity" style='width:50px;' >Quantity:</label>
-		        	<div class="controls" style='margin-left:60px;' >
-		        		<select id="quantity" class="span1" name="quantity">
-				            <option>1</option>
-				            <option>2</option>
-				            <option>3</option>
-				            <option>4</option>
-				            <option>5</option>
+		        		{% endfor %}
+		        		<select id="quantity" class="span1" style='font-size:12px;line-height:24px;' name="quantity">
+				            <option value='1' style='font-size:12px;line-height:24px;'>Qty:1</option>
+				            <option value='2' style='font-size:12px;line-height:24px;'>2</option>
+				            <option value='3' style='font-size:12px;line-height:24px;'>3</option>
+				            <option value='4' style='font-size:12px;line-height:24px;'>4</option>
+				            <option value='5' style='font-size:12px;line-height:24px;'>5</option>
 	                    </select>
-	               </div>
+
+								<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+								<span style='margin-right:5px;line-height:24px;'>&nbsp;</span>
+								<button class="btn btn-small btn-danger" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+					<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+					{% plugin_point "product_add_buttons" %}
+					{% plugin_point "product_form" %}
+					</form>
+    			</div>
+    			{% if product.mynewproduct.concept %}
+    			<div style='margin-top:8px;margin-bottom:15px;'>
+	    			<h5 style='margin-bottom:5px;'>Concept</h5>
+	    			<p>
+	    				{{product.mynewproduct.concept}}
+	    			</p>
+    		    </div>
+    			{% endif %}
+    			{% if product.description %}
+    			<div style='margin-top:8px;margin-bottom:15px;'>
+	    			<h5 style='margin-bottom:5px;'>Information</h5>
+	    			<p>
+	    				{{product.description}}
+	    			</p>
+	    		</div>
+    			{% endif %}
+    			<div style='margin-top:35px;'>
+	                <form id="options2" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+	                	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>
+		        		{% for option_group in options %}
+		        		    <select id="{{option_group.id}}" class='span1' name="{{ option_group.id }}"style='font-size:12px;line-height:24px;' >
+							    {% for choice in option_group.items %}
+							        {% ifequal forloop.counter 1 %}
+									     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ option_group.name }}:{{ choice.translated_name }}
+									        {% if choice.price_change %}
+									            {% option_price choice %}
+									        {% endif %}
+									     </option>
+									{% else %}
+									     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
+									        {% if choice.price_change %}
+									            {% option_price choice %}
+									        {% endif %}
+									     </option>
+									{% endifequal %}
+							    {% endfor %}
+	                        </select>
+		        		{% endfor %}
+		        		<select id="quantity" class="span1" style='font-size:12px;line-height:24px;' name="quantity">
+				            <option value='1' style='font-size:12px;line-height:24px;'>Qty:1</option>
+				            <option value='2' style='font-size:12px;line-height:24px;'>2</option>
+				            <option value='3' style='font-size:12px;line-height:24px;'>3</option>
+				            <option value='4' style='font-size:12px;line-height:24px;'>4</option>
+				            <option value='5' style='font-size:12px;line-height:24px;'>5</option>
+	                    </select>
+
+								<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+								<span style='margin-right:5px;line-height:24px;'>&nbsp;</span>
+								<button class="btn btn-small btn-danger" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+					<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+					{% plugin_point "product_add_buttons" %}
+					{% plugin_point "product_form" %}
+					</form>
 				</div>
-				<div class="control-group">
-					<div class="controls" style='margin-left:60px;'>
-						<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
-						<button class="btn btn-large btn-danger" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
-						<!--<input id="addcart" type="submit" name="addcart" value="{% trans "Add to cart" %}" />-->
-				    </div>
-				</div>
-				{% plugin_point "product_add_buttons" %}
-				{% plugin_point "product_form" %}
-				</form>
-    			<h2>Product Description</h2>
-    			<p>{{ product.translated_description }}</p>
+    		</div>
+
     			
         </div>
         <div class="clearfix" ></div>
@@ -147,7 +229,7 @@ satchmo.thumbnails = new Array();
         </div>
         <div class="clearfix" ></div>
     	{% block productfooter %}
-		{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}
+		<!--{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}-->
 		{% plugin_point "product_footer" %}
 		{% endblock %}
     </div>

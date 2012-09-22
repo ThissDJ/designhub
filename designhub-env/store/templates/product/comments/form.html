@@ -1,7 +1,7 @@
 {% load comments %}
 {% get_comment_form for product as form %}
 <form class="form-inline" action="{% comment_form_target %}" method="POST">{% csrf_token %}
-	<legend style='color:#555;'>Say Something to The Designer</legend>
+	<legend style='color:#555;' class='say-something2designer'>Say Something to The Designer</legend>
     
 	<input type="hidden" name="next" value="{{ product.get_absolute_url }}" />
 	{% for field in form %}

@@ -288,3 +288,7 @@ a.product-detail-thumnail:hover{
 #product .slides_container a{
 	display:block;
 }
+a.zoom-in{
+/*	cursor:-moz-zoom-in,default;*/
+	cursor:url('../img/zoom-in.png'),pointer;
+}
