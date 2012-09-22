@@ -1,14 +1,16 @@
 {% load thumbnail %}
 {% spaceless %}
         {% if product.mynewproduct.designer %}
-        <div>
-        	<h4>{{product.mynewproduct.designer.name}}</h4>
-        	<p>{{product.mynewproduct.designer.description}}</p>
+        <div style='float:left;width:200px;'>
 		    {% if product.mynewproduct.designer.main_image %}
-		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x200"  crop="center" as image %}
+		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x150"  crop="center" as image %}
 		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 		           {% endthumbnail %}
 		    {% endif %}
+        </div>
+        <div style='float:right;width:300px;margin-right:76px;'>
+        	<h4>{{product.mynewproduct.designer.name}}</h4>
+        	<p>{{product.mynewproduct.designer.description}}</p>
         </div>
         {% endif %}
 {% endspaceless %}
