@@ -47,8 +47,8 @@
 	display: block;
 	position: relative;
 	overflow: hidden;
-	border: 1px solid #222;
-	background: #111;
+	border: 1px solid transparent;
+	background: transparent;
 	outline: none;
 }
 
@@ -71,6 +71,9 @@
 	padding: 0px;
 	border:none;
 	border: 1px solid #fff;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 
 #fancybox-thumbs.left ul li:hover {
@@ -81,8 +84,8 @@
 	display: block;
 	position: relative;
 	overflow: hidden;
-	border: 1px solid #222;
-	background: #111;
+/*	border: 1px solid #222;*/
+	background: transparent;
 	outline: none;
 }
 

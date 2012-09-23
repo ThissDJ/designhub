@@ -12,6 +12,12 @@ body{
 	background:url(../img/site-bg5.jpg);
 	padding-left:0px;padding-right:0px;
 }
+/* round border for all image */
+img{
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
 a,input,p,textarea,div{
 	font-size:12px;
 	text-align:left;
@@ -226,6 +232,9 @@ a.product-name-container:hover{
 }
 .product-index-container:hover{
 	border:1px #bbb solid;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 .product-index-container:hover .product-name-index{
 	text-decoration:underline;
@@ -264,6 +273,9 @@ a.fancybox-thumb:hover{
 #product .pagination li.current{
 	padding:4px;
 	border:1px #bbb solid;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }
 #product .pagination li a{
 	display:inline;

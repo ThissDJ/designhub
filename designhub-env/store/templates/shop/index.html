@@ -2,11 +2,258 @@
 {% load i18n %}
 {% load thumbnail %}
 {% load satchmo_util %}
-
+	{% block breadcrumbs %}
+	{% endblock breadcrumbs %}
 	{% block content %}
 	<div class='container'>
-	
-		
+    		<div id="index-slider">
+	    		<div class="slides_container">
+				    <a href="javascript:void(0);" class='slides-image-container'>
+				    	<img src="{{MEDIA_URL}}images/index/1-960width.jpg"/>
+				    </a>
+				    <a href="javascript:void(0);" class='slides-image-container'>
+				    	<img src="{{MEDIA_URL}}images/index/2.jpg"/>
+				    </a>
+	    		</div>
+	    	</div>
 	</div>
-	{% endblock content %}
+	<style>
+		#index-slider .slides_container{
+		    height:552px;
+		}
+		#index-slider .slides_container a{
+			display:block;
+		}
+	    #index-slider{
+	    	position:relative;
+	    }
+	    a.prev, a.next{
+			position:absolute;
+			display:block;
+			z-index:100;
+			width:50%;
+			top:0px;
+			height:0px;
+			padding-top:552px;
+			overflow:hidden;
+	    }
+		a.prev{
+			left:0px;
+		}
+		a.next{
+			right:0px;
+		}
+		a.prev:hover{
+			background:url({{MEDIA_URL}}img/arrow-left.png) no-repeat 12px 235px;
+		}
+		a.next:hover{
+			right:0px;
+			background:url({{MEDIA_URL}}img/arrow-right.png) no-repeat 446px 235px;
+		}
+	</style>
+	<div class='container'>
+		<div style='padding-top:50px;padding-bottom:0px;'>
+			<h3>
+				Talent Today
+			</h3>
+		</div>
+		<div style='float:left;width:50%;height:350px;position:relative;'>
+            {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
+                <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+            {% endthumbnail %}
+            <a class='designer-today' href='javascript:void(0);'>{{designer.name}}</a>
+		</div>
+		<style>
+			.designer-today{
+				display:block;
+				position:relative;
+				bottom:50px;height:50px;padding:0px;width:350px;text-align:center;line-height:50px;
+				-webkit-border-radius: 0px 0px 4px 4px;
+				-moz-border-radius: 0px 0px 4px 4px;
+				border-radius:  0px 0px 4px 4px;
+				background:rgba(0, 0, 0, 0.5);
+			}
+			.designer-today:hover{
+				background:rgba(0, 0, 0, 0.8);
+			}
+		</style>
+		<div style='float:right;width:50%;height:350px;'>
+			<div class='deisgner-today-featured-designs-container'>
+				{% for p in designer.mynewproduct_set.all%}
+				    {% if forloop.counter < 5 %}
+				    <a class='deisgner-today-featured-design' href='{{ p.product.get_absolute_url }}'>
+				    	<div class='black-bg-deisgner-today-featured-design'>
+					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
+					    	<img src="{{ image.url }}" />
+					    {% endthumbnail %}
+					    </div>
+				    </a>
+				    {% endif %}
+				{% endfor %}
+			</div>
+		</div>
+		<style>
+		    .deisgner-today-featured-designs-container{
+		    	margin-left:120px;
+		    	margin-top:20px
+		    }
+		    .deisgner-today-featured-design{
+		    	display:block;
+		    	padding:15px;
+		    	float:left;
+		    }
+		    .black-bg-deisgner-today-featured-design{
+		    	background:#555;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				border-radius: 5px;
+		    }
+		    .deisgner-today-featured-design img{
+		    	opacity: 0.85;
+		    }
+			.deisgner-today-featured-design:hover{
+				text-decoration:none;
+				padding:14px;
+				border:1px solid #bbb;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				border-radius: 4px;
+			}
+			.deisgner-today-featured-design:hover.deisgner-today-featured-design img{
+		    	opacity: 1;
+		    }
+		</style>
+		<div class="clearfix" ></div>
+	</div>
+	
+	<div class='container'>
+		<div style='padding-top:50px;padding-bottom:0px;'>
+			<h3>
+				Featured Today
+			</h3>
+		</div>
+		{% load satchmo_currency %}
+        {% load satchmo_discounts satchmo_tax %}
+		{% if all_products_list %}
+		    {% for product in all_products_list %} 
+		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
+		            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+		            		<!--<div class="tip-content-when-hover">
+		            			Sample
+		            	 </div>-->
+		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+		            	        {% if product.productimage_set.all.count > 1 %}
+		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+		            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+		            	            {% endthumbnail %}
+		            	        {% else %}
+		            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		            	        {% endif %}
+		                    {% endthumbnail %}
+		                </a>
+		                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
+		                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
+		                	<span class='product-name-index'>{{product.name}}</span>
+		                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+						    <span class='product-original-price-index'>
+						    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+						    </span>
+						    {% endifnotequal %}
+							<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+							
+		                </a>
+		            </div>
+		        {% if forloop.last %} </div>{% endif %}
+		    {% endfor %}
+		{% endif %}
+	    {% if is_paginated %}
+		    <div id = "pagination">
+		    <ul>
+		        {% if page_obj.has_previous %}
+		            <li> <a href="{{shop_base}}/?page={{page_obj.previous_page_number}}">{% trans "Previous" %}</a> </li>
+		        {% else %}
+		            <li> {% trans "Previous" %} </li>
+		        {% endif %}
+		        {% for page_number in paginator.num_pages|template_range %}
+		            {% ifequal page_number page_obj.number %}
+		                <li class="currentpage">{{page_number}}</li>
+		            {% else %}
+		                <li> <a href="{{shop_base}}/?page={{page_number}}">{{page_number}}</a> </li>
+		            {% endifequal %}
+		        {% endfor %}
+		        {% if page_obj.has_next %}
+		            <li> <a href="{{shop_base}}/?page={{page_obj.next_page_number}}">{% trans "Next" %}</a></li>
+		        {% else %}
+		            <li> {% trans "Next" %} </li>
+		        {% endif %}
+		    </ul>
+		    </div>
+	    {% endif %}
+	</div>
 
+	{% endblock content %}
+	{% block indexfooter %}
+	<div style="width:100%; height: 400px; background:#F3F4EE;border-top: 1px solid #E8E7DC;border-bottom: 1px solid #E8E7DC;">
+		
+		<div class='container'>
+			<div style='padding-top:30px;padding-bottom:0px;'>
+				<h3 style='text-align:center;'>
+					About Designhub.hk
+				</h3>
+			</div>
+			<div class='index-footer-col'>
+				<div class='index-footer-col-border'>
+					<h5 style='text-align:center;'>
+						Designs
+					</h5>
+					<p>
+						Designs begin as a simple drawing in a sketchbook and are then modeled in CAD, where they are patterned with the highest level of precision. Each and every detail is carefully considered, down to the exact number of stitches. Once the initial pattern is complete, the first prototype is created by hand, just a few feet from the CAD workstation. The prototyping process is known to take several months, with each revision being more structurally and aesthetically sound than the last. Finally, samples are created from several material options and only then is the design either rejected or approved for production.
+					</p>
+				</div>
+			</div>
+			<div class='index-footer-col'>
+				<div class='index-footer-col-border'>
+					<h5 style='text-align:center;'>
+						Designers / Artists
+					</h5>
+					<p>
+						The prototyping process is known to take several months, with each revision being more structurally and aesthetically sound than the last. Finally, samples are created from several material options and only then is the design either rejected or approved for production.Designs begin as a simple drawing in a sketchbook and are then modeled in CAD, where they are patterned with the highest level of precision. Each and every detail is carefully considered, down to the exact number of stitches. Once the initial pattern is complete, the first prototype is created by hand, just a few feet from the CAD workstation.
+					</p>
+				</div>
+			</div>
+		</div>
+		<style>
+		    
+			.index-footer-col{
+				float:left;
+				width:50%;
+				height:230px;
+			}
+			.index-footer-col-border{
+				padding: 0px 30px 50px 30px;
+				width:400px;
+				margin-left:auto;margin-right:auto;
+				height:230px;
+			}
+		</style>
+	</div>
+	{% endblock indexfooter %}
+{% block extrajs %}
+<script type="text/javascript" src="{{MEDIA_URL}}js/slides.min.jquery.js"></script>
+<script type="text/javascript">
+(function ($) {
+	$('#index-slider').slides({
+		preload: true,
+		preloadImage: '{{ MEDIA_URL }}img/loading.gif',
+		effect: 'slide, fade',
+		crossfade: true,
+		slideSpeed: 350,
+		fadeSpeed: 500,
+		generateNextPrev: true,
+		generatePagination: false,
+		play: 5000
+	});
+})(jQuery);
+</script>
+{% endblock %}
