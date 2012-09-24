@@ -60,7 +60,7 @@
 			background:url({{MEDIA_URL}}img/arrow-right.png) no-repeat 446px 235px;
 		}
 	</style>
-	<div class='container index-section' style='background:url({{MEDIA_URL}}images/index/talent-today-bg-01.png)'>
+	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png)'>
 		<div style='padding-bottom:0px;'>
 			<h3 class='section-title'>
 				Talent Today
@@ -98,11 +98,11 @@
 			}
 		</style>
 		<div style='float:right;width:50%;height:350px;'>
-			<div class='deisgner-today-featured-designs-container'>
+			<div class='designer-today-featured-designs-container'>
 				{% for p in designer.mynewproduct_set.all%}
 				    {% if forloop.counter < 5 %}
-				    <a class='deisgner-today-featured-design' href='{{ p.product.get_absolute_url }}'>
-				    	<div class='black-bg-deisgner-today-featured-design'>
+				    <a class='designer-today-featured-design' href='{{ p.product.get_absolute_url }}'>
+				    	<div class='black-bg-designer-today-featured-design'>
 					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
 					    	<img src="{{ image.url }}" />
 					    {% endthumbnail %}
@@ -113,33 +113,33 @@
 			</div>
 		</div>
 		<style>
-		    .deisgner-today-featured-designs-container{
+		    .designer-today-featured-designs-container{
 		    	margin-left:120px;
 		    	margin-top:20px
 		    }
-		    .deisgner-today-featured-design{
+		    .designer-today-featured-design{
 		    	display:block;
 		    	padding:15px;
 		    	float:left;
 		    }
-		    .black-bg-deisgner-today-featured-design{
+		    .black-bg-designer-today-featured-design{
 		    	background:#555;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;
 				border-radius: 5px;
 		    }
-		    .deisgner-today-featured-design img{
+		    .designer-today-featured-design img{
 		    	opacity: 0.85;
 		    }
-			.deisgner-today-featured-design:hover{
+			.designer-today-featured-design:hover{
 				text-decoration:none;
-				padding:14px;
-				border:1px solid #bbb;
+/*				padding:14px;*/
+/*				border:1px solid #bbb;*/
 				-webkit-border-radius: 4px;
 				-moz-border-radius: 4px;
 				border-radius: 4px;
 			}
-			.deisgner-today-featured-design:hover.deisgner-today-featured-design img{
+			.designer-today-featured-design:hover.designer-today-featured-design img{
 		    	opacity: 1;
 		    }
 		</style>
