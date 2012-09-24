@@ -9,6 +9,7 @@ class Designer(models.Model):
     name = models.CharField(max_length=60)
     slug = models.SlugField(_('slug'), blank=False, unique=True)
     description = models.TextField(blank=True)
+    artist = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
     featured = models.BooleanField(default=False)
 #    avatar = ImageWithThumbsField(upload_to=UPLOADED_TO, sizes=((40,40),(50,50),(100,100),(200,200),(400,400),(630,630)),default='')

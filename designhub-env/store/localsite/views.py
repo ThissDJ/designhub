@@ -1,7 +1,6 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
-
 def example(request):
     ctx = RequestContext(request, {})
     return render_to_response('localsite/example.html', context_instance=ctx)
@@ -62,3 +61,20 @@ def form2(request):
         return redirect('socialauth_complete', backend=backend)
     return render_to_response('social/form2.html', {}, RequestContext(request))
 
+#designers
+from django.views.generic import ListView, DetailView
+from localsite.models import Designer
+class DesignerListView(ListView):
+    context_object_name = 'designers'
+    template_name = 'designers/designers.html'
+    model = Designer
+    def get_context_data(self, **kwargs):
+        context = super(DesignerListView, self).get_context_data(**kwargs)
+        designers = Designer.objects.all().order_by('name')
+        context.update(
+            designers = designers ,
+        )
+        return context
+class DesignerDetailView(DetailView):
+    model = Designer
+    template_name = 'designers/designer-details.html'

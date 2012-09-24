@@ -1,0 +1,83 @@
+{% extends "shop/base.html" %}
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+{% block content %}
+<style>
+	.center{
+		text-align:center;
+	}
+	#designer-list,#artist-list{
+		padding:0px;
+		margin:0px;
+	}
+	#designer-list li,#artist-list li{
+		list-style-type:none;
+		text-align:center;
+	}
+	#designer-list li a,#artist-list li a{
+		color:#555;
+	}
+	#designer-list li a:hover,#artist-list li a:hover{
+		color:#D04526;
+	}
+	
+</style>
+<div class='container'>
+	<div style='float:left;width:50%;'>
+		<h4 class='center'>Designers</h4>
+		<ul id='designer-list'>
+			{% for d in designers %}
+			{% if d.artist %}
+			{% else %}
+			<li><a href='javascript:void(0);'>{{d.name}}</a></li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+	<div style='float:right;width:50%;'>
+		<h4 class='center'>Artists</h4>
+		<ul id='artist-list'>
+			{% for d in designers %}
+			{% if d.artist %}
+			<li><a href='javascript:void(0);'>{{d.name}}</a></li>
+			{% endif %}
+			{% endfor %}
+		</ul>
+		<script type="text/javascript" >
+
+			(function ($) {
+				$.fn.extend({        
+				        
+				     addLetterTitle:function(){        
+				       
+					    var currentLetter = undefined;
+					    
+						$(this).children().each(function(){
+							if(currentLetter === undefined){
+								currentLetter = $(this).children().first().html()[0];
+								$(this).before('<h5 class="center">' + currentLetter +'</h5>')
+							}else{
+								if($(this).children().first().html()[0] !== currentLetter){
+									currentLetter = $(this).children().first().html()[0];
+									$(this).before('<h5 class="center">' + currentLetter +'</h5>')
+								}
+							}
+					    });
+				   }
+				});
+				$('#designer-list').addLetterTitle();
+				var artistsListNode = document.getElementById('artist-list');
+				if(String(artistsListNode.innerHTML).replace(/^\s+|\s+$/g, '') === ''){ //
+					var noneCurrently = document.createElement("p");
+					noneCurrently.innerHTML = 'None currently';
+					noneCurrently.setAttribute('class','center');
+					artistsListNode.parentNode.replaceChild(noneCurrently, artistsListNode);
+				}else{
+					$('#artist-list').addLetterTitle();
+				}
+			 })(jQuery);
+		</script>
+	</div>
+</div>
+
+{% endblock content %}
