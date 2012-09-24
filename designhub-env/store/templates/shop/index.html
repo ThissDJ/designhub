@@ -20,6 +20,15 @@
 	<style>
 		#index-slider .slides_container{
 		    height:552px;
+		    border-bottom:5px solid #555;
+			-webkit-border-radius: 0px 0px 4px 4px;
+			-moz-border-radius: 0px 0px 4px 4px;
+			border-radius: 0px 0px 4px 4px;
+		}
+		#index-slider .slides_container img{
+			-webkit-border-radius: 4px 4px 0px 0px;
+			-moz-border-radius: 4px 4px 0px 0px;
+			border-radius: 4px 4px 0px 0px;
 		}
 		#index-slider .slides_container a{
 			display:block;
@@ -51,9 +60,9 @@
 			background:url({{MEDIA_URL}}img/arrow-right.png) no-repeat 446px 235px;
 		}
 	</style>
-	<div class='container'>
-		<div style='padding-top:50px;padding-bottom:0px;'>
-			<h3>
+	<div class='container index-section' style='background:url({{MEDIA_URL}}images/index/talent-today-bg-01.png)'>
+		<div style='padding-bottom:0px;'>
+			<h3 class='section-title'>
 				Talent Today
 			</h3>
 		</div>
@@ -64,6 +73,17 @@
             <a class='designer-today' href='javascript:void(0);'>{{designer.name}}</a>
 		</div>
 		<style>
+		    .index-section{
+		    	border-top:10px solid #555;
+		    	margin-top:80px;
+				-webkit-border-radius: 4px 4px 0px 0px;
+				-moz-border-radius: 4px 4px 0px 0px;
+				border-radius: 4px 4px 0px 0px;
+		    }
+		    .index-section .section-title{
+		    	padding-top:0px;
+		    	margin-top:0px;
+		    }
 			.designer-today{
 				display:block;
 				position:relative;
@@ -126,9 +146,9 @@
 		<div class="clearfix" ></div>
 	</div>
 	
-	<div class='container'>
-		<div style='padding-top:50px;padding-bottom:0px;'>
-			<h3>
+	<div class='container index-section'>
+		<div style='padding-bottom:0px;'>
+			<h3 class='section-title'>
 				Featured Today
 			</h3>
 		</div>
