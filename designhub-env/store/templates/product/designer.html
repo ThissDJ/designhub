@@ -4,12 +4,18 @@
         <div style='float:left;width:200px;'>
 		    {% if product.mynewproduct.designer.main_image %}
 		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x150"  crop="center" as image %}
+		            <a href='{{product.mynewproduct.designer.get_absolute_url}}'>
 		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		           </a>
 		           {% endthumbnail %}
 		    {% endif %}
         </div>
         <div style='float:right;width:300px;margin-right:76px;'>
-        	<h4>{{product.mynewproduct.designer.name}}</h4>
+        	
+        		<a href='{{product.mynewproduct.designer.get_absolute_url}}'>
+        			<h4>{{product.mynewproduct.designer.name}}</h4>
+        		</a>
+        	
         	<p>{{product.mynewproduct.designer.description}}</p>
         </div>
         {% endif %}

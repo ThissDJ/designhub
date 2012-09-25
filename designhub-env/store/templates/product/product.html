@@ -101,7 +101,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     		<div style='width:320px;margin-left:auto;margin-right:auto'>
     			<h3 style='text-align:center;'>{{ product.translated_name }}</h3>
                 <h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>
-                <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='#' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
+                <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='{{ product.mynewproduct.designer.get_absolute_url}}' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
                 <div style='height:45px;'></div>
                 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
                 

@@ -29,7 +29,7 @@
 			{% for d in designers %}
 			{% if d.artist %}
 			{% else %}
-			<li><a href='javascript:void(0);'>{{d.name}}</a></li>
+			<li><a href='{{ d.get_absolute_url }}'>{{d.name}}</a></li>
 			{% endif %}
 			{% endfor %}
 		</ul>
