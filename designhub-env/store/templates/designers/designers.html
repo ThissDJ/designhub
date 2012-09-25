@@ -43,41 +43,42 @@
 			{% endif %}
 			{% endfor %}
 		</ul>
-		<script type="text/javascript" >
-
-			(function ($) {
-				$.fn.extend({        
-				        
-				     addLetterTitle:function(){        
-				       
-					    var currentLetter = undefined;
-					    
-						$(this).children().each(function(){
-							if(currentLetter === undefined){
-								currentLetter = $(this).children().first().html()[0];
-								$(this).before('<h5 class="center">' + currentLetter +'</h5>')
-							}else{
-								if($(this).children().first().html()[0] !== currentLetter){
-									currentLetter = $(this).children().first().html()[0];
-									$(this).before('<h5 class="center">' + currentLetter +'</h5>')
-								}
-							}
-					    });
-				   }
-				});
-				$('#designer-list').addLetterTitle();
-				var artistsListNode = document.getElementById('artist-list');
-				if(String(artistsListNode.innerHTML).replace(/^\s+|\s+$/g, '') === ''){ //
-					var noneCurrently = document.createElement("p");
-					noneCurrently.innerHTML = 'None currently';
-					noneCurrently.setAttribute('class','center');
-					artistsListNode.parentNode.replaceChild(noneCurrently, artistsListNode);
-				}else{
-					$('#artist-list').addLetterTitle();
-				}
-			 })(jQuery);
-		</script>
 	</div>
 </div>
 
 {% endblock content %}
+{% block extrajs %}
+<script type="text/javascript" >
+                        (function ($) {
+                                $.fn.extend({
+
+                                     addLetterTitle:function(){
+
+                                            var currentLetter = undefined;
+
+                                                $(this).children().each(function(){
+                                                        if(currentLetter === undefined){
+                                                                currentLetter = $(this).children().first().html()[0];
+                                                                $(this).before('<h5 class="center">' + currentLetter +'</h5>')
+                                                        }else{
+                                                                if($(this).children().first().html()[0] !== currentLetter){
+                                                                        currentLetter = $(this).children().first().html()[0];
+                                                                        $(this).before('<h5 class="center">' + currentLetter +'</h5>')
+                                                                }
+                                                        }
+                                            });
+                                   }
+                                });
+                                $('#designer-list').addLetterTitle();
+                                var artistsListNode = document.getElementById('artist-list');
+                                if(String(artistsListNode.innerHTML).replace(/^\s+|\s+$/g, '') === ''){ //
+                                        var noneCurrently = document.createElement("p");
+                                        noneCurrently.innerHTML = 'None currently';
+                                        noneCurrently.setAttribute('class','center');
+                                        artistsListNode.parentNode.replaceChild(noneCurrently, artistsListNode);
+                                }else{
+                                        $('#artist-list').addLetterTitle();
+                                }
+                         })(jQuery);
+</script>
+{% endblock extrajs %}
