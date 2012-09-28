@@ -11,6 +11,8 @@ from social_auth.utils import setting
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.contrib.messages.api import get_messages
+
+from product.models import Discount
 def home(request):
     """Home view, displays login mechanism"""
     if request.user.is_authenticated():
@@ -78,3 +80,19 @@ class DesignerListView(ListView):
 class DesignerDetailView(DetailView):
     model = Designer
     template_name = 'designers/designer-details.html'
+
+def saleindex(request):
+    """
+       display all the sale products
+    """
+    template = 'sale/index.html'
+    discounts = Discount.objects.filter(active = True)
+    products = []
+    if discounts.count() > 0:
+        for discount in list(discounts):
+            if discount.valid_products.count() > 0:
+                for product in discount.valid_products.all():
+                    products.append(product)
+                
+    ctx = {'products':products}
+    return render_to_response(template, context_instance=RequestContext(request, ctx))
