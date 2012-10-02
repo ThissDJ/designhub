@@ -6,12 +6,14 @@ from localsite.views import home, done, logout, error, form, form2
 from localsite.facebook import facebook_view
 
 #designers
-from localsite.views import DesignerListView,DesignerDetailView
+from localsite.views import DesignerListView, DesignerDetailView, DesignerAjaxListView
 
 urlpatterns += patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
     url(r"^talents/$", DesignerListView.as_view(), 
             name='designer-list'),
+    url(r"^talents/ajax/$", DesignerAjaxListView.as_view(), 
+            name='designer-list-ajax'),
     url(r"^talents/(?P<slug>[\-\/\w]+)/$", DesignerDetailView.as_view(),name="designer-detail"),     
     url(r"^sale/$", 'localsite.views.saleindex', name='sale-index'),          
     url(r'^social/$', home, name='home'),

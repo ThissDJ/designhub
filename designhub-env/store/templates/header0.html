@@ -100,7 +100,7 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('class','dropdown-toggle');
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('data-toggle','dropdown');
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('href','#');
-        newCategoryNode.childNodes[i].childNodes[0].innerHTML += '<b class="caret"></b>';
+        newCategoryNode.childNodes[i].childNodes[0].innerHTML += '<span class="caret"></span>';
         
         newCategoryNode.childNodes[i].childNodes[1].setAttribute('role','menu');
         newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel');
@@ -114,16 +114,47 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
 }
 navbarHeader0ContainerNode.innerHTML += [
           '<ul class="nav pull-right">',
-           ' <li id="fat-menu" class="dropdown">',
-             ' <a href="{% url designer-list %}" id="drop3" role="button">Talents</a>',
+           ' <li class="dropdown" id="drop4">',
+             ' <a href="javascript:void(0);" role="button">Talents</a>',
+			 '<ul class="subnav0 hide dropdown-menu" id="talents-ajax-container">',
+			 '</ul>',
              ' </li>',
-            ' <li id="fat-menu" class="dropdown">',
-             ' <a href="{% url sale-index %}" id="drop3" role="button">Sale</a>',
+            ' <li class="dropdown" id="drop5" >',
+             ' <a href="{% url sale-index %}" role="button">Sale</a>',
              ' </li>',
-            ' <li id="fat-menu" class="dropdown">',
-             ' <a href="javascript:void(0);" id="drop3" role="button" title="coming soon!">Ideas</a>',
+            ' <li class="dropdown" id="drop6" >',
+             ' <a href="javascript:void(0);" role="button" title="coming soon!">Ideas</a>',
            ' </li>',
          ' </ul>'].join('');
-
+var currentUrl = "{{request.path}}";
+function addClass(id,stylestr){
+	var o=document.getElementById(id);
+	o.className=o.className+" "+stylestr;
+	o=null;
+}
+var activeStr = 'active';
+if(currentUrl.substring(0,13) === "/category/art"){
+	addClass('category-3',activeStr);
+}else{
+	if(currentUrl.substring(0,19) === "/category/lifestyle"){
+		addClass('category-2',activeStr);
+	}else{
+		if(currentUrl.substring(0,17) === "/category/fashion"){
+			addClass('category-1',activeStr);
+		}else{
+			if(currentUrl.substring(0,8) === "/talents"){
+				addClass('drop4',activeStr);
+			}else{
+				if(currentUrl.substring(0,5) === "/sale"){
+					addClass('drop5',activeStr);
+				}else{
+					if(currentUrl.substring(0,6) === "/ideas"){
+						addClass('drop6',activeStr);
+					}	
+				}
+			}
+		}
+	}
+}
 </script>
 {% endspaceless %}

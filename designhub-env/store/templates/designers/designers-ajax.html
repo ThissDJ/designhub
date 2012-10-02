@@ -1,0 +1,75 @@
+<style>
+	.center{
+		text-align:center;
+	}
+	.talent-groups-container, .talent-groups-container li.talent-group-container ul, .talent-groups-container-li-parent{
+		padding:0px;
+		margin:0px;
+	}
+	.talent-groups-container-li{
+		list-style-type:none;
+	}
+	.talent-groups-container li.talent-group-container, .talent-groups-container li.talent-group-container li{
+		list-style-type:none;
+		text-align:center;
+	}
+	.talent-groups-container li.talent-group-container{
+		float:left;
+	}
+    .talent-groups-container-li-parent{
+		padding-bottom:50px;
+		overflow:hidden;
+	}
+	.talent-groups-container li.a-z-container{
+		list-style-type:none;
+		text-align:center;
+	}
+	#talents-ajax-container{
+		margin-top:0px;
+		margin-left:0px;
+		min-width:958px;
+		left:-742px;
+		right:auto;
+	}
+    #talents-ajax-container::before{
+    	right:187px;
+    }
+    #talents-ajax-container::after{
+    	right:188px;
+    }
+</style>
+<div class='container'>
+	<ul class='talent-groups-container-li-parent'>
+		<li class='talent-groups-container-li' style='width:70%;float:left;'>
+			<h4 class='center'>Designers</h4>
+			<ul id='designer-list' class='talent-groups-container'>
+				{% for dgroup in designers %}
+				    <li class='talent-group-container'>
+				    <h5> {{dgroup.name}}</h5>
+				    <ul>
+				    {% for d in dgroup.list %}
+				            <li><a href='{{ d.get_absolute_url }}'>{{d.name}}</a></li>
+				    {% endfor %}
+				    </ul>
+				    </li>
+				{% endfor %}
+			</ul>
+		</li>
+		<li class='talent-groups-container-li' style='width:30%;float:right;'>
+			<h4 class='center'>Artists</h4>
+			<ul id='artist-list' class='talent-groups-container'>
+				{% for agroup in artists %}
+				    <li class='talent-group-container'>
+				    <h5> {{agroup.name}}</h5>
+				    <ul>
+				    {% for a in agroup.list %}
+				            <li><a href='{{ a.get_absolute_url }}'>{{a.name}}</a></li>
+				    {% endfor %}
+				    </ul>
+				    </li>
+				{% endfor %}
+			</ul>
+		</li>
+	</ul>
+</div>
+
