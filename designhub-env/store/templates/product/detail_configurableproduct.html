@@ -120,6 +120,16 @@ satchmo.thumbnails = new Array();
 							<strike id="fullprice" style="display: block;margin-bottom:7px;">{{ product|discount_price:""|currency }}</strike>
 					    </span>
 					{% endif %}
+					{% if product.mynewproduct.preorder %}
+					    <div style='text-align:center'>
+					    	<span class='label'>Pre-order Item</span>
+					    </div>
+					    <div style='text-align:center;margin-bottom:18px;'>
+							<span>
+								Pre-order campaign ending on <span style='text-decoration:underline;'>{{ product.mynewproduct.end }}</span>
+							</span>
+					    </div>
+					{% endif %}
 	                <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
 	                	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>	
 		        		{% for option_group in options %}
@@ -169,7 +179,9 @@ satchmo.thumbnails = new Array();
     			<div style='margin-top:8px;margin-bottom:15px;'>
 	    			<h5 style='margin-bottom:5px;'>Information</h5>
 	    			<p>
+	    			{% autoescape off %}
 	    				{{product.description}}
+	    			{% endautoescape %}
 	    			</p>
 	    		</div>
     			{% endif %}

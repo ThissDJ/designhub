@@ -170,6 +170,8 @@ class MyNewProduct(models.Model):
     designer = models.ForeignKey(Designer, null=True, blank=True)
     brand = models.ForeignKey(Brand, null=True, blank=True)
     concept = models.TextField(null=True, blank=True, max_length=2000)
+    preorder = models.BooleanField(default=False)
+    end = models.DateTimeField(_("Preorder Ending Date"), null=True, blank=True)
     def _get_subtype(self):
         """
         Has to return the name of the product subtype

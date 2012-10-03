@@ -78,13 +78,11 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 	    			margin-right:8px;
 	    		}
 	    	</style>
-	    	<script>
+	    	<script type="text/javascript">
 	    		function sendMail() {
 				    var link = "mailto:?"
-				             +"subject=" + escape("Share A Cool Stuff {{product.name}}")
-				             + "&body=" + escape('http://{{ request.META.HTTP_HOST }}{{request.get_full_path}} ' + '{{product.description}}')
-				    ;
-				
+				             +"subject=" + escape("Share A Cool Stuff {{product.name}} from DesignHub.hk with you")
+				             + "&body=" + escape('http://{{ request.META.HTTP_HOST }}{{request.get_full_path}} ');
 				    window.location.href = link;
 				}
 	    	</script>
@@ -119,6 +117,16 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 							<strike id="fullprice" style="display: block;margin-bottom:7px;">{{ product|discount_price:""|currency }}</strike>
 					    </span>
 					{% endif %}
+					{% if product.mynewproduct.preorder %}
+					    <div style='text-align:center'>
+					    	<span class='label'>Pre-order Item</span>
+					    </div>
+					    <div style='text-align:center;margin-bottom:18px;'>
+							<span>
+								Pre-order campaign ending on <span style='text-decoration:underline;'>{{ product.mynewproduct.end }}</span>
+							</span>
+					    </div>
+					{% endif %}
 	                <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
 	                	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>	
 		        		<select id="quantity" class="span1" style='font-size:12px;line-height:24px;' name="quantity">
@@ -148,9 +156,9 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     			{% if product.description %}
     			<div style='margin-top:8px;margin-bottom:15px;'>
 	    			<h5 style='margin-bottom:5px;'>Information</h5>
-	    			<p>
+	    			{% autoescape off %}
 	    				{{product.description}}
-	    			</p>
+	    			{% endautoescape %}
 	    		</div>
     			{% endif %}
     			<div style='margin-top:35px;'>
@@ -202,6 +210,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% block extrajs %}
 <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/helpers/jquery.fancybox-media.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mCustomScrollbar.js"></script>
@@ -247,7 +256,16 @@ var productid = {{product.id}};
 
     	(function ($) {
 	        $('.qtip-zoom-in').tooltip();
-		})(jQuery);
 
+		})(jQuery);
+			$(document).ready(function() {
+				$('.fancybox-media').fancybox({
+					openEffect  : 'none',
+					closeEffect : 'none',
+					helpers : {
+						media : {}
+					}
+				});
+			});
 </script>
 {% endblock %}
