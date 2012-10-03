@@ -185,6 +185,14 @@ satchmo.thumbnails = new Array();
 	    			</p>
 	    		</div>
     			{% endif %}
+    			{% if product.mynewproduct.ship %}
+    			<div style='margin-top:8px;margin-bottom:15px;'>
+	    			<h5 style='margin-bottom:5px;'>Ship And Return</h5>
+	    			{% autoescape off %}
+	    				{{product.mynewproduct.ship}}
+	    			{% endautoescape %}
+	    		</div>
+    			{% endif %}
     			<div style='margin-top:35px;'>
 	                <form id="options2" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
 	                	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>
