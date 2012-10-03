@@ -172,6 +172,8 @@ class MyNewProduct(models.Model):
     concept = models.TextField(null=True, blank=True, max_length=2000)
     preorder = models.BooleanField(default=False)
     end = models.DateTimeField(_("Preorder Ending Date"), null=True, blank=True)
+    ship = models.TextField(null=True, blank=True, max_length=2000)
+    featured = models.BooleanField(_("Featured"), default=False, help_text=_("Featured items will show on the front page"))
     def _get_subtype(self):
         """
         Has to return the name of the product subtype
