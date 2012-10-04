@@ -10,7 +10,7 @@
 {% block extrastyle %}
 <style type="text/css">body {overflow: hidden;}</style>
 
-<Body onLoad="FB.Canvas.setSize({width: 810, height: 2850})"><Div id="fb-root"></div>
+<Body onLoad="FB.Canvas.setSize({width: 810})"><Div id="fb-root"></div>
 
 <Script src="http://connect.facebook.net/en_US/all.js#xfbml=1"></script>
 
@@ -18,9 +18,9 @@
 FB.init({
 appId: 445436945506777,Status: true,Cookie: true,Xfbml: true
 });
-window.fbAsyncInit = function(){
-FB.Canvas.setAutoGrow(91); 
-}
+// window.fbAsyncInit = function(){
+// FB.Canvas.setAutoGrow(91); 
+// }
 </Script>
 {% endblock %}
 
