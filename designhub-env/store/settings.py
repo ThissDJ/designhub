@@ -235,8 +235,8 @@ AUTHENTICATION_BACKENDS = (
 
 TWITTER_CONSUMER_KEY         = ''
 TWITTER_CONSUMER_SECRET      = ''
-FACEBOOK_APP_ID              = '360543177361884'
-FACEBOOK_API_SECRET          = '5ffc6cdbaacac76a3d6112dd00a63835'
+FACEBOOK_APP_ID              = '330400780383211'
+FACEBOOK_API_SECRET          = '5424fbed650b11a814df2e068ca31d30'
 LINKEDIN_CONSUMER_KEY        = ''
 LINKEDIN_CONSUMER_SECRET     = ''
 ORKUT_CONSUMER_KEY           = ''
@@ -267,8 +267,8 @@ YAHOO_CONSUMER_KEY           = ''
 YAHOO_CONSUMER_SECRET        = ''
 MIXCLOUD_CLIENT_ID           = ''
 MIXCLOUD_CLIENT_SECRET       = ''
-WEIBO_CLIENT_KEY = '1469032109'
-WEIBO_CLIENT_SECRET = '8cc5646ca4400430667b4bba9e107a61'
+WEIBO_CLIENT_KEY = '1205393253'
+WEIBO_CLIENT_SECRET = 'ba3baa915a5e4544103a628d43b1f89d'
 #LOGIN_URL          = '/login-form/'
 #LOGIN_REDIRECT_URL = '/logged-in/'
 #LOGIN_ERROR_URL    = '/login-error/'
@@ -289,7 +289,7 @@ DEFAULT_FROM_EMAIL = 'info@designhub.hk'
 SERVER_EMAIL = 'info@designhub.hk'
 # Load the local settings
 from local_settings import *
-DEBUG = True
+DEBUG = False #True
 # debug_toolbar settings
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
