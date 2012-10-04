@@ -146,3 +146,54 @@ def saleindex(request):
                 
     ctx = {'products':products}
     return render_to_response(template, context_instance=RequestContext(request, ctx))
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
+def fabtabFeaturedToday(request):
+    """
+       facebook tab , featured today
+    """
+    from localsite.models import Designer
+    from product.models import Category
+    from product.models import Product
+    designer  = Designer.objects.filter(featured=True, active=True)
+
+    if designer.count > 0:
+        designer = designer[0]
+
+    featuredCatIds = [1,2,3]
+    featuredCats = []
+    for id in featuredCatIds:
+        if len(Category.objects.filter(id=id)):
+            featuredCats.append(Category.objects.get(id=id))
+#    featured = display_featured()
+    class FeaturedCat:
+        def __init__(self,name='',list =[]):
+            self.name = name
+            self.list = list
+    featuredCatsCls = []
+    if len(featuredCats):
+        for f in featuredCats:
+            childCats = f.get_all_children()
+            pList = []
+            if len(childCats):
+                for cc in childCats:
+                    pListincc = Product.objects.filter(category = cc,featured = True, active = True)
+                    if pListincc.count():
+                        pList.extend(list(pListincc))
+            if len(pList):
+                fCls = FeaturedCat(name = f.name,list = pList)
+                featuredCatsCls.append(fCls)
+    from localsite.models import MyNewProduct
+    featured_preorder_products_list = []
+    featured_preorder_myNewProducts_list = MyNewProduct.objects.filter(preorder = True, featured = True)
+    if featured_preorder_myNewProducts_list.count():
+        for f in list(featured_preorder_myNewProducts_list):
+            featured_preorder_products_list.append(f.product)
+    ctx = RequestContext(request, {
+        'featured_preorder_products_list' : featured_preorder_products_list,
+        'featured_cats': featuredCatsCls,
+        'designer' : designer
+    })
+    template = 'fbtab/featuredToday.html'
+    return render_to_response(template, context_instance=RequestContext(request, ctx))
