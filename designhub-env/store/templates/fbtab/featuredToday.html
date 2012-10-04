@@ -10,7 +10,7 @@
 	{% block content %}
 	<style>
 	    .container{
-	    	width:800px;
+	    	width:793px;
 	    	margin-left:auto;
 	    	margin-right:auto;
 	    }
@@ -60,7 +60,7 @@
 		}
 	</style>
 	<div style='padding-top:20px;'><h1 style='text-align:center;text-shadow: 0 1px 0 rgba(1, 1, 1, 0.35);'> <span style='color:#D04526'>Design</span>Hub Featured Today for Facebook</h1></div>
-	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat -130px 0px'>
+	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat -140px 0px'>
 		<div style='padding-bottom:0px;'>
 			<h3 class='section-title'>
 				Talent Today
@@ -158,7 +158,7 @@
 				</div>
             {% for product in fc.list %}
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:197px;float:left;" class='toggleImage-container product-index-container'>
+		            <div style="width:195px;float:left;" class='toggleImage-container product-index-container'>
 		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 		            		<!--<div class="tip-content-when-hover">
 		            			Sample
@@ -199,7 +199,7 @@
 			</div>
             {% for product in featured_preorder_products_list %}
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:197px;float:left;" class='toggleImage-container product-index-container'>
+		            <div style="width:195px;float:left;" class='toggleImage-container product-index-container'>
 		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 		            		<!--<div class="tip-content-when-hover">
 		            			Sample
