@@ -37,7 +37,7 @@ else:
         url(r"^talents/ajax/$", DesignerAjaxListView.as_view(),{'SSL': True}, 
                 name='designer-list-ajax'),
         url(r'^fbtab/$','localsite.views.fabtabFeaturedToday',{'SSL': True}),
-        
+        url(r'^launching/$','localsite.views.launching',{'SSL': True}),
         url(r"^talents/(?P<slug>[\-\/\w]+)/$", DesignerDetailView.as_view(),{'SSL': True}, name="designer-detail"),     
         url(r"^sale/$", 'localsite.views.saleindex',{'SSL': True}, name='sale-index'),          
         url(r'^social/$', home,{'SSL': True}, name='home'),
