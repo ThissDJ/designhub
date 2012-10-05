@@ -10,7 +10,7 @@ from localsite.views import DesignerListView, DesignerDetailView, DesignerAjaxLi
 
 urlpatterns += patterns('',
     url(r'^comments/', include('django.contrib.comments.urls')),
-    url(r"^talents/$", DesignerListView.as_view(), 
+    url(r"^talents/$", DesignerListView.as_view(),{'SSL': True}, 
             name='designer-list'),
     url(r"^talents/ajax/$", DesignerAjaxListView.as_view(), 
             name='designer-list-ajax'),
