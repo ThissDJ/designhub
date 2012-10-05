@@ -17,7 +17,7 @@ if LOCAL_DEV:
         url(r"^talents/ajax/$", DesignerAjaxListView.as_view(),
                 name='designer-list-ajax'),
         url(r'^fbtab/$','localsite.views.fabtabFeaturedToday'),
-        
+        url(r'^launching/$','localsite.views.launching'),
         url(r"^talents/(?P<slug>[\-\/\w]+)/$", DesignerDetailView.as_view(), name="designer-detail"),     
         url(r"^sale/$", 'localsite.views.saleindex', name='sale-index'),          
         url(r'^social/$', home, name='home'),
@@ -34,7 +34,7 @@ else:
         url(r'^comments/', include('django.contrib.comments.urls')),
         url(r"^talents/$", DesignerListView.as_view(),{'SSL': True}, 
                 name='designer-list'),
-        url(r"^talents/ajax/$", DesignerAjaxListView.as_view(), {'SSL': True},
+        url(r"^talents/ajax/$", DesignerAjaxListView.as_view(),{'SSL': True}, 
                 name='designer-list-ajax'),
         url(r'^fbtab/$','localsite.views.fabtabFeaturedToday',{'SSL': True}),
         

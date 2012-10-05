@@ -197,3 +197,20 @@ def fabtabFeaturedToday(request):
     })
     template = 'fbtab/featuredToday.html'
     return render_to_response(template, context_instance=RequestContext(request, ctx))
+
+def launching(request):
+    ctx = RequestContext(request, {
+    })
+    template = 'launching/subscription.html'
+    if request.POST:
+        from django.http import HttpResponse
+        from django.core.mail import send_mail
+        from django.conf import settings as email_settings
+        subject = 'new talent'
+        try: 
+            message = request.POST['email']
+            send_mail(subject, message, email_settings.DEFAULT_FROM_EMAIL, ['klijunjie@gmail.com'], auth_user= email_settings.EMAIL_HOST_USER,  auth_password= email_settings.EMAIL_HOST_PASSWORD)
+            return HttpResponse(message)
+        except:
+            return HttpResponse('sucks')
+    return render_to_response(template, context_instance=RequestContext(request, ctx))

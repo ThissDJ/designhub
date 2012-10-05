@@ -1,0 +1,142 @@
+{% block doctype %}<!DOCTYPE html>
+<html lang="en">
+{% endblock %}
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="wb:webmaster" content="b33503664b41138d" />
+	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
+    {% block extra-head %}{% endblock %}
+    <style>
+		*{
+			padding:0px;margin:0px;
+		}
+		html,body{
+			height: 100%;
+		}
+		.wrapper {
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		margin: 0 auto -4em;
+		}
+		.footer, .push {
+		height: 4em;
+		}
+		.footer{
+			background-color:transparent;
+		}
+		.content{
+			margin-bottom:2em;
+		}
+    </style>
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.css">
+    {% block stylesheet %}
+    {% endblock %}
+    {% block extrastyle %}{% endblock %}
+    {% block extrahead %}{% endblock %}
+    <style>
+    	/* transparent background */
+    	html,body{
+    		background:transparent;/*rgba(0,0,0,0.15);*/
+    	}
+    </style>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-32832750-1']);
+  _gaq.push(['_setDomainName', 'designhub.hk']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+{% block body %}
+<body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
+    <div class="wrapper">
+	{% block header %}{% endblock %}
+	<div class='container'>	
+	{% block content %}
+	<div style='margin-top:20px;'>
+		<img src='{{MEDIA_URL}}img/logo-damn.png' width=250>
+	</div>
+	<link href="https://fonts.googleapis.com/css?family=Nothing+You+Could+Do" rel="stylesheet" type="text/css">
+	<style>
+		.launching-line{
+			font-size:40px;line-height:40px;
+			text-shadow: 0px 2px 3px #666;
+			color:#fff;
+		}
+		.thanks{
+			font-family: 'Nothing You Could Do', cursive;
+		}
+		input.launching-input{
+			height:50px;width:20em;line-height:40px;font-size:30px;color:#D04526;
+		    border: 10px solid rgb(127, 0, 0);
+		    border: 10px solid rgba(255, 0, 0, .5);
+		    -webkit-background-clip: padding-box; /* for Safari */
+		    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+		}
+	</style>
+	<div style='margin-top:50px;text-align:center;'>
+		<p class='launching-line'>
+			DesignHub is a platform for local design, art &#38; idea
+		</p>
+		<p class='launching-line'>
+			Support local creativity and join us!
+		</p>
+	</div>
+	<div style='position:absolute;top:50%;left:0;width:100%;text-align:center;'>
+		<form id='launching-form'>
+			<input id='launching-input' name='email' class='launching-input' type='text' placeholder="Leave your email, and we'll contact you soon." >
+		</form>
+	</div>
+	{% endblock content %}
+	</div>
+	<div class='push'></div>
+	</div>
+	{% block footer %}
+	<div class='footer container'>
+		
+		
+	</div>
+	{% endblock %}
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.cookie.js"></script>
+    <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.autocsrftoken.js"></script>
+    {% block extrajs %}
+    <script type="text/javascript">
+	    $(document).ready(function() {
+	    	$('#launching-form').submit(function() {
+				  var reg = new RegExp(/^\S+@\S+\.\S+$/);
+				  var em = $("#launching-input").val();
+				  var $that = $(this);
+				  if (!reg.test(em)) {
+				    alert('Please correct your email address.');
+				    $("#launching-input").focus();
+				  } else {
+				    $.ajax({
+				      type: "POST",
+				      url: '/launching/',
+				      data : 'email=' + em,
+				      success: function(msg) {
+                           $that.replaceWith("<p class='launching-line thanks'>Thanks for your attention, we'll contact you soon!</p>");
+				      }
+				    });   
+				  }
+				  return false;
+				});
+	    });
+    </script>
+    {% endblock %}
+</body>
+{% endblock %}
+</html>
