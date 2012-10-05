@@ -290,7 +290,7 @@ DEFAULT_FROM_EMAIL = 'info@designhub.hk'
 SERVER_EMAIL = 'info@designhub.hk'
 # Load the local settings
 from local_settings import *
-DEBUG = False #True
+
 # debug_toolbar settings
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)
