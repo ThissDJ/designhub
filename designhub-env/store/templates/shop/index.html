@@ -294,4 +294,55 @@
 	});
 })(jQuery);
 </script>
+    <!-- launching page part optional-->
+    <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
+    <!-- launching page part -->
+    <style>
+    	.fancybox-close-launching{
+    		top:1px;
+    		right:1px;
+    		width:45px;
+    		height:45px;
+    		background:url('{{MEDIA_URL}}img/close-button-launching.png');
+    	}
+    	.fancybox-skin-launching{/*,.fancybox-overlay{*/
+    		background:transparent;
+    	}
+    </style>
+    <script type="text/javascript" >
+		$(document).ready(function() {
+			$(".various").fancybox({
+				// maxWidth	: 800,
+				// maxHeight	: 600,
+				padding     : 0,
+				margin      : 0,
+				tpl         : {
+									wrap     : '<div class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin fancybox-skin-launching"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
+									image    : '<img class="fancybox-image" src="{href}" alt="" />',
+									iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0"' + ($.browser.msie ? ' allowtransparency="true"' : '') + '></iframe>',
+									error    : '<p class="fancybox-error">The requested content cannot be loaded.<br/>Please try again later.</p>',
+									closeBtn : '<a title="Close" class="fancybox-item fancybox-close fancybox-close-launching" href="javascript:;"></a>',
+									next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
+									prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
+								},
+				// wrapCSS     : '<style>.fancybox-close {top:0px;right:0px;}</style>',
+				fitToView	: false,
+				width		: '100%',
+				height		: '100%',
+				autoSize	: false,
+				closeClick	: false,
+				openEffect	: 'none',
+				closeEffect	: 'none',
+				helpers : { 
+						   overlay: {
+						    //opacity: 0.1, // or the opacity you want 
+						    css: {'background':'url({{MEDIA_URL}}img/gradient-bg.png) center center no-repeat'//}//,
+						          ,'background-size': '100% 100%'} // or your preferred hex color value
+						   } // overlay 
+						  } //helpers
+			});
+			$(".various").click();
+		});
+    </script>
+    <!-- launching page part -->
 {% endblock %}
