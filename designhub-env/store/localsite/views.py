@@ -209,7 +209,7 @@ def launching(request):
         subject = 'new talent'
         try: 
             message = request.POST['email']
-            send_mail(subject, message, email_settings.DEFAULT_FROM_EMAIL, ['klijunjie@gmail.com'], auth_user= email_settings.EMAIL_HOST_USER,  auth_password= email_settings.EMAIL_HOST_PASSWORD)
+            send_mail(subject, message, email_settings.DEFAULT_FROM_EMAIL, ['klijunjie@gmail.com','winston@designhub.hk'], auth_user= email_settings.EMAIL_HOST_USER,  auth_password= email_settings.EMAIL_HOST_PASSWORD)
             return HttpResponse(message)
         except:
             return HttpResponse('sucks')
