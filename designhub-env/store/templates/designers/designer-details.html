@@ -47,7 +47,8 @@
 		<div style='float:left;width:200px;'>
 		    {% if designer.main_image %}
 		            {% thumbnail designer.main_image.picture "200x200"  crop="center" as image %}
-		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+<!-- 		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
+		           <img src="{{MEDIA_URL}}images/index/none-200.jpg" width="{{ image.width }}" height="{{ image.height }}" />
 		           {% endthumbnail %}
 		    {% endif %}
 		</div>
@@ -86,10 +87,12 @@
 	            	    {% thumbnail p.product.main_image.picture "180x230" crop='center' as image %}
 	            	        {% if p.product.productimage_set.all.count > 1 %}
 	            	            {% thumbnail p.product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+<!-- 	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
+                                     <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 	            	            {% endthumbnail %}
 	            	        {% else %}
-	            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+<!-- 	            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
+	            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
 	            	        {% endif %}
 	                    {% endthumbnail %}
 	                </a>
