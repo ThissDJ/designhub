@@ -10,14 +10,18 @@
 	var virtualImgs = new Array();
 	$('.toggleImage-container').each(function(){
 		var virtualImg = new Image(10,10);
-		virtualImg.src= $(this).find('img').attr('data-other');
-		virtualImgs.push(virtualImg); 
+	    var img = $(this).find('img');
+	    var replaceUrl = img.attr('data-other');
+	    if(replaceUrl !== undefined){
+			virtualImg.src= replaceUrl;
+			virtualImgs.push(virtualImg); 
+		}
 	});  		
 	$('.toggleImage-container').hover(function() {
 	  var img = $(this).find('img');
 	  var originalUrl = img.attr('src');
 	  var replaceUrl = img.attr('data-other');
-	  if(typeof replaceUrl !== undefined){
+	  if(replaceUrl !== undefined){
 	  	img.attr('src',replaceUrl);
 	  	img.attr('data-other',originalUrl);
 	  }
@@ -25,7 +29,7 @@
 	  var img = $(this).find('img');
 	  var originalUrl = img.attr('src');
 	  var replaceUrl = img.attr('data-other');
-	  if(typeof replaceUrl !== undefined){
+	  if(replaceUrl !== undefined){
 	  	img.attr('src',replaceUrl);
 	  	img.attr('data-other',originalUrl);
 	  }

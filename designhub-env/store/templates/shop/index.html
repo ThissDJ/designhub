@@ -11,10 +11,10 @@
     		<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/1-960width.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/none-960.jpg"/>
 				    </a>
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/2.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/none-960.jpg"/>
 				    </a>
 	    		</div>
 	    	</div>
@@ -63,25 +63,26 @@
 		}
 	</style>
 	<div style='height:20px;'></div>
-	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png)'>
+	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat 0 -20px;'>
 		<div style='padding-bottom:0px;'>
-			<h3 class='section-title'>
+			<h4 class='section-title'>
 				Talent Today
-			</h3>
+			</h4>
 		</div>
 		<div style='float:left;width:50%;height:350px;position:relative;'>
             {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
-                <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+                <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
+                <img src="{{MEDIA_URL}}images/index/none-350.jpg" />
             {% endthumbnail %}
             <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
 		</div>
 		<style>
 		    .index-section{
-		    	border-top:10px solid #555;
+		    	border-top:2px solid #555;
 		    	margin-top:40px;
-				-webkit-border-radius: 4px 4px 0px 0px;
-				-moz-border-radius: 4px 4px 0px 0px;
-				border-radius: 4px 4px 0px 0px;
+				-webkit-border-radius: 2px 2px 0px 0px;
+				-moz-border-radius: 2px 2px 0px 0px;
+				border-radius: 2px 2px 0px 0px;
 		    }
 		    .index-section .section-title{
 		    	padding-top:0px;
@@ -107,7 +108,8 @@
 				    <a class='designer-today-featured-design' href='{{ p.product.get_absolute_url }}'>
 				    	<div class='black-bg-designer-today-featured-design'>
 					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
-					    	<img src="{{ image.url }}" />
+					    	<!--<img src="{{ image.url }}" />-->
+					    	<img src="{{MEDIA_URL}}images/index/none-120.jpg" />
 					    {% endthumbnail %}
 					    </div>
 				    </a>
@@ -152,9 +154,9 @@
         {% for fc in featured_cats %}
 			<div class='container index-section'>
 				<div style='padding-bottom:0px;'>
-					<h3 class='section-title'>
+					<h4 class='section-title'>
 						Featured {{ fc.name}}
-					</h3>
+					</h4>
 				</div>
             {% for product in fc.list %}
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
@@ -166,10 +168,12 @@
 		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
 		            	        {% if product.productimage_set.all.count > 1 %}
 		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-		            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
+		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 		            	            {% endthumbnail %}
 		            	        {% else %}
-		            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		            	            <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
+		            	            <img src="{{MEDIA_URL}}images/index/180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
 		            	        {% endif %}
 		                    {% endthumbnail %}
 		                </a>
@@ -193,9 +197,9 @@
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
 			<div style='padding-bottom:0px;'>
-				<h3 class='section-title'>
+				<h4 class='section-title'>
 					Featured Ideas
-				</h3>
+				</h4>
 			</div>
             {% for product in featured_preorder_products_list %}
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
@@ -207,10 +211,12 @@
 		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
 		            	        {% if product.productimage_set.all.count > 1 %}
 		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-		            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
+		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
+		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 		            	            {% endthumbnail %}
 		            	        {% else %}
-		            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		            	            <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
+		            	            <img src="{{MEDIA_URL}}images/index/180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
 		            	        {% endif %}
 		                    {% endthumbnail %}
 		                </a>
@@ -303,7 +309,9 @@
     		right:1px;
     		width:45px;
     		height:45px;
-    		background:url('{{MEDIA_URL}}img/close-button-launching.png');
+            background:url('{{MEDIA_URL}}img/close-button-launching.png') no-repeat;
+    		background-position: center center;
+    		background-size: 50% 50%;
     	}
     	.fancybox-skin-launching{/*,.fancybox-overlay{*/
     		background:transparent;

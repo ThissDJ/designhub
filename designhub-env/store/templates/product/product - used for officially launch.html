@@ -44,8 +44,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 					    {% thumbnail pic.picture "80x120" crop='center' as image %}
 					    <li>
 					    	<a href="#" class="product-detail-thumnail" style='background:transparent;'>
-					    	<!--<img src="{{ image.url }}" />-->
-					    	<img src="{{MEDIA_URL}}images/index/none-80x120.jpg" />
+					    	<img src="{{ image.url }}" />
 					    </a>
 					    </li>
 					    {% endthumbnail %}
@@ -56,10 +55,8 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 	    			{% for pic in product.productimage_set.all %}
 	    			    {% thumbnail pic.picture "400x400" crop='center'  as image %}
 					    {% thumbnail pic.picture "750x750" as image_b %}
-<!-- 					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{ image_b.url }}"> -->
-					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{MEDIA_URL}}images/index/none-750.jpg">
-<!-- 					    	<img src="{{ image.url }}"/> -->
-					    	<img src="{{MEDIA_URL}}images/index/none-400.jpg"/>
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{ image_b.url }}">
+					    	<img src="{{ image.url }}"/>
 					    </a>
 					    {% endthumbnail %}
 					    {% endthumbnail %}
@@ -286,9 +283,7 @@ var productid = {{product.id}};
     		right:1px;
     		width:45px;
     		height:45px;
-            background:url('{{MEDIA_URL}}img/close-button-launching.png') no-repeat;
-    		background-position: center center;
-    		background-size: 50% 50%;
+    		background:url('{{MEDIA_URL}}img/close-button-launching.png');
     	}
     	.fancybox-skin-launching{/*,.fancybox-overlay{*/
     		background:transparent;
