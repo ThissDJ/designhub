@@ -141,7 +141,7 @@
 					            	        {% if product.productimage_set.all.count > 1 %}
 					            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
 <!-- 					            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
-					            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/182x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
+					            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 					            	            {% endthumbnail %}
 					            	        {% else %}
 <!-- 					            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
