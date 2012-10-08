@@ -1,15 +1,15 @@
 {% load satchmo_category i18n normalize_decimal satchmo_discounts satchmo_currency%}
 {% spaceless %}
 <div class='container header'>
-	<div style='width:100%;position:relative;overflow:hidden;margin-top:15px;margin-bottom:10px;height:100px;'>
-		<div style='text-align:center;width:379px;top:0px;left:300px;position:absolute;'>
+	<div style='width:100%;position:relative;overflow:visible;margin-top:0px;margin-bottom:10px;height:100px;'>
+		<div style='text-align:center;width:379px;top:10px;left:0px;position:absolute;'>
 			<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='320'></a>
 		</div>
-		<div style='position:absolute;left:0px;top:18px;text-align:left;'>
-            <a class='sns-button-wrapper qtip-title-tip' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
-            <a class='sns-button-wrapper qtip-title-tip' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>
+		<div style='position:absolute;left:380px;bottom:0px;text-align:left;'>
+            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
+            <!--<a class='sns-button-wrapper' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>-->
 		</div>
-		<div style='position:absolute;right:0px;top:18px;line-height:15px;'>
+		<div style='position:absolute;right:0px;top:8px;line-height:15px;'>
 			<div class='nav1-right'>
 				<p class='nav1-right-ele'>
 				{% if user.is_active %}
@@ -23,31 +23,32 @@
 				{% else %}
 				<a class='list-item'  href='{% ifnotequal request.path "/accounts/login/"  %}{% url auth_login %}?next={{ request.get_full_path }}{% else %}{{ request.get_full_path }}{% endifnotequal %}'>Login</a><span style='color:#bbb;margin:0px 5px;'>or</span><a  class='list-item' href='{% url registration_register %}'>Sign Up</a>
 				{% endif %}
-				</p>
-				<p class='nav1-right-ele'>
-					<a id='qtip-testing-ele' href='#'>About Us</a>
-					<span class="seperator">/</span>
-					<a href='javascript:void(0);'>Worldwide Delivery</a>
-				</p>
-				<p class='nav1-right-ele'>
-					{% url satchmo_cart as carturl %}
-				    {% if carturl %}<a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
-				    {% if not cart.is_empty and cart%}
-			            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
-			            {% url satchmo_checkout-step1 as checkouturl %}
-			            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
-				    {% endif %}
+				<span class="seperator">/</span>
+				<a id='qtip-testing-ele' href='#'>About Us</a>
+				<span class="seperator">/</span>
+				<a href='javascript:void(0);'>Worldwide Delivery</a>
+				{% url satchmo_cart as carturl %}
+			    {% if carturl %}<span class="seperator">/</span><a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
+			    {% if not cart.is_empty and cart%}
+			        <span class="seperator">/</span>
+		            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
+		            {% url satchmo_checkout-step1 as checkouturl %}
+		            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
+			    {% endif %}
 				</p>
 			</div>
 		</div>
+		<div style='position:absolute;right:0px;top:56px;width:480px;overflow:visible;'>
+		    <div id="navbar-header0" class="navbar navbar-static">
+		      <div class="navbar-inner">
+		        <div class="container" style="width: auto;">
+		
+		        </div>
+		      </div>
+		    </div> <!-- /navbar-example -->
+		</div>
 	</div>
-    <div id="navbar-header0" class="navbar navbar-static">
-      <div class="navbar-inner">
-        <div class="container" style="width: auto;">
 
-        </div>
-      </div>
-    </div> <!-- /navbar-example -->
 </div>
 <div class="hide" id="category-list-info">
     {% if category.id %}
@@ -113,19 +114,23 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
 	}
 }
 navbarHeader0ContainerNode.innerHTML += [
-          '<ul class="nav pull-right">',
+          '<ul class="nav pull-left">',
            ' <li class="dropdown" id="drop4">',
-             ' <a href="javascript:void(0);" role="button">Talents</a>',
+             ' <a href="javascript:void(0);" role="button">Talents<span class="caret"></span></a>',
 			 '<ul class="subnav0 hide dropdown-menu" id="talents-ajax-container">',
 			 '</ul>',
              ' </li>',
             ' <li class="dropdown" id="drop5" >',
              ' <a href="{% url sale-index %}" role="button">Sale</a>',
              ' </li>',
+
+         ' </ul>'].join('');
+navbarHeader0ContainerNode.innerHTML = [
+          '<ul class="nav pull-left">',
             ' <li class="dropdown" id="drop6" >',
              ' <a href="javascript:void(0);" role="button" title="coming soon!">Ideas</a>',
            ' </li>',
-         ' </ul>'].join('');
+             ' </ul>'].join('') +    navbarHeader0ContainerNode.innerHTML ;
 var currentUrl = "{{request.path}}";
 function addClass(id,stylestr){
 	var o=document.getElementById(id);
