@@ -214,3 +214,49 @@ def launching(request):
         except:
             return HttpResponse('sucks')
     return render_to_response(template, context_instance=RequestContext(request, ctx))
+
+
+from satchmo_store.contact.models import Contact
+from satchmo_store.contact.forms import ExtendedContactInfoForm
+from django.contrib.auth import REDIRECT_FIELD_NAME
+
+from localsite.forms import ContactEmailPasswordForm
+from django.core.urlresolvers import reverse
+from django.template.response import TemplateResponse
+from satchmo_store.contact import signals, CUSTOMER_ID
+def createEmailPassword(request,
+                    template_name='contact/create-email-password.html',
+                    post_change_redirect=None,
+                    create_email_password_form=ContactEmailPasswordForm,
+                    current_app=None, extra_context=None):
+    init_data = {}
+    if post_change_redirect is None:
+        post_change_redirect = reverse('django.contrib.auth.views.password_change_done')
+    try:
+        contact = Contact.objects.from_request(request, create=False)
+    except Contact.DoesNotExist:
+        contact = None
+    if request.method == "POST":
+        form = create_email_password_form(contact=contact, data=request.POST)
+        if form.is_valid():
+            if contact is None and request.user:
+                contact = Contact(user=request.user)
+            custID = form.save()
+            request.session[CUSTOMER_ID] = custID
+            redirect_to = request.REQUEST.get(REDIRECT_FIELD_NAME, '')
+            if not redirect_to or '//' in redirect_to or ' ' in redirect_to:
+                redirect_to = reverse('satchmo_account_info')
+
+            return HttpResponseRedirect(redirect_to)
+        else:
+            signals.satchmo_contact_view.send(contact, contact=contact, contact_dict=init_data)
+    else:
+        signals.satchmo_contact_view.send(contact, contact=contact, contact_dict=init_data)
+        form = create_email_password_form(contact=contact)
+    context = {'form': form,}
+    if extra_context is not None:
+        context.update(extra_context)
+    return TemplateResponse(request, template_name, context,
+                            current_app=current_app)
+
+createEmailPassword = login_required(createEmailPassword)

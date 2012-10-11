@@ -27,6 +27,7 @@ if LOCAL_DEV:
         url(r'^social/form/$', form, name='form'),
         url(r'^social/form2/$', form2, name='form2'),
         url(r'^social/fb/', facebook_view, name='fb_app'),
+        url(r'^accounts/create-email-password/', 'localsite.views.createEmailPassword', name='create-email-password'),
         url(r'', include('social_auth.urls')),
     )
 else:
@@ -47,5 +48,7 @@ else:
         url(r'^social/form/$', form,{'SSL': True}, name='form'),
         url(r'^social/form2/$', form2,{'SSL': True}, name='form2'),
         url(r'^social/fb/', facebook_view,{'SSL': True}, name='fb_app'),
+        
+        url(r'^accounts/create-email-password/', 'localsite.views.createEmailPassword',{'SSL': True}, name='create-email-password'),
         url(r'', include('social_auth.urls')),
     )
