@@ -260,12 +260,13 @@
 					<button onClick='javascript:window.location="{% url socialauth_begin name %}?next={% if next %}{{next}}{% else %}{% url satchmo_account_info as accounturl %}{% if accounturl %}{% url satchmo_account_info %}{% endif %}{% endif %}"' class='login-sns-button btn facebook'>
 						<img style='display:block;float:left;margin-left:5%;' src='{{MEDIA_URL}}img/f.png'>Facebook
 					</button>
-                    <span>&nbsp;&nbsp;</span>
+
 				{% else %}
-					<button class='login-sns-button btn'>
+					<button onClick='javascript:window.location="{% url socialauth_begin name %}?next={% if next %}{{next}}{% else %}{% url satchmo_account_info as accounturl %}{% if accounturl %}{% url satchmo_account_info %}{% endif %}{% endif %}"' class='login-sns-button btn sinaweibo'>
 						<img style='display:block;float:left;margin-left:5%;' src='{{MEDIA_URL}}img/sinaweibo.png' width=23>Sina Weibo
 					</button>
 				{% endifequal %}
+				<br>
 			{% endfor %}
 		</div>
 	</div>
