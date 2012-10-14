@@ -72,4 +72,38 @@
         submenu.first().hide();
 
 	});
+    function FauxPlaceholder() {
+        if(!ElementSupportAttribute('input','placeholder')) {
+            $("input[placeholder]").each(function() {
+                var $input = $(this);
+		        var originalColor = $input.css('color');
+		        var placeholderColor = '#bbb';
+                $input.after('<input id="'+$input.attr('id')+'-faux" style="display:none;" type="text" value="' + $input.attr('placeholder') + '" />');
+                var $faux = $('#'+$input.attr('id')+'-faux');
+
+                $faux.show().attr('class', $input.attr('class')).attr('style', $input.attr('style'));
+                $faux.css('color',placeholderColor);    
+                $input.hide();
+
+                $faux.focus(function() {
+                    $faux.hide();
+                    $input.show().focus();
+                    $input.css('color',originalColor);   
+                });
+
+                $input.blur(function() {
+                    if($input.val() === '') {
+                        $input.hide();
+                        $faux.show();
+                        $faux.css('color',placeholderColor);   
+                    }
+                });
+            });
+        }
+    }
+    function ElementSupportAttribute(elm, attr) {
+        var test = document.createElement(elm);
+        return attr in test;
+    }
+    FauxPlaceholder();	
 })(jQuery);

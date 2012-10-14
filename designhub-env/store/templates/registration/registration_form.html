@@ -1,43 +1,63 @@
-{% extends "shop/base.html" %}
-{% load i18n %}
-{% block breadcrumbs-inner %}
-    <span class="seperator">/</span>
-    <span>{% trans "Registration" %}</span>
-{% endblock breadcrumbs-inner %}
-{% block content %}
-<h3>{% trans "Please Enter Your Account Information" %}</h3>
+{% extends "registration/base.html" %}
 
-<table>
-<form method="post" action=".">{% csrf_token %}
-    {{ form.next }}
-
-{% if allow_nickname %}
-    <tr><td>{{ form.username.label }}</td><td>{{ form.username }}</td></tr>
-    <tr><td></td><td>{% if form.username.errors %}*** {{ form.username.errors|join:", " }}{% endif %}</td></tr>
-{% endif %}
-    <tr><td>{{ form.email.label_tag }}:</td><td>{{ form.email }}</td></tr>
-    <tr><td></td><td>{% if form.email.errors %}*** {{ form.email.errors|join:", " }}{% endif %}</td></tr>
-
-    <tr><td>{{ form.first_name.label_tag }}:</td><td>{{ form.first_name }}</td></tr>
-    <tr><td></td><td>{% if form.first_name.errors %}*** {{ form.first_name.errors|join:", " }}{% endif %}</td></tr>
-      
-    <tr><td>{{ form.last_name.label_tag }}:</td><td>{{ form.last_name }}</td></tr>
-    <tr><td></td><td>{% if form.last_name.errors %}*** {{ form.last_name.errors|join:", " }}{% endif %}</td></tr>
-
-    <tr><td>{{ form.password1.label_tag }}:</td><td>{{ form.password1 }}</td></tr>
-    <tr><td></td><td>{% if form.password1.errors %}*** {{ form.password1.errors|join:", " }}{% endif %}</td></tr>
-
-    <tr><td>{{ form.password2.label_tag }}:</td><td>{{ form.password2 }}</td></tr>
-    <tr><td></td><td>{% if form.password2.errors %}*** {{ form.password2.errors|join:", " }}{% endif %}</td></tr>
-
-    {% if show_newsletter %}
-    <tr><td>{{ form.newsletter.label_tag }}:</td><td>{{ form.newsletter }}</td></tr>
-    <tr><td></td><td>{% if form.newsletter.errors %}*** {{ form.newsletter.errors|join:", " }}{% endif %}</td></tr>
+{% block loginsignupform %}
+<form id='login-panel-form' method='post' action='.'>
+<div id='login-panel-container'>
+    {% if allow_nickname %}
+		<div class='login-row login-row-first'>
+			<input id='login-username' name='username' class='login-input' type='text' placeholder="Nick name" >
+			{% if form.username.errors %}
+			    <div style='float:left;'><p class='error'> ***{{ form.username.errors|join:", " }}</p></div>
+			{% endif %}
+		</div>
+		<div class='login-row'>
+			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" >
+			{% if form.email.errors %}
+			    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
+			{% endif %}
+		</div>	
     {% else %}
-    <input type='hidden' name='newsletter' value="False" />
+		<div class='login-row login-row-first'>
+			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" >
+			{% if form.email.errors %}
+			    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
+			{% endif %}
+		</div>	
+    {% endif %}	
+	<div class='login-row'>
+		<input id='login-first_name' name='first_name' class='login-input' type='text' placeholder="First name" >
+		{% if form.first_name.errors %}
+		    <div style='float:left;'><p class='error'> ***{{ form.first_name.errors|join:", " }}</p></div>
+		{% endif %}
+	</div>		
+	<div class='login-row'>
+		<input id='login-last_name' name='last_name' class='login-input' type='text' placeholder="Last name" >
+		{% if form.last_name.errors %}
+		    <div style='float:left;'><p class='error'> ***{{ form.last_name.errors|join:", " }}</p></div>
+		{% endif %}
+	</div>		
+	<div class='login-row'>
+		<input id='login-password1' name='password1' class='login-input' type='password' placeholder="Password" >
+		{% if form.password1.errors %}
+		    <div style='float:left;'><p class='error'> ***{{ form.password1.errors|join:", " }}</p></div>
+		{% endif %}
+	</div>		
+	<div class='login-row login-row-last'>
+		<input id='login-password2' name='password2' class='login-input' type='password' placeholder="Password again" >
+		{% if form.password2.errors %}
+		    <div style='float:left;'><p class='error'> ***{{ form.password2.errors|join:", " }}</p></div>
+		{% endif %}
+	</div>		
+    {% if show_newsletter %}
+    {% else %}
+        <input type='hidden' name='newsletter' value="False" />
     {% endif %}
-
-<tr><td></td><td><input type="submit" value="{% trans "Create Account" %}"/></td></tr>
+    {% csrf_token %}
+</div>
+<div id='login-submit-container'>
+    <button class="btn btn-login" id="login-submit" name="login-submit" type="submit">Start your journey!</button>
+</div>
 </form>
-</table>
-{% endblock %}
+
+{% endblock loginsignupform %}
+
