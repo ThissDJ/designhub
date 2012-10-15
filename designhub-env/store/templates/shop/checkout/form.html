@@ -4,13 +4,13 @@
 {% block extra-head %}
 {% include "contact/_contact_info_form.html" %}
 {% endblock %}
-
+    {% block breadcrumbs-inner %}
+		<span class="seperator">/</span>
+		<span>{% trans "Checkout" %}</span>
+	{% endblock breadcrumbs-inner %}
 {% block content %}
-<div class="container">
-    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
-	<span class="seperator">/</span>
-	<span>{% trans "Checkout" %}</span>
-</div>
+
+
 <div class="container" style="padding-top:10px;">
 <h3>{% trans "Checkout" %}</h3>
 <div id="checkoutprogress">
