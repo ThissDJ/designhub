@@ -11,6 +11,18 @@ function getElementsByClass( searchClass, domNode, tagName) {
 	} 
 	return el;
 } 
+function getDisplayedImgURL(){
+	var allProductImgs = getElementsByClass('fancybox-thumb',null,'A');
+	if(allProductImgs.length > 0){
+		for(var i=0; i < allProductImgs.length; i++){
+			if(allProductImgs[i].style.display !== 'none'){
+				imgURL = allProductImgs[i].getElementsByTagName('img')[0].src;
+				break;
+			}
+		}
+	}
+	return imgURL
+}
 // sharing functions
 function socialNetworkShare(type, pageLoc, url, msg, imgURL){
 	var url = url||location.href;
@@ -41,7 +53,11 @@ function socialNetworkShare(type, pageLoc, url, msg, imgURL){
 		case "weibo":
 			url = encodeURIComponent(url+joiner+"utm_source=weibo&utm_medium=social_media&utm_content=pdp_share");
 			pathPrefix = "http://service.t.sina.com.cn/share/share.php?";
-			pathShare = pathPrefix + "url=" + url + "&title=" + msg;
+            if(imgURL === undefined ){
+            	imgURL = getDisplayedImgURL();
+            }
+			var currentImg = imgURL;
+			pathShare = pathPrefix + "url=" + url + "&title=" + msg + '&pic=' + currentImg;
 			_gaq.push(
 				['_trackSocial', 'Weibo', 'Share', msg_original, pathShare]
 			);
@@ -66,26 +82,15 @@ function socialNetworkShare(type, pageLoc, url, msg, imgURL){
 		case "pinterest":
 			url = encodeURIComponent(url+joiner+"utm_source=pinterest&utm_medium=social_media&utm_content=pdp_share");
 			pathPrefix = "http://pinterest.com/pin/create/button/?";
-			var allProductImgs = getElementsByClass('fancybox-thumb',null,'A');
-			if(allProductImgs.length > 0){
-				// console.log(allProductImgs[0]);
-				for(var i=0; i < allProductImgs.length; i++){
-					if(allProductImgs[i].style.display !== 'none'){
-						// console.log(allProductImgs[i].style.display);
-						// console.log(allProductImgs[i].getElementsByTagName('img')[0].src);
-						imgURL = allProductImgs[i].getElementsByTagName('img')[0].src;
-						// console.log(allProductImgs[i].childNodes[0].attr("src"));
-						break;
-					}
-				}
-			}
+            if(imgURL === undefined ){
+            	imgURL = getDisplayedImgURL();
+            }
 			var currentImg = imgURL;
 			pathShare = pathPrefix + "url=" + url + "&media=" + currentImg + "&description=" + msg;
 			_gaq.push(
 				['_trackSocial', 'Pinterest', 'Share', msg_original]
 			);
 			break;
-		
 	}
 	
 	window.open(pathShare,"_blank","toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=640, height=480");
