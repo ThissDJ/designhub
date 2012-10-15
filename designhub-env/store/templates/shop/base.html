@@ -18,21 +18,22 @@
     {% block extrastyle %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox.css" />{% endblock %}
     {% block extrahead %}{% endblock %}
     
+    {% block preloadcommonjs %}
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-32832750-1']);
+		  _gaq.push(['_setDomainName', 'designhub.hk']);
+		  _gaq.push(['_trackPageview']);
+		
+		  (function() {
+		    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+        <script type="text/javascript" src="{{MEDIA_URL}}js/preload.main.20121015.js"></script>
+    {% endblock preloadcommonjs %}
 
-<script type="text/javascript">
-
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-32832750-1']);
-  _gaq.push(['_setDomainName', 'designhub.hk']);
-  _gaq.push(['_trackPageview']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-
-</script>
 </head>
 {% block body %}
 <body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
