@@ -1,4 +1,16 @@
-
+function getElementsByClass( searchClass, domNode, tagName) { 
+	if (domNode == null) domNode = document;
+	if (tagName == null) tagName = '*';
+	var el = new Array();
+	var tags = domNode.getElementsByTagName(tagName);
+	var tcl = " "+searchClass+" ";
+	for(i=0,j=0; i<tags.length; i++) { 
+		var test = " " + tags[i].className + " ";
+		if (test.indexOf(tcl) != -1) 
+			el[j++] = tags[i];
+	} 
+	return el;
+} 
 // sharing functions
 function socialNetworkShare(type, pageLoc, url, msg, imgURL){
 	var url = url||location.href;
@@ -54,6 +66,19 @@ function socialNetworkShare(type, pageLoc, url, msg, imgURL){
 		case "pinterest":
 			url = encodeURIComponent(url+joiner+"utm_source=pinterest&utm_medium=social_media&utm_content=pdp_share");
 			pathPrefix = "http://pinterest.com/pin/create/button/?";
+			var allProductImgs = getElementsByClass('fancybox-thumb',null,'A');
+			if(allProductImgs.length > 0){
+				// console.log(allProductImgs[0]);
+				for(var i=0; i < allProductImgs.length; i++){
+					if(allProductImgs[i].style.display !== 'none'){
+						// console.log(allProductImgs[i].style.display);
+						// console.log(allProductImgs[i].getElementsByTagName('img')[0].src);
+						imgURL = allProductImgs[i].getElementsByTagName('img')[0].src;
+						// console.log(allProductImgs[i].childNodes[0].attr("src"));
+						break;
+					}
+				}
+			}
 			var currentImg = imgURL;
 			pathShare = pathPrefix + "url=" + url + "&media=" + currentImg + "&description=" + msg;
 			_gaq.push(
