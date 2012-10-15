@@ -7,6 +7,7 @@
 {% load satchmo_discounts %}
 {% load normalize_decimal %}
 {% load thumbnail %}
+{% load saved_percentage %}
 {% block breadcrumbs-inner %}
     <span class="seperator">/</span>
 	<span>Cart</span>
@@ -33,14 +34,13 @@
 	    <tr>
 	      <th></th>
 	      <th>{% trans "Items" %}</th>
-	      {% if sale %}
-			<th>{% trans "Regular Price" %}</th>
-			<th>{% trans "Sale Price" %}
-	      {% else %}
-	        <th>{% trans "Price" %}</th>
-	      {% endif %}
 	      <th>{% trans "Quantity" %}</th>
-	      <th>{% if default_view_tax %}{% trans "Total<br/>(incl.&nbsp;tax)" %}{% else %}{% trans "Total" %}{% endif %}</th>
+	      <th>{% if default_view_tax %}{% trans "Subtotal<br/>(incl.&nbsp;tax)" %}{% else %}{% trans "Subtotal" %}{% endif %}</th>
+	      {% if sale %}
+	          <th>
+	          	Saved
+	          </th>
+	      {% endif %}
 	      <th>{% trans "Action" %}</th>
 	    </tr>
 	  </thead>
@@ -55,8 +55,6 @@
                 {% endthumbnail %}
 		      </td>
 		      <td><a href="{{cartitem.product.get_absolute_url}}" style="line-height:80px;">{{ cartitem.description }}</a></td>
-		      {% if sale %}<td><span style="line-height:80px;">HK{{ cartitem.unit_price|currency }}</span></td>{% endif %}
-		      <td><span style="line-height:80px;">HK{{ cartitem|discount_line_unit_price:sale|currency }}</span></td>
 		      <td>
                 <form style='margin-top:25px;' class="qtyform form-inline" id="form-{{ cartitem.id }}" action="{% url satchmo_cart_set_qty %}" method="post">{% csrf_token %}
                     <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
@@ -64,7 +62,40 @@
                     <button class="btn" id="id_update_submit"   type="submit">{% trans 'Update' %}</button>
                 </form>
 		      </td>
-		      <td><span style="line-height:80px;">HK{{ cartitem|discount_line_total:sale|currency }}</span></td>
+		      <td>
+		      	<span style="line-height:80px;">
+		      		{% ifnotequal  cartitem.product|discount_price:""|currency cartitem.product|sale_price|currency %}
+		      		    {% with cartitem.product|discount_price:"" as original_unit_price %}
+		      		        {% with cartitem.quantity|normalize_decimal as item_quantity %}
+		      		            {% with  original_unit_price|mul:item_quantity as total_original_price%}
+		      		                <strike>{{ total_original_price|currency}}</strike>
+		      		            {% endwith %}
+		      		        {% endwith %}
+		      		    {% endwith %}
+		      		{% endifnotequal %}
+		      		{{ cartitem|discount_line_total:sale|currency }}
+		      	</span>
+		      </td>
+		      {% if sale %}
+		        <td>
+		      	  <span style="line-height:80px;">
+		      	  	
+		      		{% ifnotequal  cartitem.product|discount_price:""|currency cartitem.product|sale_price|currency %}
+		      		    {% with cartitem.product|discount_price:"" as original_unit_price %}
+		      		        {% with cartitem.quantity|normalize_decimal as item_quantity %}
+		      		            {% with cartitem|discount_line_total:sale as total_sale_price %}
+		      		                {% with original_unit_price|mul:item_quantity as total_original_price%}
+		      		                    {% with total_original_price|sub:total_sale_price as saved_money %}
+		      		                        {{saved_money|currency}} ({% widthratio saved_money total_original_price  100 %}%)
+		      		                    {% endwith %}
+		      		                {% endwith %}
+		      		            {% endwith %}
+		      		         {% endwith %}
+		      		    {% endwith %}
+		      		{% endifnotequal %}
+		      	  </span>
+		      	</td>
+		      {% endif %}
 		      <td>
 	            <form style='margin-top:25px;' action="{% url satchmo_cart_remove %}" method="post">{% csrf_token %}
 	                <input type="hidden" name="cartitem" value="{{ cartitem.id }}" />
@@ -76,11 +107,11 @@
 			{% cartitem_subscription_details cartitem %}
 		{% endfor %}
         <tr>
-        	<td colspan="{% if sale %}5{% else %}4{% endif %}" style='text-align:right;'>
+        	<td colspan="3" style='text-align:right;'>
         		<span style="line-height:40px;font-weight:bold;">{% trans "Cart Total" %}:</span>
         	</td>
             <td>
-            	<span style="line-height:40px;">HK{{ cart|discount_cart_total:sale|currency }}</span>
+            	<span style="line-height:40px;">{{ cart|discount_cart_total:sale|currency }}</span>
             </td>
             <td>
             </td>

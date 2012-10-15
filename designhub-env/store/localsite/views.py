@@ -131,20 +131,33 @@ class DesignerDetailView(DetailView):
     model = Designer
     template_name = 'designers/designer-details.html'
 
+from product.utils import find_best_auto_discount
+from satchmo_store.shop.models import Cart
 def saleindex(request):
     """
        display all the sale products
     """
     template = 'sale/index.html'
-    discounts = Discount.objects.filter(active = True)
+    discounts = Discount.objects.filter(active = True, automatic = True)
     products = []
     if discounts.count() > 0:
         for discount in list(discounts):
             if discount.valid_products.count() > 0:
-                for product in discount.valid_products.all():
+                for product in discount.valid_products.filter(productvariation__parent__isnull=True).all():
+                    product.discountIsValid, product.discountValidMsg = discount.isValid()
                     products.append(product)
-                
-    ctx = {'products':products}
+    cart = Cart.objects.from_request(request)
+
+    if cart.numItems > 0:
+        productsInCart = [item.product for item in cart.cartitem_set.all()]
+        sale = find_best_auto_discount(productsInCart)
+    else:
+        sale = None
+       
+    ctx = {
+           'products':products,
+           'sale': sale
+           }
     return render_to_response(template, context_instance=RequestContext(request, ctx))
 
 from django.views.decorators.csrf import csrf_exempt

@@ -57,7 +57,7 @@ function socialNetworkShare(type, pageLoc, url, msg, imgURL){
             	imgURL = getDisplayedImgURL();
             }
 			var currentImg = imgURL;
-			pathShare = pathPrefix + "url=" + url + "&title=" + msg + '&pic=' + currentImg;
+			pathShare = pathPrefix + "url=" + url + "&title=" + msg + '&appkey=' + '1737320750' + '&pic=' + currentImg;
 			_gaq.push(
 				['_trackSocial', 'Weibo', 'Share', msg_original, pathShare]
 			);
