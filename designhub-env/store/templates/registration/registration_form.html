@@ -5,33 +5,33 @@
 <div id='login-panel-container'>
     {% if allow_nickname %}
 		<div class='login-row login-row-first'>
-			<input id='login-username' name='username' class='login-input' type='text' placeholder="Nick name" >
+			<input id='login-username' name='username' class='login-input' type='text' placeholder="Nick name" {% if form.username.value %}value='{{form.username.value}}'{% endif %} >
 			{% if form.username.errors %}
 			    <div style='float:left;'><p class='error'> ***{{ form.username.errors|join:", " }}</p></div>
 			{% endif %}
 		</div>
 		<div class='login-row'>
-			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" >
+			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" {% if form.email.value %}value='{{form.email.value}}'{% endif %}>
 			{% if form.email.errors %}
 			    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
 			{% endif %}
 		</div>	
     {% else %}
 		<div class='login-row login-row-first'>
-			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" >
+			<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" {% if form.email.value %}value='{{form.email.value}}'{% endif %}>
 			{% if form.email.errors %}
 			    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
 			{% endif %}
 		</div>	
     {% endif %}	
 	<div class='login-row'>
-		<input id='login-first_name' name='first_name' class='login-input' type='text' placeholder="First name" >
+		<input id='login-first_name' name='first_name' class='login-input' type='text' placeholder="First name" {% if form.first_name.value %}value='{{form.first_name.value}}'{% endif %} >
 		{% if form.first_name.errors %}
 		    <div style='float:left;'><p class='error'> ***{{ form.first_name.errors|join:", " }}</p></div>
 		{% endif %}
 	</div>		
 	<div class='login-row'>
-		<input id='login-last_name' name='last_name' class='login-input' type='text' placeholder="Last name" >
+		<input id='login-last_name' name='last_name' class='login-input' type='text' placeholder="Last name" {% if form.last_name.value %}value='{{form.last_name.value}}'{% endif %}>
 		{% if form.last_name.errors %}
 		    <div style='float:left;'><p class='error'> ***{{ form.last_name.errors|join:", " }}</p></div>
 		{% endif %}

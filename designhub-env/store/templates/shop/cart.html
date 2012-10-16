@@ -113,8 +113,8 @@
             <td>
             	<span style="line-height:40px;">{{ cart|discount_cart_total:sale|currency }}</span>
             </td>
-            <td>
-            </td>
+            <td {% if sale %} colspan="2"{% endif %} >
+            </td> 
         </tr>
 	  </tbody>
 	</table>

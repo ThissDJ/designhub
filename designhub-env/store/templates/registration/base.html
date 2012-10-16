@@ -7,18 +7,7 @@
 <style>
     html{
     	min-width:960px;
-    	/*height:100%;*/
     }
-/*	body {
-	    height: 100%;
-	    margin: 0;
-	}*/
-/*	body {
-	    height: 100%;
-	    margin: 0;
-	    background-repeat: no-repeat;
-	    background-attachment: fixed;
-	}*/
     input.login-input,#login-panel-container,.login-row,.pwd-reset-container{
         font-size:20px;
     }
@@ -83,10 +72,8 @@
 	}
 	.login-row-first{
 		border-top:0px;
-/*			padding-bottom:0px;*/
 	}
 	.login-row-last{
-/*			padding-top:0px;*/
 		border-bottom:0px;
 	}
     #login-submit-container{
@@ -135,9 +122,6 @@
     	border-width:1px;
     }
     #login-right-panel{
-/*    	position:absolute;
-    	right:30px;
-    	top:30px;*/
         top:20px;
         right:20px;
     	overflow:display;
@@ -201,7 +185,7 @@
 				{% endfor %}</p>
 				{% endif %}
 				<div class='login-row login-row-first'>
-					<input id='login-email' name='username' class='login-input' type='text' placeholder="Your login email" >
+					<input id='login-email' name='username' class='login-input' type='text' placeholder="Your login email" {% if form.username.value %}value='{{form.username.value}}'{% endif %}>
 					{% if form.username.errors %}
 					    <div style='float:left;'><p class='error'> ***{{ form.username.errors|join:", " }}</p></div>
 					{% endif %}
