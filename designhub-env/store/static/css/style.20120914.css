@@ -10,7 +10,8 @@ html{
 }
 body{
 	/*background:url(../img/site-bg5.jpg);*/
-	background-color:#edeee5;
+	/*background-color:#edeee5;*/
+	background-color:#fff;
 	padding-left:0px;padding-right:0px;
 }
 /* round border for all image */
