@@ -16,7 +16,7 @@
 		-moz-border-radius: 4px 4px 0px 0px;
 		border-radius: 4px 4px 0px 0px;
 		width:900px;
-		padding:30px;
+		padding:25px;
 		background:rgba(0,0,0,0.15);
 	}
 	.brand-label{
@@ -79,14 +79,14 @@
     {% for p in designer.mynewproduct_set.all %}
             {% if forloop.first %} <div class="pic-list-container">   {% endif %}
             	{% if p.product.active %}
-	            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+	            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 	            	<a href="{{ p.product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ p.product.translated_name }} | coming soon!"> 
 	            		<!--<div class="tip-content-when-hover">
 	            			Sample
 	            	 </div>-->
-	            	    {% thumbnail p.product.main_image.picture "180x230" crop='center' as image %}
+	            	    {% thumbnail p.product.main_image.picture "215x230" crop='center' as image %}
 	            	        {% if p.product.productimage_set.all.count > 1 %}
-	            	            {% thumbnail p.product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+	            	            {% thumbnail p.product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
 <!-- 	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
                                      <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 	            	            {% endthumbnail %}

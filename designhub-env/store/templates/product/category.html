@@ -22,12 +22,12 @@
                 
 	    {% for product in products %} 
 	        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-	            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+	            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 	            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 	            		<!--<div class="tip-content-when-hover">
 	            			Sample
 	            	 </div>-->
-	            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+	            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 	            	        {% if product.productimage_set.all.count > 1 %}
 	            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
 <!-- 	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
@@ -62,12 +62,12 @@
 			            {% ifequal order_by 'price_inc' %}
 				            {% for product in cat.active_products_price_inc %}
 				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-						            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+						            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 						            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 						            		<!--<div class="tip-content-when-hover">
 						            			Sample
 						            	 </div>-->
-						            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+						            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 						            	        {% if product.productimage_set.all.count > 1 %}
 						            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
 <!-- 						            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
@@ -97,12 +97,12 @@
 				        {% else %}
 				            {% for product in cat.active_products_price_dec %}
 				                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-						            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+						            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 						            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 						            		<!--<div class="tip-content-when-hover">
 						            			Sample
 						            	 </div>-->
-						            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+						            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 						            	        {% if product.productimage_set.all.count > 1 %}
 						            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
 <!-- 						            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
@@ -132,14 +132,14 @@
 		            {% else %}
 			            {% for product in cat.active_products %}
 			                {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-					            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+					            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 					            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 					            		<!--<div class="tip-content-when-hover">
 					            			Sample
 					            	 </div>-->
-					            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+					            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 					            	        {% if product.productimage_set.all.count > 1 %}
-					            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+					            	            {% thumbnail product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
 <!-- 					            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
 					            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 					            	            {% endthumbnail %}
@@ -158,7 +158,6 @@
 									    </span>
 									    {% endifnotequal %}
 										<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-										
 					                </a>
 					            </div>
 			                {% if forloop.last %}</div>{% endif %}
