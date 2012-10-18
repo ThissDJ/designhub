@@ -10,26 +10,26 @@
     		<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/none-960.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
 				    </a>
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/none-960.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
 				    </a>
 	    		</div>
 	    	</div>
 	</div>
 	<style>
 		#index-slider .slides_container{
-		    height:552px;
+		    height:546px;
 		    border-bottom:5px solid #555;
 			-webkit-border-radius: 0px 0px 4px 4px;
 			-moz-border-radius: 0px 0px 4px 4px;
 			border-radius: 0px 0px 4px 4px;
 		}
 		#index-slider .slides_container img{
-			-webkit-border-radius: 4px 4px 0px 0px;
-			-moz-border-radius: 4px 4px 0px 0px;
-			border-radius: 4px 4px 0px 0px;
+			-webkit-border-radius: 0px;
+			-moz-border-radius: 0px;
+			border-radius: 0px;
 		}
 		#index-slider .slides_container a{
 			display:block;
@@ -159,14 +159,14 @@
 				</div>
             {% for product in fc.list %}
 		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
+		            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
 		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
 		            		<!--<div class="tip-content-when-hover">
 		            			Sample
 		            	 </div>-->
-		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+		            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 		            	        {% if product.productimage_set.all.count > 1 %}
-		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+		            	            {% thumbnail product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
 		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
 		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 		            	            {% endthumbnail %}
@@ -207,9 +207,9 @@
 		            		<!--<div class="tip-content-when-hover">
 		            			Sample
 		            	 </div>-->
-		            	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
+		            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
 		            	        {% if product.productimage_set.all.count > 1 %}
-		            	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
+		            	            {% thumbnail product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
 		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
 		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
 		            	            {% endthumbnail %}
@@ -237,50 +237,7 @@
 	{% endif %}
 	{% endblock content %}
 	{% block indexfooter %}
-	<div style="width:100%; height: 400px; background:#F3F4EE;border-top: 1px solid #E8E7DC;border-bottom: 1px solid #E8E7DC;">
-		
-		<div class='container'>
-			<div style='padding-top:30px;padding-bottom:0px;'>
-				<h3 style='text-align:center;'>
-					About Designhub.hk
-				</h3>
-			</div>
-			<div class='index-footer-col'>
-				<div class='index-footer-col-border'>
-					<h5 style='text-align:center;'>
-						Designs
-					</h5>
-					<p>
-						Designs begin as a simple drawing in a sketchbook and are then modeled in CAD, where they are patterned with the highest level of precision. Each and every detail is carefully considered, down to the exact number of stitches. Once the initial pattern is complete, the first prototype is created by hand, just a few feet from the CAD workstation. The prototyping process is known to take several months, with each revision being more structurally and aesthetically sound than the last. Finally, samples are created from several material options and only then is the design either rejected or approved for production.
-					</p>
-				</div>
-			</div>
-			<div class='index-footer-col'>
-				<div class='index-footer-col-border'>
-					<h5 style='text-align:center;'>
-						Designers / Artists
-					</h5>
-					<p>
-						The prototyping process is known to take several months, with each revision being more structurally and aesthetically sound than the last. Finally, samples are created from several material options and only then is the design either rejected or approved for production.Designs begin as a simple drawing in a sketchbook and are then modeled in CAD, where they are patterned with the highest level of precision. Each and every detail is carefully considered, down to the exact number of stitches. Once the initial pattern is complete, the first prototype is created by hand, just a few feet from the CAD workstation.
-					</p>
-				</div>
-			</div>
-		</div>
-		<style>
-		    
-			.index-footer-col{
-				float:left;
-				width:50%;
-				height:230px;
-			}
-			.index-footer-col-border{
-				padding: 0px 30px 50px 30px;
-				width:400px;
-				margin-left:auto;margin-right:auto;
-				height:230px;
-			}
-		</style>
-	</div>
+
 	{% endblock indexfooter %}
 {% block preloadextrajs %}
 <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.cookie.js"></script>

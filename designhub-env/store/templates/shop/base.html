@@ -5,7 +5,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="wb:webmaster" content="b33503664b41138d" />
 	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
     {% block extra-head %}{% endblock %}
@@ -38,32 +37,35 @@
 {% block body %}
 <body{% if bodyid %} id="{{ bodyid }}"{% endif %}{% if bodyclass %} class="{{ bodyclass }}"{% endif %}>
     <div class="wrapper">
-	{% block header %}{% include "header0.html" with category=category %}{% endblock %}
-	
-	{% block breadcrumbs %}
-	<div class="container">
-	    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
-	    {% block breadcrumbs-inner %}
-		{% endblock breadcrumbs-inner %}
-	</div>
-	{% endblock breadcrumbs %}
-	<div class='container' style='margin-top:10px;margin-bottom:50px;'>
-	<style>
-		.various-hide{
-			position:absolute;top:-10000px;
-		}
-	</style>
-	<a class="various various-hide" href="#launching-inline">Ajax</a>
-    <div id='launching-inline'>
-    	{% include "launching/subscription-inline.html" %}
-    </div>
-<!--     <a class="various various-hide" data-fancybox-type="iframe"  href="/launching/">Ajax</a>     -->
-	{% block content %}
-	{% endblock content %}
-	</div>
-	{% block indexfooter %}
-	{% endblock indexfooter %}
-	<div class='push'></div>
+		{% block header %}{% include "header0.html" with category=category %}{% endblock %}
+		
+		{% block breadcrumbs %}
+		<div class='mycontainer'>
+		    <div class="container">
+			    <a href="{{ shop_base }}/">{% trans "Home" %}</a>
+			    {% block breadcrumbs-inner %}
+				{% endblock breadcrumbs-inner %}
+			</div>
+		</div>
+		{% endblock breadcrumbs %}
+		<div class='mycontainer' style='padding-top:10px;padding-bottom:50px;'>
+		<style>
+			.various-hide{
+				position:absolute;top:-10000px;
+			}
+		</style>
+		<a class="various various-hide" href="#launching-inline">Ajax</a>
+	    <div id='launching-inline'>
+	    	{% include "launching/subscription-inline.html" %}
+	    </div>
+	<!--     <a class="various various-hide" data-fancybox-type="iframe"  href="/launching/">Ajax</a>     -->
+	    <div class='container'>
+			{% block content %}
+			{% endblock content %}
+		</div>
+		{% block indexfooter %}
+		{% endblock indexfooter %}
+	    <div class='push'></div>
 	</div>
 	{% block footer %}{% include "footer0.html" %}{% endblock %}
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>

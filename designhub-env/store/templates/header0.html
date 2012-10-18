@@ -6,55 +6,56 @@
 {% load satchmo_discounts %}
 {% load normalize_decimal %}
 {% spaceless %}
-<div class='container header'>
-	<div style='width:100%;position:relative;overflow:visible;margin-top:0px;margin-bottom:10px;height:100px;'>
-		<div style='text-align:center;width:379px;top:10px;left:0px;position:absolute;'>
-			<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='320'></a>
-		</div>
-		<div style='position:absolute;left:380px;bottom:0px;text-align:left;'>
-            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
-            <!--<a class='sns-button-wrapper' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>-->
-		</div>
-		<div style='position:absolute;right:0px;top:8px;line-height:15px;'>
-			<div class='nav1-right'>
-				<p class='nav1-right-ele'>
-				{% if user.is_active %}
-				<span style='color:#bbb'>Hi,</span><a class='list-item'  href='{% url satchmo_account_info %}'>
-					{% if user.last_name %}{{user.last_name}}
-					{% else %}{{user.username}}
+<div class='mycontainer'>
+	<div class='container header'>
+		<div style='width:100%;position:relative;overflow:visible;margin-top:0px;margin-bottom:10px;height:100px;'>
+			<div style='text-align:center;width:379px;top:10px;left:0px;position:absolute;'>
+				<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='320'></a>
+			</div>
+			<div style='position:absolute;left:380px;bottom:0px;text-align:left;'>
+	            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
+	            <!--<a class='sns-button-wrapper' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>-->
+			</div>
+			<div style='position:absolute;right:0px;top:8px;line-height:15px;'>
+				<div class='nav1-right'>
+					<p class='nav1-right-ele'>
+					{% if user.is_active %}
+					<span style='color:#bbb'>Hi,</span><a class='list-item'  href='{% url satchmo_account_info %}'>
+						{% if user.last_name %}{{user.last_name}}
+						{% else %}{{user.username}}
+						{% endif %}
+					</a>
+					<span class="seperator">/</span>
+					<a href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_logout %}?next={{ request.get_full_path }}{% else %}{% url auth_logout %}{% endifnotequal %}'>Logout</a>
+					{% else %}
+					<a class='list-item'  href='{% url auth_login %}?next={{ request.get_full_path }}'>Login</a><span style='color:#bbb;margin:0px 5px;'>or</span><a  class='list-item' href='{% url registration_register %}?next={{ request.get_full_path }}'>Sign Up</a>
 					{% endif %}
-				</a>
-				<span class="seperator">/</span>
-				<a href='{% ifnotequal request.path '/accounts/login/'  %}{% url auth_logout %}?next={{ request.get_full_path }}{% else %}{% url auth_logout %}{% endifnotequal %}'>Logout</a>
-				{% else %}
-				<a class='list-item'  href='{% url auth_login %}?next={{ request.get_full_path }}'>Login</a><span style='color:#bbb;margin:0px 5px;'>or</span><a  class='list-item' href='{% url registration_register %}?next={{ request.get_full_path }}'>Sign Up</a>
-				{% endif %}
-				<span class="seperator">/</span>
-				<a id='qtip-testing-ele' href='#'>About Us</a>
-				<span class="seperator">/</span>
-				<a href='javascript:void(0);'>Worldwide Delivery</a>
-				{% url satchmo_cart as carturl %}
-			    {% if carturl %}<span class="seperator">/</span><a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
-			    {% if not cart.is_empty and cart%}
-			        <span class="seperator">/</span>
-		            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
-		            {% url satchmo_checkout-step1 as checkouturl %}
-		            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
-			    {% endif %}
-				</p>
+					<span class="seperator">/</span>
+					<a id='qtip-testing-ele' href='#'>About Us</a>
+					<span class="seperator">/</span>
+					<a href='javascript:void(0);'>Worldwide Delivery</a>
+					{% url satchmo_cart as carturl %}
+				    {% if carturl %}<span class="seperator">/</span><a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
+				    {% if not cart.is_empty and cart%}
+				        <span class="seperator">/</span>
+			            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
+			            {% url satchmo_checkout-step1 as checkouturl %}
+			            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
+				    {% endif %}
+					</p>
+				</div>
+			</div>
+			<div style='position:absolute;right:0px;top:56px;width:495px;overflow:visible;'>
+			    <div id="navbar-header0" class="navbar navbar-static">
+			      <div class="navbar-inner">
+			        <div  style="width: auto;">
+			
+			        </div>
+			      </div>
+			    </div> <!-- /navbar-example -->
 			</div>
 		</div>
-		<div style='position:absolute;right:0px;top:56px;width:495px;overflow:visible;'>
-		    <div id="navbar-header0" class="navbar navbar-static">
-		      <div class="navbar-inner">
-		        <div class="container" style="width: auto;">
-		
-		        </div>
-		      </div>
-		    </div> <!-- /navbar-example -->
-		</div>
 	</div>
-
 </div>
 <div class="hide" id="category-list-info">
     {% if category.id %}
