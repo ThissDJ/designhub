@@ -10,12 +10,18 @@
     		<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
+				    	{% if debug %}
 				    	<img src="{{MEDIA_URL}}images/index/1-950width.jpg"/>
-<!-- 				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/> -->
+				    	{% else %}
+				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
+				    	{% endif %}
 				    </a>
 				    <a href="javascript:void(0);" class='slides-image-container'>
+				    	{% if debug %}
 				    	<img src="{{MEDIA_URL}}images/index/2-950width.jpg"/>
-<!-- 				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/> -->
+				    	{% else %}
+				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
+				    	{% endif %}
 				    </a>
 	    		</div>
 	    	</div>

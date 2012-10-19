@@ -18,9 +18,11 @@
                             {% endif %}
         	            {% endthumbnail %}
         	        {% else %}
+        	            {% if debug %}
                             <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-<!-- 		            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" /> -->
-                       
+                        {% else %}
+            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
+        	            {% endif %}
         	        {% endif %}
         	        </div>
                 {% endthumbnail %}
