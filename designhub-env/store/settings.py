@@ -282,7 +282,7 @@ SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_EXTRA_DATA = False
 
 SOCIAL_AUTH_SESSION_EXPIRATION = False
-
+SOCIAL_AUTH_NEW_USER_REDIRECT_URL =  '/accounts/create-email-password/'
 EMAIL_HOST = 'smtp.webfaction.com'
 EMAIL_HOST_USER = 'dhub'
 EMAIL_HOST_PASSWORD = 'dhub4'
