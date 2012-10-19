@@ -3,11 +3,23 @@
 {% load thumbnail %}
 {% load satchmo_currency %}
 {% load satchmo_discounts satchmo_tax %}
-	{% block breadcrumbs %}
-	{% endblock breadcrumbs %}
-	{% block content %}
+{% endblock preloadcommonjs %}
+    <script type="text/javascript">
+        {% if user.is_active %}
+            {% with user.contact_set.all.0 as c %}
+                {% if c.first_name %}
+                {% else %}
+                    location.replace('{% url create-email-password %}');
+                {% endif %}
+            {% endwith %}
+        {% endif %}
+    </script>
+{% endblock extracommonjs %}
+{% block breadcrumbs %}
+{% endblock breadcrumbs %}
+{% block content %}
 	<div class='container'>
-    		<div id="index-slider">
+			<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
 				    	{% if debug %}
@@ -27,7 +39,7 @@
 	    	</div>
 	</div>
 	<style>
-
+	
 	</style>
 	<div style='height:20px;'></div>
 	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat 0 -20px;'>
@@ -37,11 +49,11 @@
 			</h4>
 		</div>
 		<div style='float:left;width:50%;height:350px;position:relative;'>
-            {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
-             {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-             {% else %}<img src="{{MEDIA_URL}}images/index/none-350.jpg" /> {% endif %}
-            {% endthumbnail %}
-            <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
+	        {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
+	         {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+	         {% else %}<img src="{{MEDIA_URL}}images/index/none-350.jpg" /> {% endif %}
+	        {% endthumbnail %}
+	        <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
 		</div>
 		<div style='float:right;width:50%;height:350px;'>
 			<div class='designer-today-featured-designs-container'>
@@ -51,8 +63,8 @@
 				    	<div class='black-bg-designer-today-featured-design'>
 				    	
 					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
-                         {% if debug %}<img src="{{ image.url }}" />{% else %}
-                         <img src="{{MEDIA_URL}}images/index/none-120.jpg" /> {% endif %}
+	                     {% if debug %}<img src="{{ image.url }}" />{% else %}
+	                     <img src="{{MEDIA_URL}}images/index/none-120.jpg" /> {% endif %}
 					    {% endthumbnail %}
 					    </div>
 				    </a>
@@ -63,9 +75,9 @@
 		<div class="clearfix" ></div>
 	</div>
 	
-    {% if featured_cats %}
-
-        {% for fc in featured_cats %}
+	{% if featured_cats %}
+	
+	    {% for fc in featured_cats %}
 			<div class='container index-section'>
 				<div style='padding-bottom:0px;'>
 					<h4 class='section-title'>
@@ -73,9 +85,9 @@
 					</h4>
 				</div>
 				{% include 'product/product_box.html' with productBoxesList=fc.list %}
-            </div>
-        {% endfor %}
-    {% endif %}
+	        </div>
+	    {% endfor %}
+	{% endif %}
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
 			<div style='padding-bottom:0px;'>
@@ -84,12 +96,12 @@
 				</h4>
 			</div>
 			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
-       </div>
-	{% endif %}
-	{% endblock content %}
-	{% block indexfooter %}
+	   </div>
+{% endif %}
+{% endblock content %}
+{% block indexfooter %}
 
-	{% endblock indexfooter %}
+{% endblock indexfooter %}
 {% block preloadextrajs %}
 <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.autocsrftoken.js"></script>
