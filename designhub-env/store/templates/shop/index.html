@@ -3,7 +3,7 @@
 {% load thumbnail %}
 {% load satchmo_currency %}
 {% load satchmo_discounts satchmo_tax %}
-{% endblock preloadcommonjs %}
+{% endblock extracommonjs %}
     <script type="text/javascript">
         {% if user.is_active %}
             {% with user.contact_set.all.0 as c %}
