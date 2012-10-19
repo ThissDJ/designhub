@@ -56,10 +56,13 @@
 					position:absolute;top:-10000px;
 				}
 			</style>
+			{% if user.is_active %}
+			{% else %}
 			<a class="various various-hide" href="#launching-inline">Ajax</a>
-		    <div id='launching-inline'>
+		    <div id='launching-inline' style='display:none;'>
 		    	{% include "launching/subscription-inline.html" %}
 		    </div>
+		    {% endif %}
 		<!--     <a class="various various-hide" data-fancybox-type="iframe"  href="/launching/">Ajax</a>     -->
 		    <div class='container'>
 				{% block content %}
@@ -123,6 +126,8 @@
     </style>
     <script type="text/javascript" >
 		$(document).ready(function() {
+			{% if user.is_active %}
+			{% else %}
 			$(".various").fancybox({
 				padding     : 0,
 				margin      : 0,
@@ -147,10 +152,10 @@
 						    css: {}} // overlay 
 						  } //helpers
 			});
-			$(".various").click();
-		});
+                $('#launching-inline').show();
+			    $(".various").click();
+			
 
-	    $(document).ready(function() {
 	    	$('#launching-form').submit(function() {
 				  var reg = new RegExp(/^\S+@\S+\.\S+$/);
 				  var em = $("#launching-input").val();
@@ -192,6 +197,7 @@
 			            }
 			        });
 			    });
+			    {% endif %}
 	    });
     </script>
     <!-- launching page part -->
