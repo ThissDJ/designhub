@@ -4,11 +4,33 @@ from django.contrib.auth.forms import SetPasswordForm
 from satchmo_store.contact.models import Contact
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _, ugettext
-class ContactEmailPasswordForm(SetPasswordForm):
-    error_messages = dict(SetPasswordForm.error_messages, **{
+
+class SetPasswordOnceInputForm(forms.Form):
+    """
+    A form that lets a user change set his/her password without entering the
+    old password
+    """
+    error_messages = {
+        'password_mismatch': _("The two password fields didn't match."),
+    }
+    password = forms.CharField(label=_("Password"),
+                                    widget=forms.PasswordInput)
+
+    def __init__(self, user, *args, **kwargs):
+        self.user = user
+        super(SetPasswordOnceInputForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        self.user.set_password(self.cleaned_data['password'])
+        if commit:
+            self.user.save()
+        return self.user
+class ContactEmailPasswordForm(SetPasswordOnceInputForm):
+    error_messages = dict(SetPasswordOnceInputForm.error_messages, **{
         'email_incorrect': _("Your email was entered incorrectly because someone has used it. "
                                 "Please enter it again."),
     })
+    
     email = forms.EmailField (label=_("Email"),
                                    widget=None)
 
@@ -30,11 +52,12 @@ class ContactEmailPasswordForm(SetPasswordForm):
         return email
 
     def __init__(self, contact, *args, **kwargs):
+        self.error_messages.update({'invalid_login':_('Some strange error occurs, please try again')})
         self._contact = contact
         super(ContactEmailPasswordForm, self).__init__(contact, *args, **kwargs)    
 
     def save(self, commit=True):
-        self._contact.user.set_password(self.cleaned_data['new_password1'])
+        self._contact.user.set_password(self.cleaned_data['password'])
         self._contact.email = self.cleaned_data['email']
         if commit:
             self._contact.save()

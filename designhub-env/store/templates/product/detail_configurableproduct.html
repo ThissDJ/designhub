@@ -45,8 +45,11 @@ satchmo.thumbnails = new Array();
 					    {% thumbnail pic.picture "80x120" crop='center' as image %}
 					    <li>
 					    	<a href="#" class="product-detail-thumnail" style='background:transparent;'>
-					    	<!--<img src="{{ image.url }}" />-->
+					    	{% if debug %}
+					    	<img src="{{ image.url }}" />
+					    	{% else %}
 					    	<img src="{{MEDIA_URL}}images/index/none-80x120.jpg" />
+					    	{% endif %}
 					    </a>
 					    </li>
 					    {% endthumbnail %}
@@ -57,10 +60,13 @@ satchmo.thumbnails = new Array();
 	    			{% for pic in product.productimage_set.all %}
 	    			    {% thumbnail pic.picture "400x400" crop='center'  as image %}
 					    {% thumbnail pic.picture "750x750" as image_b %}
-<!-- 					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{ image_b.url }}"> -->
+					    {% if debug %}
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{ image_b.url }}">
+					    	<img src="{{ image.url }}"/>
+					    {% else %}
 					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" href="{{MEDIA_URL}}images/index/none-750.jpg">
-<!-- 					    	<img src="{{ image.url }}"/> -->
 					    	<img src="{{MEDIA_URL}}images/index/none-400.jpg"/>
+                        {% endif %} 
 					    </a>
 					    {% endthumbnail %}
 					    {% endthumbnail %}

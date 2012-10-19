@@ -10,56 +10,18 @@
     		<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/1-950width.jpg"/>
+<!-- 				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/> -->
 				    </a>
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/>
+				    	<img src="{{MEDIA_URL}}images/index/2-950width.jpg"/>
+<!-- 				    	<img src="{{MEDIA_URL}}images/index/none-950.jpg"/> -->
 				    </a>
 	    		</div>
 	    	</div>
 	</div>
 	<style>
-		#index-slider .slides_container{
-		    height:546px;
-		    border-bottom:5px solid #555;
-			-webkit-border-radius: 0px 0px 4px 4px;
-			-moz-border-radius: 0px 0px 4px 4px;
-			border-radius: 0px 0px 4px 4px;
-		}
-		#index-slider .slides_container img{
-			-webkit-border-radius: 0px;
-			-moz-border-radius: 0px;
-			border-radius: 0px;
-		}
-		#index-slider .slides_container a{
-			display:block;
-		}
-	    #index-slider{
-	    	position:relative;
-	    }
-	    a.prev, a.next{
-			position:absolute;
-			display:block;
-			z-index:100;
-			width:50%;
-			top:0px;
-			height:0px;
-			padding-top:552px;
-			overflow:hidden;
-	    }
-		a.prev{
-			left:0px;
-		}
-		a.next{
-			right:0px;
-		}
-		a.prev:hover{
-			background:url({{MEDIA_URL}}img/arrow-left.png) no-repeat 12px 235px;
-		}
-		a.next:hover{
-			right:0px;
-			background:url({{MEDIA_URL}}img/arrow-right.png) no-repeat 446px 235px;
-		}
+
 	</style>
 	<div style='height:20px;'></div>
 	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat 0 -20px;'>
@@ -70,45 +32,21 @@
 		</div>
 		<div style='float:left;width:50%;height:350px;position:relative;'>
             {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
-                <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
-                <img src="{{MEDIA_URL}}images/index/none-350.jpg" />
+             {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+             {% else %}<img src="{{MEDIA_URL}}images/index/none-350.jpg" /> {% endif %}
             {% endthumbnail %}
             <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
 		</div>
-		<style>
-		    .index-section{
-		    	border-top:2px solid #555;
-		    	margin-top:40px;
-				-webkit-border-radius: 2px 2px 0px 0px;
-				-moz-border-radius: 2px 2px 0px 0px;
-				border-radius: 2px 2px 0px 0px;
-		    }
-		    .index-section .section-title{
-		    	padding-top:0px;
-		    	margin-top:0px;
-		    }
-			.designer-today{
-				display:block;
-				position:relative;
-				bottom:50px;height:50px;padding:0px;width:350px;text-align:center;line-height:50px;
-				-webkit-border-radius: 0px 0px 4px 4px;
-				-moz-border-radius: 0px 0px 4px 4px;
-				border-radius:  0px 0px 4px 4px;
-				background:rgba(0, 0, 0, 0.5);
-			}
-			.designer-today:hover{
-				background:rgba(0, 0, 0, 0.8);
-			}
-		</style>
 		<div style='float:right;width:50%;height:350px;'>
 			<div class='designer-today-featured-designs-container'>
 				{% for p in designer.mynewproduct_set.all%}
 				    {% if forloop.counter < 5 %}
 				    <a class='designer-today-featured-design' href='{{ p.product.get_absolute_url }}'>
 				    	<div class='black-bg-designer-today-featured-design'>
+				    	
 					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
-					    	<!--<img src="{{ image.url }}" />-->
-					    	<img src="{{MEDIA_URL}}images/index/none-120.jpg" />
+                         {% if debug %}<img src="{{ image.url }}" />{% else %}
+                         <img src="{{MEDIA_URL}}images/index/none-120.jpg" /> {% endif %}
 					    {% endthumbnail %}
 					    </div>
 				    </a>
@@ -116,35 +54,6 @@
 				{% endfor %}
 			</div>
 		</div>
-		<style>
-		    .designer-today-featured-designs-container{
-		    	margin-left:120px;
-		    	margin-top:20px
-		    }
-		    .designer-today-featured-design{
-		    	display:block;
-		    	padding:15px;
-		    	float:left;
-		    }
-		    .black-bg-designer-today-featured-design{
-		    	background:#555;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
-				border-radius: 5px;
-		    }
-		    .designer-today-featured-design img{
-		    	opacity: 0.85;
-		    }
-			.designer-today-featured-design:hover{
-				text-decoration:none;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
-				border-radius: 4px;
-			}
-			.designer-today-featured-design:hover.designer-today-featured-design img{
-		    	opacity: 1;
-		    }
-		</style>
 		<div class="clearfix" ></div>
 	</div>
 	
@@ -157,39 +66,7 @@
 						Featured {{ fc.name}}
 					</h4>
 				</div>
-            {% for product in fc.list %}
-		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
-		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
-		            		<!--<div class="tip-content-when-hover">
-		            			Sample
-		            	 </div>-->
-		            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
-		            	        {% if product.productimage_set.all.count > 1 %}
-		            	            {% thumbnail product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
-		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
-		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
-		            	            {% endthumbnail %}
-		            	        {% else %}
-		            	            <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
-		            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-		            	        {% endif %}
-		                    {% endthumbnail %}
-		                </a>
-		                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
-		                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
-		                	<span class='product-name-index'>{{product.name}}</span>
-		                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-						    <span class='product-original-price-index'>
-						    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-						    </span>
-						    {% endifnotequal %}
-							<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-							
-		                </a>
-		            </div>
-		        {% if forloop.last %} </div>{% endif %}
-            {% endfor %}
+				{% include 'product/product_box.html' with productBoxesList=fc.list %}
             </div>
         {% endfor %}
     {% endif %}
@@ -200,40 +77,8 @@
 					Featured Ideas
 				</h4>
 			</div>
-            {% for product in featured_preorder_products_list %}
-		        {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-		            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
-		            	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
-		            		<!--<div class="tip-content-when-hover">
-		            			Sample
-		            	 </div>-->
-		            	    {% thumbnail product.main_image.picture "215x230" crop='center' as image %}
-		            	        {% if product.productimage_set.all.count > 1 %}
-		            	            {% thumbnail product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
-		            	                <!--<img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />-->
-		            	                <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
-		            	            {% endthumbnail %}
-		            	        {% else %}
-		            	            <!--<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />-->
-		            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-		            	        {% endif %}
-		                    {% endthumbnail %}
-		                </a>
-		                <a href='{{ product.get_absolute_url }}' class='product-name-container'>
-		                	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
-		                	<span class='product-name-index'>{{product.name}}</span>
-		                	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-						    <span class='product-original-price-index'>
-						    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-						    </span>
-						    {% endifnotequal %}
-							<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-							
-		                </a>
-		            </div>
-		        {% if forloop.last %} </div>{% endif %}
-            {% endfor %}
-           </div>
+			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
+       </div>
 	{% endif %}
 	{% endblock content %}
 	{% block indexfooter %}

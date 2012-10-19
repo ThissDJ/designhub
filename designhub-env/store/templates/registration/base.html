@@ -219,6 +219,7 @@
 		</div>
 		{% endblock loginsignupform %}
     </div>
+    {% block loginRightPanel %}
     <div id='login-right-panel'>
 		{% if is_register_only %}
 			<div id='login-signup-button-container'>
@@ -253,8 +254,9 @@
 				<br><br>
 			{% endfor %}
 		</div>
+		
 	</div>
-
+    {% endblock loginRightPanel %}
     <div class="push"></div>
 </div>
 <!-- </div> -->

@@ -1,6 +1,7 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
+
 def example(request):
     ctx = RequestContext(request, {})
     return render_to_response('localsite/example.html', context_instance=ctx)
@@ -130,7 +131,12 @@ class DesignerAjaxListView(ListView):
 class DesignerDetailView(DetailView):
     model = Designer
     template_name = 'designers/designer-details.html'
-
+    # Get extra context data
+    def get_context_data(self, **kwargs):
+        context = super(DesignerDetailView, self).get_context_data(**kwargs)
+        place = self.get_object()
+        context['products'] = [mynewp.product for mynewp in self.object.mynewproduct_set.all() if mynewp.product.active == True]
+        return context
 from product.utils import find_best_auto_discount
 from satchmo_store.shop.models import Cart
 def saleindex(request):
@@ -237,11 +243,15 @@ from localsite.forms import ContactEmailPasswordForm
 from django.core.urlresolvers import reverse
 from django.template.response import TemplateResponse
 from satchmo_store.contact import signals, CUSTOMER_ID
+from django.contrib.auth import REDIRECT_FIELD_NAME
 def createEmailPassword(request,
                     template_name='contact/create-email-password.html',
                     post_change_redirect=None,
                     create_email_password_form=ContactEmailPasswordForm,
                     current_app=None, extra_context=None):
+    redirect_field_name=REDIRECT_FIELD_NAME
+    redirect_to = request.REQUEST.get(redirect_field_name, '')
+
     init_data = {}
     if post_change_redirect is None:
         post_change_redirect = reverse('django.contrib.auth.views.password_change_done')
@@ -266,7 +276,7 @@ def createEmailPassword(request,
     else:
         signals.satchmo_contact_view.send(contact, contact=contact, contact_dict=init_data)
         form = create_email_password_form(contact=contact)
-    context = {'form': form,}
+    context = {'form': form,redirect_field_name:redirect_to}
     if extra_context is not None:
         context.update(extra_context)
     return TemplateResponse(request, template_name, context,

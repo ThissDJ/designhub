@@ -47,8 +47,11 @@
 		<div style='float:left;width:200px;'>
 		    {% if designer.main_image %}
 		            {% thumbnail designer.main_image.picture "200x200"  crop="center" as image %}
-<!-- 		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
-		           <img src="{{MEDIA_URL}}images/index/none-200.jpg" width="{{ image.width }}" height="{{ image.height }}" />
+		            {% if debug %}
+     		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
+		            {% else %}
+		            <img src="{{MEDIA_URL}}images/index/none-200.jpg" width="{{ image.width }}" height="{{ image.height }}" />
+		            {% endif %}
 		           {% endthumbnail %}
 		    {% endif %}
 		</div>
@@ -76,41 +79,7 @@
 	<div class="clearfix" ></div>
 </div>
 <div class='container' style="margin-top:30px;">
-    {% for p in designer.mynewproduct_set.all %}
-            {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-            	{% if p.product.active %}
-	            <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
-	            	<a href="{{ p.product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ p.product.translated_name }} | coming soon!"> 
-	            		<!--<div class="tip-content-when-hover">
-	            			Sample
-	            	 </div>-->
-	            	    {% thumbnail p.product.main_image.picture "215x230" crop='center' as image %}
-	            	        {% if p.product.productimage_set.all.count > 1 %}
-	            	            {% thumbnail p.product.productimage_set.all.1.picture "215x230" crop='center' as image1 %}
-<!-- 	            	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" /> -->
-                                     <img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" />
-	            	            {% endthumbnail %}
-	            	        {% else %}
-<!-- 	            	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
-	            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-	            	        {% endif %}
-	                    {% endthumbnail %}
-	                </a>
-	                <a href='{{ p.product.get_absolute_url }}' class='product-name-container'>
-	                	<span class='brand-name-index'>{{p.brand.name}}</span>
-	                	<span class='product-name-index'>{{p.product.name}}</span>
-	                	{% ifnotequal  p.product|discount_price:""|currency p.product|sale_price|currency %}
-					    <span class='product-original-price-index'>
-					    	<strike style="display: block;" id="fullprice">{{ p.product|discount_price:""|currency }}</strike>
-					    </span>
-					    {% endifnotequal %}
-						<span class='product-price-index'>{{ p.product|sale_price|currency }}</span>
-						
-	                </a>
-	            </div>
-	            {% endif %}
-            {% if forloop.last %}</div>{% endif %}
-    {% endfor %}
+    {% include 'product/product_box.html' with productBoxesList=products %}
 </div>
 {% endspaceless %}
 {% endblock content %}

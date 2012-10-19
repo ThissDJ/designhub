@@ -9,7 +9,7 @@
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
     {% block extra-head %}{% endblock %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.css">
-    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20120914.css" />
+    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20120914.p1.css" />
     {% endblock %}
     <title>{% block title %}{{ shop_name }}, a platform for local creativity.{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
     {% plugin_point "page_head" %}
@@ -49,23 +49,24 @@
 		</div>
 		{% endblock breadcrumbs %}
 		<div class='mycontainer' style='padding-top:10px;padding-bottom:50px;'>
-		<style>
-			.various-hide{
-				position:absolute;top:-10000px;
-			}
-		</style>
-		<a class="various various-hide" href="#launching-inline">Ajax</a>
-	    <div id='launching-inline'>
-	    	{% include "launching/subscription-inline.html" %}
-	    </div>
-	<!--     <a class="various various-hide" data-fancybox-type="iframe"  href="/launching/">Ajax</a>     -->
-	    <div class='container'>
-			{% block content %}
-			{% endblock content %}
+			<style>
+				.various-hide{
+					position:absolute;top:-10000px;
+				}
+			</style>
+			<a class="various various-hide" href="#launching-inline">Ajax</a>
+		    <div id='launching-inline'>
+		    	{% include "launching/subscription-inline.html" %}
+		    </div>
+		<!--     <a class="various various-hide" data-fancybox-type="iframe"  href="/launching/">Ajax</a>     -->
+		    <div class='container'>
+				{% block content %}
+				{% endblock content %}
+			</div>
+			{% block indexfooter %}
+			{% endblock indexfooter %}
+		    <div class='push'></div>
 		</div>
-		{% block indexfooter %}
-		{% endblock indexfooter %}
-	    <div class='push'></div>
 	</div>
 	{% block footer %}{% include "footer0.html" %}{% endblock %}
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>

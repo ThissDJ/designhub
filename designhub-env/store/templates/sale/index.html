@@ -15,35 +15,5 @@
 <div style='text-align:center;margin-top:-25px;margin-bottom:20px;width:150px;height:150px;background-color:#D04526;color:#eee;line-height:50px;'>
 		<h4 style='color:#eee;padding-top:30px;'>Products</h4><h4 style='color:#eee;'>On</h4><h4 style='color:#eee;'>Sale</h4>
 </div>
-{% for product in products %}
-    {% if forloop.first %} <div class="pic-list-container">   {% endif %}
-        <div style="width:238px;float:left;" class='toggleImage-container product-index-container'>
-        	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | {% if product.discountIsValid %}Still valid for sale{% else %}{{product.discountValidMsg}}{% endif %}"> 
-        		<!--<div class="tip-content-when-hover">
-        			Sample
-        	 </div>-->
-        	    {% thumbnail product.main_image.picture "180x230" crop='center' as image %}
-        	        {% if product.productimage_set.all.count > 1 %}
-        	            {% thumbnail product.productimage_set.all.1.picture "180x230" crop='center' as image1 %}
-        	                <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
-        	            {% endthumbnail %}
-        	        {% else %}
-        	            <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-        	        {% endif %}
-                {% endthumbnail %}
-            </a>
-            <a href='{{ product.get_absolute_url }}' class='product-name-container'>
-            	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
-            	<span class='product-name-index'>{{product.name}}</span>
-            	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-			    <span class='product-original-price-index'>
-			    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-			    </span>
-			    {% endifnotequal %}
-				<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-				
-            </a>
-        </div>
-    {% if forloop.last %}</div>{% endif %}
-{% endfor %}
+{% include 'product/product_box.html' with productBoxesList=products %}
 {% endblock %}
