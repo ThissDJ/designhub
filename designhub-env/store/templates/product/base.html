@@ -1,6 +1,6 @@
 {% extends "shop/base.html" %}
 {% load satchmo_category %}
-{% endblock extracommonjs %}
+{% block extracommonjs %}
     <script type="text/javascript">
         {% if user.is_active %}
             {% with user.contact_set.all.0 as c %}
