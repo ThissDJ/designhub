@@ -7,7 +7,7 @@
     <script type="text/javascript">
         {% if user.is_active %}
             {% with user.contact_set.all.0 as c %}
-                {% if c.first_name %}
+                {% if c.email %}
                 {% else %}
                     location.replace('{% url create-email-password %}');
                 {% endif %}
