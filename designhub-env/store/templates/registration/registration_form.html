@@ -25,27 +25,15 @@
 		</div>	
     {% endif %}	
 	<div class='login-row'>
-		<input id='login-first_name' name='first_name' class='login-input' type='text' placeholder="First name" {% if form.first_name.value %}value='{{form.first_name.value}}'{% endif %} >
+		<input id='login-first_name' name='first_name' class='login-input' type='text' placeholder="Your name" {% if form.first_name.value %}value='{{form.first_name.value}}'{% endif %} >
 		{% if form.first_name.errors %}
 		    <div style='float:left;'><p class='error'> ***{{ form.first_name.errors|join:", " }}</p></div>
 		{% endif %}
-	</div>		
-	<div class='login-row'>
-		<input id='login-last_name' name='last_name' class='login-input' type='text' placeholder="Last name" {% if form.last_name.value %}value='{{form.last_name.value}}'{% endif %}>
-		{% if form.last_name.errors %}
-		    <div style='float:left;'><p class='error'> ***{{ form.last_name.errors|join:", " }}</p></div>
-		{% endif %}
-	</div>		
-	<div class='login-row'>
+	</div>			
+	<div class='login-row login-row-last'>
 		<input id='login-password1' name='password1' class='login-input' type='password' placeholder="Password" >
 		{% if form.password1.errors %}
 		    <div style='float:left;'><p class='error'> ***{{ form.password1.errors|join:", " }}</p></div>
-		{% endif %}
-	</div>		
-	<div class='login-row login-row-last'>
-		<input id='login-password2' name='password2' class='login-input' type='password' placeholder="Password again" >
-		{% if form.password2.errors %}
-		    <div style='float:left;'><p class='error'> ***{{ form.password2.errors|join:", " }}</p></div>
 		{% endif %}
 	</div>		
     {% if show_newsletter %}

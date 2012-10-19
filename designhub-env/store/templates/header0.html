@@ -21,8 +21,18 @@
 					<p class='nav1-right-ele'>
 					{% if user.is_active %}
 					<span style='color:#bbb'>Hi,</span><a class='list-item'  href='{% url satchmo_account_info %}'>
-						{% if user.last_name %}{{user.last_name}}
-						{% else %}{{user.username}}
+						{% if user.last_name %}
+						    {% if user.first_name %}
+						        {{ user.first_name }} {{ user.last_name }}
+						    {% else %}    
+						        {{ user.last_name }}
+						    {% endif %}
+                        {% else %}
+						    {% if user.first_name %}
+						        {{ user.first_name }}
+						    {% else %}
+						        {{user.username}}
+						    {% endif %}
 						{% endif %}
 					</a>
 					<span class="seperator">/</span>
