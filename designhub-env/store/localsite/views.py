@@ -289,7 +289,12 @@ def invite(request,
                     current_app=None, extra_context=None):
     from satchmo_store.shop.models import Config
     shop_config = Config.objects.get_current()
-    context = {'site_url': shop_config.site and shop_config.site.domain or 'localhost'}
+    try:
+        contactId = Contact.objects.from_request(request, create=False).id
+    except Contact.DoesNotExist:
+        contactId = None
+    context = {'site_url': shop_config.site and shop_config.site.domain or 'localhost'
+               ,'contactid': contactId}
     return TemplateResponse(request, template_name, context,
                             current_app=current_app)
     
