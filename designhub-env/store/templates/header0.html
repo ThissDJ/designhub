@@ -22,17 +22,9 @@
 					{% if user.is_active %}
 					<span style='color:#bbb'>Hi,</span><a class='list-item'  href='{% url satchmo_account_info %}'>
 						{% if user.last_name %}
-						    {% if user.first_name %}
-						        {{ user.first_name }} {{ user.last_name }}
-						    {% else %}    
-						        {{ user.last_name }}
-						    {% endif %}
+						    {{ user.last_name }}
                         {% else %}
-						    {% if user.first_name %}
-						        {{ user.first_name }}
-						    {% else %}
-						        {{user.username}}
-						    {% endif %}
+						    {{user.username}}
 						{% endif %}
 					</a>
 					<span class="seperator">/</span>
@@ -41,6 +33,10 @@
 					<a class='list-item'  href='{% url auth_login %}?next={{ request.get_full_path }}'>Login</a><span style='color:#bbb;margin:0px 5px;'>or</span><a  class='list-item' href='{% url registration_register %}?next={{ request.get_full_path }}'>Sign Up</a>
 					{% endif %}
 					<span class="seperator">/</span>
+					{% if user.is_active %}
+						<a href='{% url invite%}' style='color:#D04526;font-weight:bold;'>Invite</a>
+						<span class="seperator">/</span>
+					{% endif %}
 					<a id='qtip-testing-ele' href='#'>About Us</a>
 					<span class="seperator">/</span>
 					<a href='javascript:void(0);'>Worldwide Delivery</a>
