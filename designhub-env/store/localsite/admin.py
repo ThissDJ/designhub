@@ -3,6 +3,7 @@ from models import MyNewProduct
 from models import Designer
 from models import DesignerImage
 from models import Brand
+from models import InviteReward
 from satchmo_utils.thumbnail.field import ImageWithThumbnailField
 from satchmo_utils.thumbnail.widgets import AdminImageWithThumbnailWidget
 from django.utils.translation import ugettext_lazy as _
@@ -98,3 +99,4 @@ class BrandAdmin(BaseBrandAdmin):
 
 
 admin.site.register(Brand,BrandAdmin)
+admin.site.register(InviteReward)
