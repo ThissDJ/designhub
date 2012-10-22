@@ -1,0 +1,5 @@
+{% load i18n %}
+{% spaceless %}
+	{% for parent in category.parents %} <span class="seperator">/</span><a href="{{ parent.get_absolute_url }}">{{ parent.translated_name }}</a>{% endfor %}
+	<span class="seperator">/</span><span>{{ category.translated_name }}</span>
+{% endspaceless %}

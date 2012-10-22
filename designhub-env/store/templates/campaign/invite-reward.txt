@@ -1,0 +1,10 @@
+{% load i18n %}{% blocktrans %}Dear {{ first_name }} {{ last_name }},{% endblocktrans %}
+{% load satchmo_currency %}
+{% blocktrans %}Thank you for inviting your friends to {{ shop_name }}.{% endblocktrans %}http://{{ site_url }}
+
+You have invited {{invitees_number}} friends to join our family.
+Here's your reward for your kind invitation: a {{discount.amount|currency}} off coupon. The counpon will expire on {{discount.endDate}}
+Coupon code is: {{discount.code}}
+Notice that there's a {{discount.minOrder|currency}} minimum order amount to use this coupon.
+{% trans "Regards" %},
+{% trans "Store Management" %}

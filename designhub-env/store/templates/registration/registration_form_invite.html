@@ -1,0 +1,324 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block extrastyle %}{% endblock extrastyle %}
+{% block body %}
+
+{% spaceless %}
+<style>
+    html{
+    	min-width:960px;
+    }
+    input.login-input,#login-panel-container,.login-row,.pwd-reset-container{
+        font-size:14px;
+    }
+	input.login-input{
+		height:18px;width:12em;line-height:18px;/*color:#D04526;*/
+	    border: 0px;/*10px solid rgb(127, 0, 0);*/
+	   /* border:  10px solid rgba(255, 0, 0, .5);*/
+	    -webkit-background-clip: padding-box; /* for Safari */
+	    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+	    padding:0px;
+	    margin:0px;
+	    -webkit-border-radius:0px;
+	    -moz-border-radius:0px;
+	    border-radius:0px;
+	}
+	.pwd-reset-container{
+		width:11.5em;margin-left:auto;margin-right:auto;
+	}
+	input.login-input:focus,input.login-input{
+	    outline:0;outline:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;
+	}
+	#login-panel-container, input.login-input{
+	    background-color: #F8FFB0;
+	}
+	#login-panel-container-container{
+		width:100%;text-align:center;font-size:18px;padding-top:14px;
+	}
+	#login-panel-container{
+		width:16em;
+		margin-left:auto;
+		margin-right:auto;
+/*			color: #D04526;*/
+		border: 5px solid #7F0000;
+		border: 5px solid rgba(255, 0, 0, .5);
+		-webkit-background-clip: padding-box;
+		background-clip: padding-box;
+	    -webkit-border-radius:3px;
+	    -moz-border-radius:3px;
+	    border-radius:3px;
+	    -moz-box-shadow:   0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
+	    -webkit-box-shadow:  0px 1px 7px rgba(0,0,0,0.8),inset 0 0 10px #000000;
+	    box-shadow: 0px 1px 7px rgba(0,0,0,0.8),  inset 0 0 10px #000000;
+	}
+	p.error{
+		color:red;
+		text-decoration:underline;
+		margin-bottom:0px;
+		text-align:center;
+	}
+	#login-panel-form{
+		margin:14px 0px;
+	}
+	.login-row{
+		width:12em;
+		margin-left:auto;
+		margin-right:auto;
+		padding-left:1em;padding-right:1em;
+		border-top:1px solid #FEFFE6; /*brighter*/
+		border-bottom:1px solid #E1E5A1;
+		padding-top:14px;
+		padding-bottom:14px;
+	}
+	.login-row-first{
+		border-top:0px;
+	}
+	.login-row-last{
+		border-bottom:0px;
+	}
+    #login-submit-container{
+    	margin-top:2%;
+    	width:14em;
+    	font-size:18px;
+    	margin-left:auto;margin-right:auto;
+    	text-align:center;
+    }
+    #login-submit-container .btn-login{
+    	width:14em;
+    }
+    #login-submit-container .btn-login,#login-sns-container .login-sns-button,#signup-btn{
+    	font-size:18px;
+    	height:2em;
+    	border:2px solid #fff;
+	    -webkit-border-radius:18px;
+	    -moz-border-radius:18px;
+	    border-radius:18px;
+	    -moz-box-shadow:   0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
+	    -webkit-box-shadow:  0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
+	    box-shadow:0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
+        text-shadow: 0 1px 0 #ccc, 
+		               0 2px 0 #aaa,
+		               0 4px 1px rgba(0,0,0,.1),
+		               0 6px 6px rgba(0,0,0,.15);
+
+    }
+    #login-sep-line-container{
+    	margin-top:8%;
+    	margin-bottom:3%;
+    }
+    .sep-line-top{
+    	border-top:1px solid rgba(0,0,0,0.5);
+    }
+    .sep-line-bottom{
+    	border-top:1px solid rgba(256,256,256,0.5);
+    }
+    .login-tips{
+    	text-align:center;font-size:14px;color:#555;
+    	text-shadow: 0 1px 0 rgba(256,256,256,.8);/* rgba(0,0,0,.5);*/
+    }
+    #login-sns-container .login-sns-button,#signup-btn{
+    	width:9em;
+    	font-size:23px;
+    	border-width:1px;
+    }
+    #login-right-panel{
+        top:14px;
+        right:14px;
+    	overflow:display;
+    	z-index:999;
+    	position: fixed;
+    }
+
+    #login-signup-button-container,#login-sns-container{
+    	text-align:center;
+    }
+    .password-reset{
+    	text-shadow: 0 1px 0 rgba(256,256,256,.8);
+    }
+	* {
+	margin: 0;
+	}
+	html, body {
+	height: 100%;
+	}
+	.wrapper {
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		margin: 0 auto -0em;
+		
+	}
+	.wrapper,html,body{
+		background:#fff;
+	}
+	.footer, .push {
+	height: 0em;
+	}
+	.footer, .push {
+	clear: both;
+	}
+	#left-col,#right-col,#middle-col{
+    	float:left;width:49%;
+    }
+    
+	#middle-col{
+		height:28em;
+		margin-top:10%;
+		width:0%;
+		border-left:1px solid #bbb;
+		border-right:1px solid #eee;
+	}
+/*	#left-col{
+		width:48%;
+	}*/
+    #right-col{
+    	padding-top:10%;
+    }
+    #left-col{
+    	padding-top:14%;
+    }
+    #introduction-wrapper{
+    	width:24em;margin-left:auto;margin-right:auto;
+    }
+    #introduction-wrapper p{
+    	text-align:center;
+    }
+    
+    #signup-title{
+    	text-shadow: 3px 2px 0px rgba(216,216,216,.8);
+    }
+</style>
+<!-- <div class="wrapper"> -->
+<div class="wrapper" id="beautiful-login">
+    <div class='mycontainer'>
+    	<div class='container'>
+    		<div style='margin-top:5%;'></div>
+    		<div id='left-col'>
+    			<p style='text-align:center;'><img src='{{MEDIA_URL}}img/logo-damn.png' width=200></p>
+    			<div style='width:100%;text-align:center;'><img src='{{MEDIA_URL}}img/curve-shadow.png'></div>
+    			<div id='introduction-wrapper' >
+    				<p>
+	    				We introduce the best designs and artworks
+	    			    <br>
+	    				to make everyone lives better.
+                        <br>In here, you can meet the most talented designers
+                    <br>and artists and interact with them.
+                    <br>We believe design is a co-creation process.
+	    			</p>
+    			</div>
+    		</div>
+    		<div id='middle-col'>
+    			&nbsp;
+    		</div>
+    		<div id='right-col'>
+				<div id='login-panel-container-container'>
+					<h3 id='signup-title'>Sign Up</h3>
+					{% block loginsignupform %}
+						<form id='login-panel-form' method='post' action='.'>
+						<div id='login-panel-container'>
+						    {% if allow_nickname %}
+								<div class='login-row login-row-first'>
+									<input id='login-username' name='username' class='login-input' type='text' placeholder="Nick name" {% if form.username.value %}value='{{form.username.value}}'{% endif %} >
+									{% if form.username.errors %}
+									    <div style='float:left;'><p class='error'> ***{{ form.username.errors|join:", " }}</p></div>
+									{% endif %}
+								</div>
+								<div class='login-row'>
+									<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" {% if form.email.value %}value='{{form.email.value}}'{% endif %}>
+									{% if form.email.errors %}
+									    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
+									{% endif %}
+								</div>	
+						    {% else %}
+								<div class='login-row login-row-first'>
+									<input id='login-email' name='email' class='login-input' type='text' placeholder="Email" {% if form.email.value %}value='{{form.email.value}}'{% endif %}>
+									{% if form.email.errors %}
+									    <div style='float:left;'><p class='error'> ***{{ form.email.errors|join:", " }}</p></div>
+									{% endif %}
+								</div>	
+						    {% endif %}	
+							<div class='login-row'>
+								<input id='login-last_name' name='last_name' class='login-input' type='text' placeholder="Your name" {% if form.last_name.value %}value='{{form.last_name.value}}'{% endif %} >
+								{% if form.last_name.errors %}
+								    <div style='float:left;'><p class='error'> ***{{ form.last_name.errors|join:", " }}</p></div>
+								{% endif %}
+							</div>			
+							<div class='login-row login-row-last'>
+								<input id='login-password1' name='password1' class='login-input' type='password' placeholder="Password" >
+								{% if form.password1.errors %}
+								    <div style='float:left;'><p class='error'> ***{{ form.password1.errors|join:", " }}</p></div>
+								{% endif %}
+							</div>		
+						    {% if show_newsletter %}
+						    {% else %}
+						        <input type='hidden' name='newsletter' value="False" />
+						    {% endif %}
+						    {% csrf_token %}
+						    {% if next %}
+						        <input type='hidden' name='next' value="{{next}}" />
+						    {% endif %}
+						    {% if invitor %}
+						        <input type='hidden' name='invitor' value="{{invitor}}" />
+						    {% endif %}
+						</div>
+						<div id='login-submit-container'>
+						    <button class="btn btn-login" id="login-submit" name="login-submit" type="submit">Start your journey!</button>
+						</div>
+						</form>
+					{% endblock loginsignupform %}
+			    </div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="push"></div>
+</div>
+<!-- </div> -->
+<!-- <div class="clearfix" ></div> -->
+<!-- </div> -->
+<div class="footer"></div>
+{% endspaceless %}
+
+<script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" >
+(function ($) {
+    function FauxPlaceholder() {
+        if(!ElementSupportAttribute('input','placeholder')) {
+            $("input[placeholder]").each(function() {
+                var $input = $(this);
+		        var originalColor = $input.css('color');
+		        var placeholderColor = '#bbb';
+                $input.after('<input id="'+$input.attr('id')+'-faux" style="display:none;" type="text" value="' + $input.attr('placeholder') + '" />');
+                var $faux = $('#'+$input.attr('id')+'-faux');
+
+                $faux.show().attr('class', $input.attr('class')).attr('style', $input.attr('style'));
+                $faux.css('color',placeholderColor);    
+                $input.hide();
+
+                $faux.focus(function() {
+                    $faux.hide();
+                    $input.show().focus();
+                    $input.css('color',originalColor);   
+                });
+
+                $input.blur(function() {
+                    if($input.val() === '') {
+                        $input.hide();
+                        $faux.show();
+                        $faux.css('color',placeholderColor);   
+                    }
+                });
+            });
+        }
+    }
+    function ElementSupportAttribute(elm, attr) {
+        var test = document.createElement(elm);
+        return attr in test;
+    }
+    FauxPlaceholder();	
+
+})(jQuery);	
+</script>
+
+ 
+{% endblock %}

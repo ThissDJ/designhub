@@ -1,7 +1,9 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from product.models import Product
+from product.models import Discount
 from satchmo_utils.thumbnail.field import ImageWithThumbnailField
+from satchmo_store.contact.models import Contact
 
 SATCHMO_PRODUCT=True
 
@@ -200,3 +202,19 @@ class MyNewProduct(models.Model):
 #    import sys
 #    print >>sys.stderr, 'Good, cruel worldddddddddddddddddddddddddddd!'       
 #index_prerender.connect(add_brand_to_product)
+
+
+# invite friend to register, and give out coupon reword
+
+class InviteReward(models.Model):
+    invitor = models.ForeignKey(Contact, null=False, blank=False)
+    invitees = models.ManyToManyField(Contact, related_name='u+')
+    start_invite_date = models.DateTimeField(_("Start inviting Date"), null=True, blank=True, auto_now_add = True)
+    discount = models.ForeignKey(Discount, null=True, blank=True)
+    sent = models.BooleanField(default=False)
+    sent_date = models.DateTimeField(_("Reward email sent date"), null=True, blank=True)
+    accepted = models.BooleanField(default=False)
+    accepted_date = models.DateTimeField(_("Accepted the reward Date"), null=True, blank=True)
+    def __unicode__(self):
+        return u"Invitor: %s %s" %(self.invitor.first_name,self.invitor.last_name)
+    

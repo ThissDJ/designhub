@@ -1,0 +1,144 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block extrastyle %}{% endblock extrastyle %}
+{% block body %}
+
+{% spaceless %}
+<style>
+    html{
+    	min-width:960px;
+    }
+    .invite-biggest-title{
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0,0,0,.1), 0 0 5px rgba(0,0,0,.1), 0 1px 3px rgba(0,0,0,.3), 0 3px 5px rgba(0,0,0,.2), 0 5px 10px rgba(0,0,0,.25), 0 10px 10px rgba(0,0,0,.2), 0 20px 20px rgba(0,0,0,.15);
+/*    	color:#D04526;*/
+        color:#fff;
+        font-size:5em;
+        margin-bottom:1em;
+    }
+    .invite-second-class-title{
+    	/*color:#F8FFB0;*/
+    	color:#D04526;
+    	text-shadow: 0 2px 2px #555;
+
+    }
+	* {
+	margin: 0;
+	}
+	html, body {
+	height: 100%;
+	}
+	.wrapper {
+		min-height: 100%;
+		height: auto !important;
+		height: 100%;
+		margin: 0 auto -0em;
+	}
+	.wrapper,.mycontainer,.container{
+		background-color:#fff;
+	}
+	.footer, .push {
+	height: 0em;
+	}
+	.footer, .push {
+	clear: both;
+	}
+	#left-col,#right-col{
+		float:left;
+	}
+	#left-col{
+		width:40%;
+	}
+	#right-col{
+		width:60%;
+	}
+    .container{
+    	padding-top:10%;
+    }
+</style>
+<!-- <div class="wrapper"> -->
+<div class="wrapper" id="beautiful-invitation">
+    <div class='mycontainer'>
+    	<div class='container'>
+    		<div id='left-col'>
+	    		<div style='float:left;margin-top:30%;'>
+	    			<a href='/' title='back to home page'><img src='{{MEDIA_URL}}img/logo-damn.png' width=250></a>
+	    		</div>
+    		</div>
+            <div id='right-col'>
+	    		<h1 class='invite-biggest-title'>INVITE FRIENDS</h1>
+	    		<h2 class='invite-second-class-title'>WHY?</h2>
+	    		<p>
+	    			By inviting your friends to register in our sexy website, you deserve this reward plan:
+	    		</p>
+	    		<ul>
+	    			<li>
+	    				10 people invited: HK$100 coupon with a minimum order of HK$500
+	    			</li>
+	    			<li>
+	    				25 or more people invited in total: another HK$200 coupon with a minimum order of HK$1000
+	    			</li>
+	    		</ul>
+	    		<h2 class='invite-second-class-title'>HOW?</h2>
+	    		<p>
+	    			We generated the following unique url for you:
+	    		</p>
+	    		<input style='width:30em' type='text' value='http://{{ site_url }}{% url registration_register %}?invitor={{request.user.id}}'>
+	    		<p>
+	    			copy paste it to your facebook, weibo or email to let your friends know:)
+	    		</p>
+            </div>
+    		<div class="clearfix" ></div>
+
+    	</div>
+
+    <div class="push"></div>
+</div>
+<!-- </div> -->
+<!-- <div class="clearfix" ></div> -->
+<!-- </div> -->
+<div class="footer"></div>
+{% endspaceless %}
+
+<script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" >
+(function ($) {
+    function FauxPlaceholder() {
+        if(!ElementSupportAttribute('input','placeholder')) {
+            $("input[placeholder]").each(function() {
+                var $input = $(this);
+		        var originalColor = $input.css('color');
+		        var placeholderColor = '#bbb';
+                $input.after('<input id="'+$input.attr('id')+'-faux" style="display:none;" type="text" value="' + $input.attr('placeholder') + '" />');
+                var $faux = $('#'+$input.attr('id')+'-faux');
+
+                $faux.show().attr('class', $input.attr('class')).attr('style', $input.attr('style'));
+                $faux.css('color',placeholderColor);    
+                $input.hide();
+
+                $faux.focus(function() {
+                    $faux.hide();
+                    $input.show().focus();
+                    $input.css('color',originalColor);   
+                });
+
+                $input.blur(function() {
+                    if($input.val() === '') {
+                        $input.hide();
+                        $faux.show();
+                        $faux.css('color',placeholderColor);   
+                    }
+                });
+            });
+        }
+    }
+    function ElementSupportAttribute(elm, attr) {
+        var test = document.createElement(elm);
+        return attr in test;
+    }
+    FauxPlaceholder();	
+    
+})(jQuery);	
+</script>
+
+ 
+{% endblock %}

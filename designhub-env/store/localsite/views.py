@@ -283,3 +283,15 @@ def createEmailPassword(request,
                             current_app=current_app)
 
 createEmailPassword = login_required(createEmailPassword)
+@login_required
+def invite(request,
+                    template_name='campaign/base.html',
+                    current_app=None, extra_context=None):
+    from satchmo_store.shop.models import Config
+    shop_config = Config.objects.get_current()
+    context = {'site_url': shop_config.site and shop_config.site.domain or 'localhost'}
+    return TemplateResponse(request, template_name, context,
+                            current_app=current_app)
+    
+    
+
