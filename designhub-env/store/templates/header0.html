@@ -106,14 +106,22 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
         
         newCategoryNode.childNodes[i].childNodes[1].setAttribute('role','menu');
         newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel');
+        var allWithoutSubmenu = false;
         for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
         	if(newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes.length > 1){
-        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu dropdown-submenu-firstlevel');
-        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].setAttribute('class','dropdown-submenu-firstlevel-title');
-        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[1].setAttribute('class','dropdown-menu');
-        	}else{
-        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-title-single');
+        		allWithoutSubmenu = true;
         	}
+        }
+        if(allWithoutSubmenu){
+	        for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
+	        	if(newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes.length > 1){
+	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu dropdown-submenu-firstlevel');
+	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].setAttribute('class','dropdown-submenu-firstlevel-title');
+	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[1].setAttribute('class','dropdown-menu');
+	        	}else{
+	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-title-single');
+	        	}
+	        }
         }
 	}
 }
