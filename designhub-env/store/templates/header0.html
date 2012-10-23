@@ -116,11 +116,20 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
 
 	        for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
 	        	if(newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes.length > 1){
-	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu dropdown-submenu-firstlevel');
+	        		if( j === newCategoryNode.childNodes[i].childNodes[1].childNodes.length -1 ){
+	        		    newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu dropdown-submenu-firstlevel dropdown-submenu-firstlevel-last');
+	        		}else{
+	        		    newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu dropdown-submenu-firstlevel');
+	        		}
 	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[0].setAttribute('class','dropdown-submenu-firstlevel-title');
 	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes[1].setAttribute('class','dropdown-menu');
 	        	}else{
-	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-title-single');
+	        		if( j === newCategoryNode.childNodes[i].childNodes[1].childNodes.length -1 ){
+	        			newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-last dropdown-submenu-firstlevel-title-single');
+	        		}else{
+	        			newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-title-single');
+	        		}
+	        		
 	        	}
 	        }
         }
