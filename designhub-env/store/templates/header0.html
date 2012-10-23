@@ -103,7 +103,7 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('data-toggle','dropdown');
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('href','#');
         newCategoryNode.childNodes[i].childNodes[0].innerHTML += '<span class="caret"></span>';
-        
+        newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel');
         newCategoryNode.childNodes[i].childNodes[1].setAttribute('role','menu');
         var allWithoutSubmenu = false;
         for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
@@ -112,7 +112,7 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
         	}
         }
         if(allWithoutSubmenu){
-        	newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel');
+        	newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu dropdown-menu-firstlevel dropdown-menu-firstlevel-with-submenu');
 
 	        for(var j = 0; j < newCategoryNode.childNodes[i].childNodes[1].childNodes.length; j++){
 	        	if(newCategoryNode.childNodes[i].childNodes[1].childNodes[j].childNodes.length > 1){
@@ -123,8 +123,6 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
 	        		newCategoryNode.childNodes[i].childNodes[1].childNodes[j].setAttribute('class','dropdown-submenu-firstlevel dropdown-submenu-firstlevel-title-single');
 	        	}
 	        }
-        }else{
-        	newCategoryNode.childNodes[i].childNodes[1].setAttribute('class','dropdown-menu');
         }
 	}
 }

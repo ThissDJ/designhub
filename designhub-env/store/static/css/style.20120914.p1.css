@@ -478,7 +478,7 @@ li.active .caret{
 	display:block;
 	position:static;
 }
-.dropdown-menu-firstlevel{
+.dropdown-menu-firstlevel-with-submenu{
     min-width:480px;
     left:-280px;
 }
@@ -517,7 +517,7 @@ li.active .caret{
 	margin-top: 5px;
 	margin-right: -10px;
 }
-.navbar .nav > li > .dropdown-menu-firstlevel::before {
+.navbar .nav > li > .dropdown-menu-firstlevel-with-submenu::before {
 	content: '';
 	display: inline-block;
 	border-left: 7px solid transparent;
@@ -529,7 +529,7 @@ li.active .caret{
 	left: 289px;  /* 9 + 280 = 289 */
 }
 
-.navbar .nav > li > .dropdown-menu-firstlevel::after {
+.navbar .nav > li > .dropdown-menu-firstlevel-with-submenu::after {
 	content: '';
 	display: inline-block;
 	border-left: 6px solid transparent; 
