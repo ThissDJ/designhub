@@ -26,11 +26,13 @@
 */
 
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
-
+@import url(http://fonts.googleapis.com/css?family=Cutive);
 .nav2{
 	font-family: 'Montserrat', sans-serif;
 }
- 
+#navbar-header0 a, #talents-ajax-container h6, #talents-ajax-container h5{
+	font-family: 'Cutive', sans-serif;
+}
  
  
  

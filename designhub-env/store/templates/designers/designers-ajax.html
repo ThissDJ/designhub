@@ -41,11 +41,11 @@
 <div class='container'>
 	<ul class='talent-groups-container-li-parent'>
 		<li class='talent-groups-container-li' style='width:70%;float:left;'>
-			<h4 class='center'>Designers</h4>
+			<h5 class='center'>Designers</h5>
 			<ul id='designer-list' class='talent-groups-container'>
 				{% for dgroup in designers %}
 				    <li class='talent-group-container'>
-				    <h5> {{dgroup.name}}</h5>
+				    <h6> {{dgroup.name}}</h6>
 				    <ul>
 				    {% for d in dgroup.list %}
 				            <li><a href='{{ d.get_absolute_url }}'>{{d.name}}</a></li>
@@ -56,11 +56,11 @@
 			</ul>
 		</li>
 		<li class='talent-groups-container-li' style='width:30%;float:right;'>
-			<h4 class='center'>Artists</h4>
+			<h5 class='center'>Artists</h5>
 			<ul id='artist-list' class='talent-groups-container'>
 				{% for agroup in artists %}
 				    <li class='talent-group-container'>
-				    <h5> {{agroup.name}}</h5>
+				    <h6> {{agroup.name}}</h6>
 				    <ul>
 				    {% for a in agroup.list %}
 				            <li><a href='{{ a.get_absolute_url }}'>{{a.name}}</a></li>
