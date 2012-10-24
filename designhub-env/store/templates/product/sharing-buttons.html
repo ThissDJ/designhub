@@ -1,0 +1,28 @@
+{% spaceless %}
+<script type="text/javascript">
+	function sendMail() {
+	    var link = "mailto:?"
+	             +"subject=" + escape("Share A Cool Stuff {{product.name}} from DesignHub.hk with you")
+	             + "&body=" + escape('http://{{ request.META.HTTP_HOST }}{{request.get_full_path}} ');
+	    window.location.href = link;
+	}
+</script>
+<div style='margin-top:20px;margin-left:130px;'>
+	<a id='share-btn-email' class='sharing-method qtip-title-tip' title='Send to your friends' onclick="sendMail(); return false" href='javascript:void(0);'  target="_blank">
+		<span class='share-btn-icon share-btn-icon-email'></span>
+        <div class='share-btn-title-wrapper'><span class='share-btn-title'>Email</span></div>
+    </a>
+	<a id='share-btn-facebook' onclick="return socialNetworkShare('facebook', 'PDP');"  class='sharing-method qtip-title-tip' title='Share this cool design with your friends in Facebook'  href='#'>
+		<span class='share-btn-icon share-btn-icon-facebook'></span>
+        <div class='share-btn-title-wrapper'><span class='share-btn-title'>Facebook</span></div>
+    </a>
+	<a id='share-btn-weibo' onclick="return socialNetworkShare('weibo', 'PDP');" class='sharing-method qtip-title-tip' title='Share this cool design in Sina Weibo | 在微博上分享這次發現'  href=''>
+		<span class='share-btn-icon share-btn-icon-weibo'></span>
+        <div class='share-btn-title-wrapper'><span class='share-btn-title'>Weibo</span></div>
+    </a>
+	<a id='share-btn-pinterest' onclick="return socialNetworkShare('pinterest', 'PDP');" class='sharing-method qtip-title-tip' title='Pin it'   href=''>
+		<span class='share-btn-icon share-btn-icon-pinterest'></span>
+        <div class='share-btn-title-wrapper'><span class='share-btn-title'>Pinit</span></div>
+    </a>
+</div>
+{% endspaceless %}

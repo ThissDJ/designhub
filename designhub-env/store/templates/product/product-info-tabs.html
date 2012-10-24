@@ -1,0 +1,87 @@
+{% spaceless %}
+<ul class="nav nav-tabs" id="myTab">
+  <li class="active">
+  	{% if product.mynewproduct.concept %}
+  	    <a href="#concept">Concept</a>
+  	    {% if product.description %}
+  	        </li><li>
+  	        <a href="#information">Information</a>
+  	        {% if product.mynewproduct.ship %}
+  	            </li><li>
+  	            <a href="#ship-and-return">Ship And Return</a>
+  	        {% endif %}
+  	    {% else %}
+  	        {% if product.mynewproduct.ship %}
+  	            </li><li>
+  	            <a href="#ship-and-return">Ship And Return</a>
+  	        {% endif %}
+  	    {% endif %}
+  	{% else %}
+  	    {% if product.description %}
+  	        <a href="#information">Information</a>
+  	        {% if product.mynewproduct.ship %}
+  	            </li><li>
+  	            <a href="#ship-and-return">Ship And Return</a>
+  	        {% endif %}
+  	    {% else %}
+  	        {% if product.mynewproduct.ship %}
+  	            <a href="#ship-and-return">Ship And Return</a>
+  	        {% endif %}
+  	    {% endif %}
+  	{% endif %}</li>
+</ul>
+ 
+<div class="tab-content">
+  	{% if product.mynewproduct.concept %}
+  	        <div class="tab-pane active" id="concept">
+               {{product.mynewproduct.concept}}
+            </div>
+  	    {% if product.description %}
+		  <div class="tab-pane" id="information">
+		  	  {% autoescape off %}
+			      {{product.description}}
+			  {% endautoescape %}
+		  </div>
+  	        {% if product.mynewproduct.ship %}
+			  <div class="tab-pane" id="ship-and-return">
+				  {% autoescape off %}
+					  {{product.mynewproduct.ship}}
+				  {% endautoescape %}
+			  </div>
+  	        {% endif %}
+  	    {% else %}
+  	        {% if product.mynewproduct.ship %}
+			  <div class="tab-pane" id="ship-and-return">
+				  {% autoescape off %}
+					  {{product.mynewproduct.ship}}
+				  {% endautoescape %}
+			  </div>
+  	        {% endif %}
+  	    {% endif %}
+  	{% else %}
+  	    {% if product.description %}
+			  <div class="tab-pane active" id="information">
+			  	  {% autoescape off %}
+				      {{product.description}}
+				  {% endautoescape %}
+			  </div>
+  	        {% if product.mynewproduct.ship %}
+			  <div class="tab-pane" id="ship-and-return">
+				  {% autoescape off %}
+					  {{product.mynewproduct.ship}}
+				  {% endautoescape %}
+			  </div>
+  	        {% endif %}
+  	    {% else %}
+  	        {% if product.mynewproduct.ship %}
+			  <div class="tab-pane active" id="ship-and-return">
+				  {% autoescape off %}
+					  {{product.mynewproduct.ship}}
+				  {% endautoescape %}
+			  </div>
+  	        {% endif %}
+  	    {% endif %}
+  	{% endif %}
+</div>
+
+{% endspaceless %}
