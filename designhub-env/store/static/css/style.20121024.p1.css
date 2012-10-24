@@ -515,6 +515,7 @@ a.zoom-in{
 	-webkit-box-shadow: 0;
 	-moz-box-shadow: 0;
 	box-shadow: 0;
+	padding-left:10px;padding-right:10px;
 }
 
 .navbar .nav > .active > a, .navbar .nav > .active > a:hover, .navbar .nav > .active > a:focus {
