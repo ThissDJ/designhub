@@ -12,7 +12,7 @@
 			<div style='text-align:center;width:379px;top:14px;left:-60px;position:absolute;'>
 				<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='250'></a>
 			</div>
-			<div style='position:absolute;left:300px;bottom:0px;text-align:left;'>
+			<div style='position:absolute;left:280px;bottom:0px;text-align:left;'>
 	            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
 	            <!--<a class='sns-button-wrapper' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>-->
 			</div>
@@ -43,7 +43,6 @@
 					{% url satchmo_cart as carturl %}
 				    {% if carturl %}<span class="seperator">/</span><a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
 				    {% if not cart.is_empty and cart%}
-				        <span class="seperator">/</span>
 			            &nbsp;({{ cart_count|normalize_decimal }} - {% if sale %}{{ cart|discount_cart_total:sale|currency }}{% else %}{{cart.total|currency}}{% endif%})
 			            {% url satchmo_checkout-step1 as checkouturl %}
 			            {% if checkouturl %}<span class="seperator">/</span><a href="{{ checkouturl }}">{% trans "Check out" %}</a>{% endif %}
@@ -51,7 +50,7 @@
 					</p>
 				</div>
 			</div>
-			<div style='position:absolute;right:0px;top:40px;width:555px;overflow:visible;'>
+			<div style='position:absolute;right:0px;top:40px;width:610px;overflow:visible;'>
 			    <div id="navbar-header0" class="navbar navbar-static">
 			      <div class="navbar-inner">
 			        <div  style="width: auto;">
@@ -96,9 +95,10 @@ var newCategoryNode = navbarHeader0ContainerNode.appendChild(categoryListInfoNod
 newCategoryNode.className = 'nav';
 newCategoryNode.setAttribute('role','navigation');
 for(var i = 0; i < newCategoryNode.childNodes.length; i++){
+	newCategoryNode.childNodes[i].childNodes[0].setAttribute('role','button');
 	if(newCategoryNode.childNodes[i].childNodes.length > 1){
 	    newCategoryNode.childNodes[i].className = 'dropdown';
-	    newCategoryNode.childNodes[i].childNodes[0].setAttribute('role','button');
+	    
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('class','dropdown-toggle');
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('data-toggle','dropdown');
         // newCategoryNode.childNodes[i].childNodes[0].setAttribute('href','#');
