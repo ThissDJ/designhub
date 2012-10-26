@@ -28,14 +28,14 @@
 		margin-top:0px;
 		margin-left:0px;
 		min-width:950px;
-		left:-767px;
+		left:-747px;
 		right:auto;
 	}
     #talents-ajax-container::before{
-    	left:780px;
+    	left:760px;
     }
     #talents-ajax-container::after{
-    	left:781px;
+    	left:761px;
     }
     #artist-list .talent-group-container{
     	float:none;
@@ -47,7 +47,7 @@
 <div class='container'>
 	<ul class='talent-groups-container-li-parent'>
 		<li class='talent-groups-container-li' style='width:75%;float:left;'>
-			<h5 class='center'>Designers</h5>
+			<h5 class='center'><span class=' twoline-title'>Designers</span></h5>
 			<ul id='designer-list' class='talent-groups-container'>
 				{% for dgroup in designers %}
 				    <li class='talent-group-container'>
@@ -62,7 +62,7 @@
 			</ul>
 		</li>
 		<li class='talent-groups-container-li' style='width:25%;float:right;'>
-			<h5 class='center'>Artists</h5>
+			<h5 class='center'><span class=' twoline-title'>Artists</span></h5>
 			<ul id='artist-list' class='talent-groups-container'>
 				{% for agroup in artists %}
 				    <li class='talent-group-container'>

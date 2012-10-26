@@ -1,0 +1,14 @@
+{% extends "product/product-detail-rightcol-base.html" %}
+{% load app_plugins %}
+{% load i18n %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% spaceless %}
+	{% block add_to_cart_form %}
+	    {% include 'product/product-detail-rightcol-add-to-cart-form-configurable-product.html' with product=product %}
+	{% endblock add_to_cart_form %}
+	{% block add_to_cart_form2 %}
+	    {% include 'product/product-detail-rightcol-add-to-cart-form-configurable-product.html' with product=product %}
+	{% endblock add_to_cart_form2 %}
+{% endspaceless %}

@@ -1,0 +1,76 @@
+
+{% load i18n %}
+{% load satchmo_price %}
+{% load satchmo_currency%}
+{% load satchmo_util satchmo_discounts %}
+{% spaceless %}
+	<style>
+	.styled-select{
+		display:inline-block; margin-right:10px;
+	}
+	/* all form DIVs have position property set to relative so we can easily position newly created SPAN */
+	form div.styled-select{position:relative;} 
+	form div.styled-select select{
+		border:1 solid #222;
+	}
+	/* setting the width and height of the SELECT element to match the replacing graphics */
+	select.select{
+	    position:relative;
+	    z-index:10;
+	    width:50px  ;
+	    height:20px !important;
+	    line-height:20px;
+	    overflow:hidden;
+	}
+	select.select.other-option, select.select.other-option + span{
+		width:62px ;
+	}
+	/* dynamically created SPAN, placed below the SELECT */
+	span.select{
+	    position:absolute;
+	    bottom:0;
+	    float:left;
+	    left:0;
+	    width:50px;
+	    height:20px;
+	    line-height:20px;
+	    text-indent:5px;
+	    background:url({{MEDIA_URL}}img/downarrow.png) no-repeat right center;
+	    cursor:default;
+	    z-index:1;
+	    border:1px solid #222;
+		-webkit-border-radius: 2px;
+		-moz-border-radius: 2px;
+		border-radius: 2px;
+		overflow:hidden;
+	}
+
+	</style>
+	<span style='margin-right:5px;line-height:24px;'>{{ product|discount_price:sale|currency }}</span>	
+	{% for option_group in options %}
+	    <div class="styled-select">	
+		    <select id="{{option_group.id}}" name="{{ option_group.id }}" class="select other-option" title="{{option_group.name}}:" >
+			    {% for choice in option_group.items %}
+				     <option value="{{ choice.value }}" {% if choice.selected %}selected="selected"{% endif %}>{{ choice.translated_name }}
+				        {% if choice.price_change %}
+				            {% option_price choice %}
+				        {% endif %}
+				     </option>
+			    {% endfor %}
+	        </select>
+       </div>
+	{% endfor %}
+	<div class="styled-select">	
+		<select id="quantity"  name="quantity"  class="select" title="Qty:" >
+	        <option value='1' style='font-size:12px;line-height:24px;'>Qty:1</option>
+	        <option value='2' style='font-size:12px;line-height:24px;'>2</option>
+	        <option value='3' style='font-size:12px;line-height:24px;'>3</option>
+	        <option value='4' style='font-size:12px;line-height:24px;'>4</option>
+	        <option value='5' style='font-size:12px;line-height:24px;'>5</option>
+	    </select>
+    </div>
+			<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+			<span style='margin-right:5px;line-height:24px;'>&nbsp;</span>
+			<button class="btn dhbtn" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+{% endspaceless %}

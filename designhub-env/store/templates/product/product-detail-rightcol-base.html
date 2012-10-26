@@ -1,0 +1,62 @@
+{% load app_plugins %}
+{% load i18n %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% spaceless %}
+	<div style="width:510px;float:right;margin-bottom:70px;">
+		<div style='width:470px;margin-left:auto;margin-right:0;'>
+			<h3 style='text-align:center;'>{{ product.translated_name }}</h3>
+            <h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>
+            <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='{{ product.mynewproduct.designer.get_absolute_url}}' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
+            <div style='height:45px;'></div>
+            {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+            
+			<div style='margin-bottom:35px;'>
+				{% with product.translated_attributes as atts %}{% if atts %}
+				<span class="productattributes">
+				{% for att in product.translated_attributes %}
+				{{ att.description }}: {{ att.value }}
+				{% endfor %}
+				</span>
+				{% endif %}{% endwith %}
+				
+				{% if sale %}
+					<span style='text-align:center;'>
+						<strike id="fullprice" style="display: block;margin-bottom:7px;">{{ product|discount_price:""|currency }}</strike>
+				    </span>
+				{% endif %}
+				{% if product.mynewproduct.preorder %}
+				    <div style='text-align:center'>
+				    	<span class='label'>Pre-order Item</span>
+				    </div>
+				    <div style='text-align:center;margin-bottom:18px;'>
+						<span>
+							Pre-order campaign ending on <span style='text-decoration:underline;'>{{ product.mynewproduct.end }}</span>
+						</span>
+				    </div>
+				{% endif %}
+				
+                <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+                	{% block add_to_cart_form %}
+                	    {% include 'product/product-detail-rightcol-add-to-cart-form.html' with product=product %}
+					{% endblock add_to_cart_form %}
+					{% plugin_point "product_add_buttons" %}
+					{% plugin_point "product_form" %}
+				</form>
+				
+			</div>
+            {% include 'product/product-info-tabs.html' with product=product %}
+
+			<div style='margin-top:35px;'>
+                <form id="options2" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+                	{% block add_to_cart_form2 %}
+                	    {% include 'product/product-detail-rightcol-add-to-cart-form.html' with product=product %}
+					{% endblock add_to_cart_form2 %}
+					{% plugin_point "product_add_buttons" %}
+					{% plugin_point "product_form" %}
+				</form>
+			</div>
+		</div>
+    </div>
+{% endspaceless %}

@@ -280,7 +280,6 @@ a.product-name-container:hover{
 }
 .product-index-container:hover a.product-name-container span,.product-index-container:hover a.product-name-container a{
 	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
-
 }
 /*product-detail*/
 a.fancybox-thumb:hover{
@@ -339,54 +338,6 @@ a.product-detail-thumnail:hover{
 #product .slides_container a{
 	display:block;
 }
-
-/*       -------------------------------------------------------------- */
-/*#zoom01 {
-width: 400px;
-margin-right: auto;
-margin-left: auto;
-float: right;
-text-align: center;
-margin-bottom: 20px;
-}
-.minizoompan {
-margin: 0 0 0 0!important;
-padding: 0 0 0 0!important;
-}
-.minizoompan {
-float: left;
-}
-.minizoompan {
-background: white;
-position: relative;
-margin: 0;
-padding-top: 0;
-padding-right: 0;
-padding-bottom: 0;
-padding-left: 0;
-}
-
-#zoomWrap {
-position: relative;
-z-index: 100;
-}
-#zoomWrap {
-height: 534px;
-float: right;
-}
-#outer_container {
-width: 100%;
-height: 100%;
-display: none;
-z-index: 30000;
-position: absolute;
-top: 0;
-left: 0;
-margin: 0 0 0 0;
-overflow: hidden;
-background: white;
-}*/
-
 
 
 a.zoom-in{
@@ -704,4 +655,25 @@ li.active .caret{
 }
 .incr-letter-spacing-2{
 	letter-spacing: 2px;
+}
+
+/* style select options */
+.dhbtn{
+	background:#fff;
+	color:#555;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	text-shadow: none;
+	font-size:12px;
+	padding:0px 10px;
+	border:1px solid #222;
+	-webkit-box-shadow: none;
+	-moz-box-shadow:none;
+	box-shadow: none;
+}
+.dhbtn:hover{
+	border:1px solid #D04526;
+	color:#D04526;
+	background:#fff;
 }

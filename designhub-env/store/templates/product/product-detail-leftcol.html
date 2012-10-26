@@ -1,0 +1,82 @@
+{% load thumbnail %}
+{% spaceless %}
+    	<div style="width:440px;float:left;margin-bottom:100px;">
+    		<div id="product">
+    			<div class='content' >
+	    	    <ul class="pagination">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "80x120" crop='center' as image %}
+					    <li>
+					    	<a href="#" class="product-detail-thumnail" style='background:transparent;'>
+					    	{% if debug %}
+					    	<img src="{{ image.url }}"  width="{{ image.width }}" height="{{ image.height }}"/>
+					    	{% else %}
+					    	<img src="{{MEDIA_URL}}images/index/none-80x120.jpg" />
+					    	{% endif %}
+					    </a>
+					    </li>
+					    {% endthumbnail %}
+					{% endfor %}	    			
+	    		</ul>
+	    		</div>
+	    		<div class="slides_container">
+	    			{% for pic in product.productimage_set.all %}
+	    			    {% thumbnail pic.picture "300x400" crop='center'  as image %}
+					    {% thumbnail pic.picture "1000x1334" crop='center' as image_b %}
+					    {% if debug %}
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{ image_b.url }}' href="#">
+					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
+					    {% else %}
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{MEDIA_URL}}images/index/none-1000x1334.jpg' href="#">
+					    	<img src="{{MEDIA_URL}}images/index/none-300x400.jpg" width="300" height="400"/>
+                        {% endif %} 
+					    </a>
+					    {% endthumbnail %}
+					    {% endthumbnail %}
+					{% endfor %}
+					<div class="hidden"> <!-- preload big images -->
+						<script type="text/javascript">
+							<!--//--><![CDATA[//><!--
+								function preloaderZoomIn() {
+									if (document.images) {
+										var virtualImgsZoomIn = new Array();
+										{% for pic in product.productimage_set.all %}
+										    {% thumbnail pic.picture "1000x1334" crop='center' as image_b %}
+										        var virtualImgZoomIn = new Image();
+										        virtualImgZoomIn.src = '{{image_b.url}}'
+										        virtualImgsZoomIn.push(virtualImgZoomIn);
+										    {% endthumbnail %}
+										{% endfor %}
+									}
+								}
+								function addLoadEvent(func) {
+									var oldonload = window.onload;
+									if (typeof window.onload != 'function') {
+										window.onload = func;
+									} else {
+										window.onload = function() {
+											if (oldonload) {
+												oldonload();
+											}
+											func();
+										}
+									}
+								}
+								addLoadEvent(preloaderZoomIn);
+							//--><!]]>
+						</script>
+					</div>
+	    		</div>
+	    	</div>
+	    	<link href='https://fonts.googleapis.com/css?family=Nothing+You+Could+Do' rel='stylesheet' type='text/css'>
+	    	<style>
+	    		.say-something2designer{
+	    			font-family: 'Nothing You Could Do', cursive;
+	    			font-size:18px;
+	    		}
+
+	    	</style>
+	    	<div class="clearfix"></div>
+            {% include 'product/sharing-buttons.html' with product=product %}
+    	</div>
+{% endspaceless %}
