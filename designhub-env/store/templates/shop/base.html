@@ -12,8 +12,6 @@
     {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20121024.p1.css" />
     {% endblock %}
     <title>{% block title %}{{ shop_name }}, a platform for local creativity.{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
-    {% plugin_point "page_head" %}
-
     {% block extrastyle %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox.css" />{% endblock %}
     {% block extrahead %}{% endblock %}
     

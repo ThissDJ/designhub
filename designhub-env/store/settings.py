@@ -162,7 +162,7 @@ INSTALLED_APPS = (
     #'satchmo_ext.wishlist',
     #'satchmo_ext.upsell',
     #'satchmo_ext.productratings',
-    'satchmo_ext.satchmo_toolbar',
+#    'satchmo_ext.satchmo_toolbar',
     'satchmo_utils',
     #'shipping.modules.tieredquantity',
     #'satchmo_ext.tieredpricing',
