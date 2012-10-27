@@ -69,6 +69,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mCustomScrollbar.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.zoom-min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.ui.dhub.fullscreenzoom.js"></script>
 <script type="text/javascript">
 var productid = {{product.id}};
 </script>
@@ -90,6 +91,7 @@ var productid = {{product.id}};
 		var bigImageUrl = $that.attr('data-bigimage-src');
 		$(this).zoom({url: bigImageUrl});
 	});
+	/* the tables in the right columb*/
 	$('#myTab a').click(function (e) {
 	  e.preventDefault();
 	  $(this).tab('show');
@@ -241,8 +243,8 @@ var productid = {{product.id}};
 			    // style the select
 			    if (!$.browser.opera) {
 
-function mytrim(str){return str.replace(/\s+|\t/g, ' ').trim();  }
-// console.log(mytrim('  a   bbb		 a	\nad'));
+				function mytrim(str){return str.replace(/\s+|\t/g, ' ').trim();  }
+				// console.log(mytrim('  a   bbb		 a	\nad'));
 
 //去除空格,回车 
 			        $('select.select').each(function(){
@@ -278,6 +280,7 @@ function mytrim(str){return str.replace(/\s+|\t/g, ' ').trim();  }
 			
 			    };
 			    // end of style the select
+
 	    });
     </script>
     <!-- launching page part -->

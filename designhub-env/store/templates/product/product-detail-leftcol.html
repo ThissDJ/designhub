@@ -24,19 +24,21 @@
 	    			    {% thumbnail pic.picture "300x400" crop='center'  as image %}
 					    {% thumbnail pic.picture "1000x1334" crop='center' as image_b %}
 					    {% if debug %}
-					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{ image_b.url }}' href="#">
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{ image_b.url }}' href="#" data-index='{{ forloop.counter}}'>
 					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
 					    {% else %}
-					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{MEDIA_URL}}images/index/none-1000x1334.jpg' href="#">
+					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{MEDIA_URL}}images/index/none-1000x1334.jpg' href="#" data-index='{{ forloop.counter}}'>
 					    	<img src="{{MEDIA_URL}}images/index/none-300x400.jpg" width="300" height="400"/>
                         {% endif %} 
 					    </a>
 					    {% endthumbnail %}
 					    {% endthumbnail %}
 					{% endfor %}
-					<div class="hidden"> <!-- preload big images -->
+					<div class="hidden">
+						<!-- preload big images -->
 						<script type="text/javascript">
 							<!--//--><![CDATA[//><!--
+							    var totalThumbnails = {{product.productimage_set.all.count}};
 								function preloaderZoomIn() {
 									if (document.images) {
 										var virtualImgsZoomIn = new Array();
@@ -74,9 +76,27 @@
 	    			font-family: 'Nothing You Could Do', cursive;
 	    			font-size:18px;
 	    		}
-
 	    	</style>
 	    	<div class="clearfix"></div>
             {% include 'product/sharing-buttons.html' with product=product %}
     	</div>
+        <div id='outer_container'>
+        	<div id='zoomPan'>
+        		<img id='super'>
+        	</div>
+
+        	<a id='prevSuperImage' class='prevNextBarContainer' title='Previous image'>
+        		<div class='prevNextSymbol'>
+        			&lt;
+        		</div>
+        	</a>
+        	<a id='nextSuperImage' class='prevNextBarContainer' title='Next image'>
+        		<div class='prevNextSymbol'>
+        			&gt;
+        		</div>
+        	</a>
+        	<div id='clickToCloseTip' clas='borderRadius3'>
+        		<span>Click anywhere to exit</span>
+        	</div>
+        </div>
 {% endspaceless %}

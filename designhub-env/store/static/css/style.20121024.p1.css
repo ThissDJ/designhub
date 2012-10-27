@@ -20,6 +20,12 @@ img{
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
+/* unround */
+#zoomPan img{
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	border-radius: 0px;
+}
 a,input,p,textarea,div{
 	font-size:12px;
 	text-align:left;
@@ -282,6 +288,7 @@ a.product-name-container:hover{
 	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
 /*product-detail*/
+
 a.fancybox-thumb:hover{
 	text-decoration:none;
 /*	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
@@ -671,9 +678,81 @@ li.active .caret{
 	-webkit-box-shadow: none;
 	-moz-box-shadow:none;
 	box-shadow: none;
+
 }
 .dhbtn:hover{
 	border:1px solid #D04526;
 	color:#D04526;
 	background:#fff;
+}
+
+/*product fullscreen*/
+
+#outer_container{
+	position:absolute;
+	top:0;
+	left:0;
+	display:none;
+	z-index:9000;
+	background-color:#fff;
+}
+
+#outer_container h2{
+	text-align:center;
+}
+#zoomPan{
+	position:absolute;
+	left:0;
+}
+
+.prevNextBarContainer{
+	position:relative;
+	background-color:rgba(56,56,56,0.2);
+	height:100%;
+	width:20px;
+	display:block
+}
+#prevSuperImage{
+	float:left;
+	border-right:1px solid #fff;
+}
+#nextSuperImage{
+	float:right;
+	border-left:1px solid #fff;
+}
+.prevNextBarContainer .prevNextSymbol{
+	position:absolute;
+	bottom:50%;
+	width:100%;
+	text-align:center;
+	color:#fff;
+	font-weight:bold;
+}
+
+.prevNextBarContainer:hover{
+	background-color:rgba(56,56,56,0.3);
+}
+.prevNextBarContainer .prevNextSymbol:hover, .prevNextBarContainer:hover{
+	cursor: pointer;
+}
+.borderRadius3{
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+#clickToCloseTip{
+	float:right;
+	position:relative;
+	margin-right:1em;
+	margin-top:5px;
+	padding:5px;
+	background-color:rgba(256,256,256,0.35);
+	border:1px solid #fff;
+}
+#clickToCloseTip:hover{
+	background-color:rgba(256,256,256,0.55);
+}
+#clickToCloseTip span{
+	font-style:italic;
+	color:#222;
 }
