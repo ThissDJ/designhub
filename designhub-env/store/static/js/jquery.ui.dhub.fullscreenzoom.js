@@ -177,7 +177,27 @@ function closeME() {
         panningOpen = false;
     }
 }
-
+$(document).keyup(function(e) {
+    if (!isMobile && panningOpen) {
+        switch (e.keyCode) {
+            case 27:
+            case 32:
+                e.preventDefault();
+                closeME();
+                break;
+            case 37:
+                if ($("#prevSuperImage").length) {
+                    $("#prevSuperImage").trigger("click");
+                }
+                break;
+            case 39:
+                if ($("#nextSuperImage").length) {
+                    $("#nextSuperImage").trigger("click");
+                }
+                break;
+        }
+    }
+});
 $(window).resize(function() {
     // if (panningOpen && $imagePan != undefined) {
     if (panningOpen) {

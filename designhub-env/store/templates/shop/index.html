@@ -42,27 +42,29 @@
 	
 	</style>
 	<div style='height:20px;'></div>
-	<div class='container index-section' style='padding-bottom:3px;background:url({{MEDIA_URL}}images/index/talent-today-bg-border-01.png) no-repeat 0 -20px;'>
+	<div class='container index-section' style='padding-bottom:3px;'>
 		<div style='padding-bottom:0px;'>
 			<h4 class='section-title'>
 				Talent Today
 			</h4>
 		</div>
-		<div style='float:left;width:50%;height:350px;position:relative;'>
-	        {% thumbnail designer.main_image.picture "350x350"  crop="center" as image %}
+		<div style='float:left;width:550px;height:350px;position:relative;' class='designer-today-avater-wrapper'>
+	        {% thumbnail designer.main_image.picture "550x350"  crop="center" as image %}
 	         {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 	         {% else %}<img src="{{MEDIA_URL}}images/index/none-350.jpg" /> {% endif %}
 	        {% endthumbnail %}
 	        <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
 		</div>
-		<div style='float:right;width:50%;height:350px;'>
+		<div style='float:right;width:400px;height:350px;'>
 			<div class='designer-today-featured-designs-container'>
 				{% for p in designer.mynewproduct_set.all%}
-				    {% if forloop.counter < 5 %}
-				    <a class='designer-today-featured-design' href='{{ p.product.get_absolute_url }}'>
+				    {% if forloop.counter < 7 %}
+				    <a class='designer-today-featured-design' href='{{ p.product.get_absolute_url }}'
+				        data-index={{forloop.counter}}
+				    >
 				    	<div class='black-bg-designer-today-featured-design'>
 				    	
-					    {% thumbnail p.product.productimage_set.all.1.picture "120x120" crop='center' as image %}
+					    {% thumbnail p.product.productimage_set.all.1.picture "131x174" crop='center' as image %}
 	                     {% if debug %}<img src="{{ image.url }}" />{% else %}
 	                     <img src="{{MEDIA_URL}}images/index/none-120.jpg" /> {% endif %}
 					    {% endthumbnail %}
