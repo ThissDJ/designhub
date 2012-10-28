@@ -2,6 +2,9 @@
 {% load thumbnail %}
 {% load satchmo_currency %}
 {% load satchmo_discounts satchmo_tax %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.mCustomScrollbar.css" />
+{% endblock extrastyle %}
 {% block breadcrumbs-inner %}
 <span class="seperator">/</span>
 <a href="{% url designer-list %}">Talents</a>
@@ -11,75 +14,99 @@
 {% block content %}
 {% spaceless %}
 <style>
-	.designer-intro-container{
-		-webkit-border-radius: 4px 4px 0px 0px;
-		-moz-border-radius: 4px 4px 0px 0px;
-		border-radius: 4px 4px 0px 0px;
-		width:900px;
-		padding:25px;
-		background:rgba(0,0,0,0.15);
-	}
-	.brand-label{
-		font-size: 11.844px;
-		font-weight: bold;
-		line-height: 14px;
-		color: white;
-		vertical-align: baseline;
-		white-space: nowrap;
-		display:block;
-		margin-left:5px;margin-right:5px;
-	}
-	.brand-label-first{
-		margin-left:0px;
-	}
-	.brand-label-last{
-		margin-right:0px;
-	}
-	.brand-title{
-		color:#eee;
-	}
-	.brand-label, .brand-title{
-		text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
-	}
+.parenthesis{
+	position:absolute;
+	min-width:20px;
+	top:0px;
+	height:248px;
+	border:1px solid #222;
+}
+#talent-box-left-parenthesis{
+	left:0px;
+	border-right:0px;
+}
+#talent-box-right-parenthesis{
+	right:0px;
+	border-left:0px;
+}
+#talent-box-middle{
+	position:absolute;
+	left:21px;top:0px;
+	width:908px;
+	height:248px;
+}
+#talent-box-middle .tanlent-box-avater,#talent-box-middle .tanlent-box-info-wrapper{
+/*	overflow:hidden;*/
+	height:248px;
+
+}
+#talent-box-middle .tanlent-box-avater{
+	width:400px;
+	float:left;
+	text-align:center;
+	line-height:248px;
+}
+#talent-box-middle .tanlent-box-info-wrapper{
+	float:right;
+	width:508px;
+}
+#talent-box-middle .tanlent-box-info-inner-wrapper{
+	width:460px;
+	margin-left:auto;margin-right:auto;
+	padding-top:10px;
+}
+#talent-box-middle .designer-name{
+    text-align:center;
+    padding: 3px 0px;
+    color: #D04526;
+    font-family: 'Cutive', sans-serif;
+}
+.designer-box-info-content{
+	width:400px; height:170px; overflow:auto;margin-left:auto;margin-right:auto;
+}
+/*#talent-box-middle p{
+	padding:0 4em;
+}*/
 </style>
-<div class='container designer-intro-container' style='margin-top:10px;'>
-	<div style='float:left;width:600px;'>
-		<div style='float:left;width:200px;'>
-		    {% if designer.main_image %}
-		            {% thumbnail designer.main_image.picture "200x200"  crop="center" as image %}
-		            {% if debug %}
-     		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" /> -->
-		            {% else %}
-		            <img src="{{MEDIA_URL}}images/index/none-200.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-		            {% endif %}
-		           {% endthumbnail %}
-		    {% endif %}
-		</div>
-		<div style='float:right;width:360px;padding:0px 20px;'>
-			<h4>{{designer.name}}</h4>
-			<p>{{designer.description}}</p>
-		</div>
+<div class='container' style='position:relative;height:250px;overflow:hidden;'>
+	<div id='talent-box-left-parenthesis'  class='parenthesis'>
 	</div>
-	<div style='float:right;width:250px;'>
-		<div style='margin-top:15px;'>
-		{% for b in designer.brand_set.all %}
-            {% if forloop.first %} 
-                <h5 class='brand-title'>BRANDS</h5>
-                <span class='brand-label brand-label-first'>{{b.name}}</span>
-            {% else %}
-                {% if forloop.last %} 
-                     <span class='brand-label brand-label-last'>{{b.name}}</span>
-                {% else %}
-                     <span class='brand-label'>{{b.name}}</span>
-                {% endif %}
-            {% endif %}
-		{% endfor%}
+	<div id='talent-box-middle'>
+		<div class='tanlent-box-avater'>
+	        {% thumbnail designer.main_image.picture "367x233" as image %}
+	         {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+	         {% else %}<img src="{{MEDIA_URL}}images/index/none-550x350.png" /> {% endif %}
+	        {% endthumbnail %}
 		</div>
+		<div class='tanlent-box-info-wrapper'>
+			<div class='tanlent-box-info-inner-wrapper'>
+				<h6 class='designer-name twoline-title'>{{designer.name}}</h6>
+				<div class='designer-box-info-content' >
+				<p>{{designer.description}}</p>
+				</div>
+			</div>
+		</div>
+		
 	</div>
-	<div class="clearfix" ></div>
+   
+	<div id='talent-box-right-parenthesis' class='parenthesis'>
+	</div>
 </div>
-<div class='container' style="margin-top:30px;">
+<div class='container' style="margin-top:20px;">
     {% include 'product/product_box.html' with productBoxesList=products %}
 </div>
 {% endspaceless %}
 {% endblock content %}
+{% block mainextrajs %}
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript">
+    (function($){
+        $(window).load(function(){ 
+        	console.log('he');
+            $(".designer-box-info-content").mCustomScrollbar();
+            console.log('llo');
+		});
+    })(jQuery);
+</script>
+{% endblock mainextrajs %}
