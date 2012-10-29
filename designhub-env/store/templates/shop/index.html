@@ -44,9 +44,9 @@
 	<div style='height:20px;'></div>
 	<div class='container index-section' style='padding-bottom:3px;'>
 		<div style='padding-bottom:0px;'>
-			<h4 class='section-title'>
+			<h2>
 				Talent Today
-			</h4>
+			</h2>
 		</div>
 		<div style='float:left;width:550px;height:350px;position:relative;' class='designer-today-avater-wrapper'>
 	        {% thumbnail designer.main_image.picture "550x350"  crop="center" as image %}
@@ -82,9 +82,9 @@
 	    {% for fc in featured_cats %}
 			<div class='container index-section'>
 				<div style='padding-bottom:0px;'>
-					<h4 class='section-title'>
+					<h2>
 						Featured {{ fc.name}}
-					</h4>
+					</h2>
 				</div>
 				{% include 'product/product_box.html' with productBoxesList=fc.list %}
 	        </div>
@@ -93,9 +93,9 @@
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
 			<div style='padding-bottom:0px;'>
-				<h4 class='section-title'>
+				<h2>
 					Featured Ideas
-				</h4>
+				</h2>
 			</div>
 			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
 	   </div>

@@ -6,7 +6,7 @@
 {% spaceless %}
 	<div style="width:510px;float:right;margin-bottom:70px;">
 		<div style='width:470px;margin-left:auto;margin-right:0;'>
-			<h3 style='text-align:center;'>{{ product.translated_name }}</h3>
+			<h1>{{ product.translated_name }}</h1>
             <h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>
             <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='{{ product.mynewproduct.designer.get_absolute_url}}' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
             <div style='height:45px;'></div>

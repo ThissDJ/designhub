@@ -2,6 +2,7 @@
 {% load thumbnail %}
 {% load satchmo_currency %}
 {% load satchmo_discounts satchmo_tax %}
+{% block pretitle %}{{designer.name}} | {% endblock pretitle %}
 {% block extrastyle %}
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.mCustomScrollbar.css" />
 {% endblock extrastyle %}
@@ -55,11 +56,19 @@
 	margin-left:auto;margin-right:auto;
 	padding-top:10px;
 }
-#talent-box-middle .designer-name{
+#talent-box-middle h1{
     text-align:center;
     padding: 3px 0px;
+    font-family: 'Julius Sans One',Helvetica,Arial,sans-serif;
+    line-height:20px;
+    width:460px;
+    display:block;
     color: #D04526;
-    font-family: 'Cutive', sans-serif;
+    font-weight:bold;
+    font-size:16px;
+	border-top:1px dotted #D04526;
+	border-bottom:1px dotted #D04526;
+	letter-spacing: 3px;
 }
 .designer-box-info-content{
 	width:400px; height:170px; overflow:auto;margin-left:auto;margin-right:auto;
@@ -80,7 +89,7 @@
 		</div>
 		<div class='tanlent-box-info-wrapper'>
 			<div class='tanlent-box-info-inner-wrapper'>
-				<h6 class='designer-name twoline-title'>{{designer.name}}</h6>
+				<h1>{{designer.name}}</h1>
 				<div class='designer-box-info-content' >
 				<p>{{designer.description}}</p>
 				</div>

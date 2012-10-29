@@ -9,11 +9,19 @@
     <meta name="description" content="{{ category.meta|escape }}">
 {% endif %}
 {% endblock %}
+{% block extrastyle %}
+<style>
+h1{
+	color:#efe;
+	display:block;
+	padding-top:25px;
+}
+</style>
 
-
+{% endblock extrastyle %}
 {% block content-product %}
-<div style='text-align:center;margin-top:-25px;margin-bottom:20px;width:150px;height:150px;background-color:#D04526;color:#eee;line-height:50px;'>
-		<h4 style='color:#eee;padding-top:30px;'>Products</h4><h4 style='color:#eee;'>On</h4><h4 style='color:#eee;'>Sale</h4>
+<div style='text-align:center;margin-top:0px;margin-bottom:20px;width:150px;height:150px;background-color:#D04526;color:#eee;line-height:50px;'>
+		<h1>Products<br>On<br>Sale</h1>
 </div>
 {% include 'product/product_box.html' with productBoxesList=products %}
 {% endblock %}

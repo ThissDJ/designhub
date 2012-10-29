@@ -70,7 +70,8 @@
 	    </select>
     </div>
 			<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
-			<span style='margin-right:5px;line-height:24px;'>&nbsp;</span>
-			<button class="btn dhbtn" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+			<div class='dhbtn-wrapper'>
+			    <button class="btn dhbtn" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+			</div>
 <input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
 {% endspaceless %}
