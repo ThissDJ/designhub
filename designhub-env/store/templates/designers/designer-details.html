@@ -4,7 +4,6 @@
 {% load satchmo_discounts satchmo_tax %}
 {% block pretitle %}{{designer.name}} | {% endblock pretitle %}
 {% block extrastyle %}
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.mCustomScrollbar.css" />
 {% endblock extrastyle %}
 {% block breadcrumbs-inner %}
 <span class="seperator">/</span>
@@ -56,26 +55,44 @@
 	margin-left:auto;margin-right:auto;
 	padding-top:10px;
 }
-#talent-box-middle h1{
-    text-align:center;
-    padding: 3px 0px;
-    font-family: 'Julius Sans One',Helvetica,Arial,sans-serif;
-    line-height:20px;
-    width:460px;
-    display:block;
-    color: #D04526;
-    font-weight:bold;
-    font-size:16px;
-	border-top:1px dotted #D04526;
+#talent-box-middle .tanlent-box-info-inner-wrapper .title-line-deco-wrapper{
+	height:30px;
+	position:relative;
+	z-index:0;
+}
+#talent-box-middle .tanlent-box-info-inner-wrapper .title-line-deco-wrapper .title-line-deco{
+	height:14px;
+	top:7px;
+	left:20%;
+	width:60%;
 	border-bottom:1px dotted #D04526;
-	letter-spacing: 3px;
+	border-top:1px dotted #D04526;
+	position:absolute;
+
 }
+#talent-box-middle .tanlent-box-info-inner-wrapper .title-line-deco-wrapper .title-line-deco-block{
+	text-align:center;
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+}
+#talent-box-middle h1{
+
+    font-weight:normal;
+    font-family: 'Julius Sans One',Helvetica,Arial,sans-serif;
+    font-size:20px;
+    color:#D04526;
+	border-top: 1px dotted #D04526;
+	border-bottom: 1px dotted #D04526;
+	letter-spacing: 15px;
+    margin-top:5px;
+}
+
 .designer-box-info-content{
-	width:400px; height:170px; overflow:auto;margin-left:auto;margin-right:auto;
+	width:420px; height:190px; overflow:auto;margin-left:auto;margin-right:auto;
 }
-/*#talent-box-middle p{
-	padding:0 4em;
-}*/
+
 </style>
 <div class='container' style='position:relative;height:250px;overflow:hidden;'>
 	<div id='talent-box-left-parenthesis'  class='parenthesis'>
@@ -89,7 +106,7 @@
 		</div>
 		<div class='tanlent-box-info-wrapper'>
 			<div class='tanlent-box-info-inner-wrapper'>
-				<h1>{{designer.name}}</h1>
+                <h1>{{designer.name}}</h1>
 				<div class='designer-box-info-content' >
 				<p>{{designer.description}}</p>
 				</div>
@@ -107,15 +124,5 @@
 {% endspaceless %}
 {% endblock content %}
 {% block mainextrajs %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel.min.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript">
-    (function($){
-        $(window).load(function(){ 
-        	console.log('he');
-            $(".designer-box-info-content").mCustomScrollbar();
-            console.log('llo');
-		});
-    })(jQuery);
-</script>
+
 {% endblock mainextrajs %}
