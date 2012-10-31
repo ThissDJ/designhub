@@ -17,6 +17,8 @@
 {% endblock extracommonjs %}
 {% block breadcrumbs %}
 {% endblock breadcrumbs %}
+{% load cache %}
+{% cache 3600 indexBody %}
 {% block content %}
 	<div class='container'>
 			<div id="index-slider">
@@ -124,3 +126,4 @@
 })(jQuery);
 </script>
 {% endblock %}
+{% endcache %}
