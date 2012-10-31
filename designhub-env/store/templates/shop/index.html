@@ -18,8 +18,9 @@
 {% block breadcrumbs %}
 {% endblock breadcrumbs %}
 {% load cache %}
-{% cache 3600 indexBody %}
+
 {% block content %}
+    {% cache 3600 indexBody %}
 	<div class='container'>
 			<div id="index-slider">
 	    		<div class="slides_container">
@@ -102,6 +103,7 @@
 			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
 	   </div>
 {% endif %}
+{% endcache %}
 {% endblock content %}
 {% block indexfooter %}
 
@@ -126,4 +128,3 @@
 })(jQuery);
 </script>
 {% endblock %}
-{% endcache %}
