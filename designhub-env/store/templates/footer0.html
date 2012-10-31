@@ -1,4 +1,6 @@
 {% spaceless %}
+{% load cache %}
+{% cache 3600 footer0 %}
 <div class="myfooter mycontainer">
 	 <div class='container'>
 		<div style="color:#bbb;float:left;">
@@ -12,4 +14,5 @@
 		</div>
     </div>
 </div>
+{% endcache %}
 {% endspaceless %}

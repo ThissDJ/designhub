@@ -20,7 +20,7 @@
 {% load cache %}
 
 {% block content %}
-    {% cache 3600 indexBody %}
+    {% cache 3600 index::featuredSlider %}
 	<div class='container'>
 			<div id="index-slider">
 	    		<div class="slides_container">
@@ -41,9 +41,8 @@
 	    		</div>
 	    	</div>
 	</div>
-	<style>
-	
-	</style>
+	{% endcache %}
+	{% cache 3600 index::talentToday %}
 	<div style='height:20px;'></div>
 	<div class='container index-section' style='padding-bottom:3px;'>
 		<div style='padding-bottom:0px;'>
@@ -79,10 +78,12 @@
 		</div>
 		<div class="clearfix" ></div>
 	</div>
+	{% endcache %}
 	
 	{% if featured_cats %}
-	
+	    
 	    {% for fc in featured_cats %}
+	        {% cache 3600 index::featuredCats  fc.name %}
 			<div class='container index-section'>
 				<div style='padding-bottom:0px;'>
 					<h2>
@@ -91,8 +92,12 @@
 				</div>
 				{% include 'product/product_box.html' with productBoxesList=fc.list %}
 	        </div>
+	        {% endcache %}
 	    {% endfor %}
+	    
 	{% endif %}
+	
+	{% cache 3600 index::featuredIdeas %}
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
 			<div style='padding-bottom:0px;'>
@@ -102,8 +107,9 @@
 			</div>
 			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
 	   </div>
-{% endif %}
-{% endcache %}
+    {% endif %}
+    {% endcache %}
+
 {% endblock content %}
 {% block indexfooter %}
 

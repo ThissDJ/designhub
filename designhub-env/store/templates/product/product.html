@@ -31,18 +31,22 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% block breadcrumbs-category %}
     {% include "product/product_path.html" with product=product %}
 {% endblock breadcrumbs-category %}
-
+{% load cache %}
 {% block content %}
 
     {% block productdetail %}
     <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;">
+    	{% cache 3600 productDetail::leftcol product.slug %}
         {% include 'product/product-detail-leftcol.html' with product=product %}
+        {% endcache %}
         {% include 'product/product-detail-rightcol-base.html' with product=product %}
         <div class="clearfix" ></div>
         <br><br>
+        {% cache 3600 productDetail::designer product.slug %}
         <div style='width:60%;float:left;'>
         	{% include "product/designer.html" %}
         </div>
+        {% endcache %}
         <div style='width:40%;float:left;'>
         	{% if user.is_active %}
         	{% include "product/comments/form.html" %}

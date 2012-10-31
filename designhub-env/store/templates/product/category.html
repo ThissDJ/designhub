@@ -9,9 +9,9 @@
     <meta name="description" content="{{ category.meta|escape }}">
 {% endif %}
 {% endblock %}
-
-
+{% load cache %}
 {% block content-product %}
+    {% cache 3600 productListing category.slug %}
 		<div id="product_category">
 		{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
 	    {% if category.main_image %}
@@ -37,4 +37,5 @@
 		        {% endfor %}
 		{% endif %}
 		</div>
+	{% endcache %}
 {% endblock %}
