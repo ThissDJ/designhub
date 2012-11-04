@@ -164,7 +164,7 @@ def get_product_types():
     """
     Returns a tuple of all product subtypes this app adds
     """
-    return ('MyNewProduct', )
+    return ('MyNewProduct', 'PreOrderProduct',)
 
 class MyNewProduct(models.Model):
     product = models.OneToOneField(Product, verbose_name=_('Product'),
@@ -188,6 +188,70 @@ class MyNewProduct(models.Model):
     class Meta:
         verbose_name = _('My New Product')
         verbose_name_plural = _('My New Products')
+
+class PreOrderProduct(models.Model):
+    product = models.OneToOneField(Product, verbose_name=_('Product'),
+        primary_key=True)
+    designer = models.ForeignKey(Designer, null=True, blank=True)
+    end = models.DateTimeField(_("Preorder Ending Date"), null=True, blank=True)
+    description = models.TextField(null=True, blank=True, max_length=200)
+    ship = models.TextField(null=True, blank=True, max_length=2000)
+    featured = models.BooleanField(_("Featured"), default=False, help_text=_("Featured items will show on the front page"))
+    def _get_subtype(self):
+        """
+        Has to return the name of the product subtype
+        """
+        return 'PreOrderProduct'
+
+    def __unicode__(self):
+        return u"PreOrderProduct: %s" % self.product.name
+
+    class Meta:
+        verbose_name = _('Pre Order Product')
+        verbose_name_plural = _('Pre Order Products')
+
+class PreOrderImage(models.Model):
+    """
+    A picture of an item.  Can have many pictures associated with an item.
+    Thumbnails are automatically created.
+    """
+    preorderproduct = models.ForeignKey(PreOrderProduct, null=True, blank=True)
+    picture = ImageWithThumbnailField(verbose_name=_('Picture'),
+        upload_to="__DYNAMIC__",
+        name_field="_filename",
+        max_length=200) #Media root is automatically prepended
+    caption = models.CharField(_("Optional caption"), max_length=100,
+        null=True, blank=True)
+    sort = models.IntegerField(_("Sort Order"), default=0)
+
+#    def translated_caption(self, language_code=None):
+#        return lookup_translation(self, 'caption', language_code)
+
+    def _get_filename(self):
+        if self.preorderproduct:
+            # In some cases the name could be too long to fit into the field
+            # Truncate it if this is the case
+            pic_field_max_length = self._meta.get_field('picture').max_length
+            max_slug_length = pic_field_max_length -len('images/preorderproductposter-picture-.jpg') - len(str(self.id))
+            slug = self.preorderproduct.product.slug[:max_slug_length]
+            return '%s-%s' % (slug, self.id)
+        else:
+            return 'default'
+    _filename = property(_get_filename)
+
+    def __unicode__(self):
+        if self.preorderproduct:
+            return u"Image of PreOrderProductPoster %s" % self.preorderproduct.product.slug
+        elif self.caption:
+            return u"Image with caption \"%s\"" % self.caption
+        else:
+            return u"%s" % self.picture
+
+    class Meta:
+        ordering = ['sort']
+        verbose_name = _("PreOrderProductPoster Image")
+        verbose_name_plural = _("PreOrderProductPoster Images")
+
 
 #
 #from product.signals import index_prerender

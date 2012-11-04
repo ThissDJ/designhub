@@ -136,6 +136,7 @@ class DesignerDetailView(DetailView):
         context = super(DesignerDetailView, self).get_context_data(**kwargs)
         place = self.get_object()
         context['products'] = [mynewp.product for mynewp in self.object.mynewproduct_set.all() if mynewp.product.active == True]
+        context['products'] += [preorderitem.product for preorderitem in self.object.preorderproduct_set.all() if preorderitem.product.active == True]
         return context
 from product.utils import find_best_auto_discount
 from satchmo_store.shop.models import Cart

@@ -1,0 +1,46 @@
+{% load app_plugins %}
+{% load i18n %}
+{% load satchmo_price %}
+{% load satchmo_currency satchmo_category %}
+{% load satchmo_util satchmo_discounts %}
+{% load cache %}
+{% spaceless %}
+	<div style="width:350px;float:right;margin-bottom:20px;" class='preorderproduct-detail-right-col'>
+		<div class='badge-wrapper' style='width:340px;margin-left:auto;margin-right:0;'>
+			<h1>{{ product.translated_name }}</h1>
+         
+            <h5 style='text-align:center;font-style:italic;margin-top:0px;color:#bbb;'>by <a href='{{ product.preorderproduct.designer.get_absolute_url}}' style='font-size:14px;' class='designer-name'>{{ product.preorderproduct.designer.name }}</a></h5>
+            <div class='pre-order-product-desc'>
+               <p>
+               	{{ product.preorderproduct.description}}
+               </p>
+			</div>
+            <div class='pre-order-product-date-desc-wrapper'>
+            	<div class='pre-order-product-date-desc-inner-wrapper'>
+	                <div class='start-date-wrapper date-desc-wrapper-sub'>
+	                	<div class='leftcol'><span>Starts:</span></div>
+	                	<div class='rightcol'><span>2012.11.1</span></div>
+	                	<div class="clearfix" ></div>
+	                </div>
+	                
+	                <div class='end-date-wrapper date-desc-wrapper-sub'>
+	                	<div class='leftcol'><span>Ends:</span></div>
+	                	<div class='rightcol'><span class='empha'>2012.12.1</span></div>
+	                	<div class="clearfix" ></div>
+	                </div>
+	                
+	                <div class='collect-amount-wrapper date-desc-wrapper-sub'>
+	                	<div class='leftcol'><span>If Collected More Than</span></div>
+	                	<div class='rightcol'><span>HK$25223</span></div>
+	                	<div class="clearfix" ></div>
+	                </div>
+	                
+	                <div class='suc-desc-wrapper date-desc-wrapper-sub'>
+	                	<div class='leftcol'><span>Delivered on</span></div>
+	                	<div class='rightcol'><span>2013.1.1</span></div>
+	                </div>
+	            </div>       
+			</div>
+		</div>
+    </div>
+{% endspaceless %}

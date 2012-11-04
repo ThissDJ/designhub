@@ -4,6 +4,8 @@ from models import Designer
 from models import DesignerImage
 from models import Brand
 from models import InviteReward
+from models import PreOrderProduct
+from models import PreOrderImage
 from satchmo_utils.thumbnail.field import ImageWithThumbnailField
 from satchmo_utils.thumbnail.widgets import AdminImageWithThumbnailWidget
 from django.utils.translation import ugettext_lazy as _
@@ -88,6 +90,40 @@ class DesignerOptions(admin.ModelAdmin):
     list_display += ('slug', 'name','featured','active',)
 admin.site.register(MyNewProduct,MyNewProductOptions)
 admin.site.register(Designer,DesignerOptions)
+
+class PreOrderImage_Inline(admin.StackedInline):
+    model = PreOrderImage
+    extra = 3
+    
+    formfield_overrides = {
+        ImageWithThumbnailField : {'widget' : AdminImageWithThumbnailWidget},
+    }
+
+class PreOrderProductOptions(admin.ModelAdmin):
+    inlines = [PreOrderImage_Inline]
+    actions = ('make_featured', 'make_unfeatured')
+    
+    def make_featured(self, request, queryset):
+        rows_updated = queryset.update(featured=True)
+        if rows_updated == 1:
+            message_bit = _("1 product was")
+        else:
+            message_bit = _("%s products were" % rows_updated)
+        self.message_user(request, _("%s successfully marked as featured") % message_bit)
+        return HttpResponseRedirect('')
+    make_featured.short_description = _("Mark selected products as featured")
+
+    def make_unfeatured(self, request, queryset):
+        rows_updated = queryset.update(featured=False)
+        if rows_updated == 1:
+            message_bit = _("1 product was")
+        else:
+            message_bit = _("%s products were" % rows_updated)
+        self.message_user(request, _("%s successfully marked as not featured") % message_bit)
+        return HttpResponseRedirect('')
+    make_unfeatured.short_description = _("Mark selected products as not featured")
+
+admin.site.register(PreOrderProduct,PreOrderProductOptions)
 
 class BaseBrandAdmin(admin.ModelAdmin):
     prepopulated_fields = {

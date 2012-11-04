@@ -4,7 +4,7 @@
 {% load cache %}
 {% for product in productBoxesList %}
     {% if forloop.first %} <div class="pic-list-container"> {% endif %}
-    	{% cache 3600 productListing::productbox product.slug %}
+    	{% cache 1 productListing::productbox1 product.slug %}
         <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
         	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
         		<!--<div class="tip-content-when-hover">

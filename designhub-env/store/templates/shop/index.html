@@ -42,13 +42,15 @@
 	    	</div>
 	</div>
 	{% endcache %}
-	{% cache 3600 index::talentToday %}
-	<div style='height:20px;'></div>
+	{% cache 3600 index::talentToday1 %}
 	<div class='container index-section' style='padding-bottom:3px;'>
-		<div style='padding-bottom:0px;'>
+		<div class='index-section-title-wrapper'>
+			<div class='index-section-title-decor-left'></div>
 			<h2>
 				Talent Today
 			</h2>
+			<div class='index-section-title-decor-right'>
+			</div>
 		</div>
 		<div style='float:left;width:550px;height:350px;position:relative;' class='designer-today-avater-wrapper'>
 	        {% thumbnail designer.main_image.picture "550x350"  crop="center" as image %}
@@ -83,13 +85,17 @@
 	{% if featured_cats %}
 	    
 	    {% for fc in featured_cats %}
-	        {% cache 3600 index::featuredCats  fc.name %}
+	        {% cache 3600 index::featuredCats1  fc.name %}
 			<div class='container index-section'>
-				<div style='padding-bottom:0px;'>
+				<div class='index-section-title-wrapper'>
+					<div class='index-section-title-decor-left'></div>
 					<h2>
 						Featured {{ fc.name}}
 					</h2>
+					<div class='index-section-title-decor-right'>
+					</div>
 				</div>
+
 				{% include 'product/product_box.html' with productBoxesList=fc.list %}
 	        </div>
 	        {% endcache %}
@@ -97,13 +103,16 @@
 	    
 	{% endif %}
 	
-	{% cache 3600 index::featuredIdeas %}
+	{% cache 3600 index::featuredIdeas1 %}
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
-			<div style='padding-bottom:0px;'>
+			<div class='index-section-title-wrapper'>
+				<div class='index-section-title-decor-left'></div>
 				<h2>
 					Featured Ideas
 				</h2>
+				<div class='index-section-title-decor-right'>
+				</div>
 			</div>
 			{% include 'product/product_box.html' with productBoxesList=featured_preorder_products_list %}  
 	   </div>

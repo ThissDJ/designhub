@@ -1,13 +1,6 @@
 
 {% load i18n %}
-{% load satchmo_price %}
-{% load satchmo_currency%}
-{% load satchmo_util satchmo_discounts %}
 {% spaceless %}
-
-	<div class='product-detail-price-wrapper'>
-		<span>{{ product|discount_price:sale|currency }}</span>
-	</div>
 	<div class="styled-select">	
 	<select id="quantity"  name="quantity"  class="select" title="Qty:">
         <option value='1'>1</option>

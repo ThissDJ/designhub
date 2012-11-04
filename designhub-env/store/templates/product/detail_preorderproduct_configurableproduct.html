@@ -36,26 +36,7 @@ satchmo.thumbnails = new Array();
 {% endblock breadcrumbs-category %}
 {% block productdetail %}
     <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;">
-    	{% include 'product/product-detail-leftcol.html' with product=product %} 
-        
-    	{% include 'product/product-detail-rightcol-configurable-product.html' with product=product %}
-        <div class="clearfix" ></div>
-        <div style='width:60%;float:left;'>
-        	{% include "product/designer.html" %}
-        </div>
-        <div style='width:40%;float:left;'>
-        	{% if user.is_active %}
-        	{% include "product/comments/form.html" %}
-        	{% else %}
-        	{% include "product/comments/login_form.html" %}
-        	{% endif %}
-        	{% include "product/comments/comments_list.html" %}
-        </div>
-        <div class="clearfix" ></div>
-    	{% block productfooter %}
-		<!--{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}-->
-		{% plugin_point "product_footer" %}
-		{% endblock %}
+        <h1> Thiss preorder</h1>
     </div>
 
 {% endblock %}

@@ -5,17 +5,17 @@
 {% load satchmo_util satchmo_discounts %}
 {% load cache %}
 {% spaceless %}
-	<div style="width:510px;float:right;margin-bottom:70px;">
+	<div style="width:510px;float:right;margin-bottom:70px;" class='product-detail-right-rol'>
 		<div style='width:470px;margin-left:auto;margin-right:0;'>
-			{% cache 3600 productDetail::rightcol::titles product.slug %}
+			{% cache 3600 productDetail::rightcol::titles1 product.slug %}
 			<h1>{{ product.translated_name }}</h1>
-            <h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>
-            <h5 style='text-align:center;font-style:italic;margin-top:0px;line-height:18px;color:#bbb;'>by <a href='{{ product.mynewproduct.designer.get_absolute_url}}' style='font-size:14px;'>{{ product.mynewproduct.designer.name }}</a></h5>
-            <div style='height:45px;'></div>
+            {% if product.mynewproduct.brand %}<h5 style='text-align:center;margin-bottom:0px;line-height:18px;'>{{ product.mynewproduct.brand.name }}</h5>{% endif %}
+            <h5 style='text-align:center;font-style:italic;margin-top:0px;color:#bbb;'>by <a href='{{ product.mynewproduct.designer.get_absolute_url}}' style='font-size:14px;' class='designer-name'>{{ product.mynewproduct.designer.name }}</a></h5>
+            <div class='pay-form-wrapper'>
             {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
             {% endcache %}
-			<div style='margin-bottom:35px;'>
-				{% cache 3600 productDetail::rightcol::attributes product.slug %}
+			
+				{% cache 3600 productDetail::rightcol::attributes1 product.slug %}
 				{% with product.translated_attributes as atts %}{% if atts %}
 				<span class="productattributes">
 				{% for att in product.translated_attributes %}
@@ -24,26 +24,35 @@
 				</span>
 				{% endif %}{% endwith %}
 				{% endcache %}
-				{% cache 3600 productDetail::rightcol::sale product.slug %}
-				{% if sale %}
-					<span style='text-align:center;'>
-						<strike id="fullprice" style="display: block;margin-bottom:7px;">{{ product|discount_price:""|currency }}</strike>
-				    </span>
-				{% endif %}
-				{% endcache %}
-				{% cache 3600 productDetail::rightcol::preorder product.slug %}
-				{% if product.mynewproduct.preorder %}
-				    <div style='text-align:center'>
-				    	<span class='label'>Pre-order Item</span>
-				    </div>
-				    <div style='text-align:center;margin-bottom:18px;'>
-						<span>
-							Pre-order campaign ending on <span style='text-decoration:underline;'>{{ product.mynewproduct.end }}</span>
-						</span>
-				    </div>
-				{% endif %}
-				{% endcache %}
+
                 <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+                	
+					{% cache 3600 productDetail::rightcol::sale1 product.slug %}
+					{% if sale %}
+					    <div class='product-detail-price-wrapper'>
+							<span style='text-align:center;'>
+								<strike id="fullprice">{{ product|discount_price:""|currency }}</strike>
+						    </span>
+					    </div>
+					{% endif %}
+					<div class='product-detail-price-wrapper'>
+						<span>
+						    {{ product|discount_price:sale|currency }}
+						</span>
+					</div>
+					{% endcache %}
+					{% cache 3600 productDetail::rightcol::preorder1 product.slug %}
+					{% if product.mynewproduct.preorder %}
+					    <div style='text-align:center'>
+					    	<span class='label'>Pre-order Item</span>
+					    </div>
+					    <div style='text-align:center;margin-bottom:18px;'>
+							<span>
+								Pre-order campaign ending on <span style='text-decoration:underline;'>{{ product.mynewproduct.end }}</span>
+							</span>
+					    </div>
+					{% endif %}
+					{% endcache %}
                 	{% block add_to_cart_form %}
                 	    {% include 'product/product-detail-rightcol-add-to-cart-form.html' with product=product %}
 					{% endblock add_to_cart_form %}
@@ -52,18 +61,12 @@
 				</form>
 				
 			</div>
-			{% cache 3600 productDetail::rightcol::info product.slug %}
-            {% include 'product/product-info-tabs.html' with product=product %}
-            {% endcache %}
-			<div style='margin-top:35px;'>
-                <form id="options2" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
-                	{% block add_to_cart_form2 %}
-                	    {% include 'product/product-detail-rightcol-add-to-cart-form.html' with product=product %}
-					{% endblock add_to_cart_form2 %}
-					{% plugin_point "product_add_buttons" %}
-					{% plugin_point "product_form" %}
-				</form>
+			{% cache 3600 productDetail::rightcol::info1 product.slug %}
+			<div class='product-info-tabs-wrapper'>
+                {% include 'product/product-info-tabs.html' with product=product %}
 			</div>
+            {% endcache %}
+
 		</div>
     </div>
 {% endspaceless %}

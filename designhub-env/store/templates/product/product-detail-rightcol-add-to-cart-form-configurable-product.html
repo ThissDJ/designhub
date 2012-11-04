@@ -1,15 +1,10 @@
 
 {% load i18n %}
 {% load satchmo_price %}
-{% load satchmo_currency%}
-{% load satchmo_util satchmo_discounts %}
+
 {% spaceless %}
 
-	<div class='product-detail-price-wrapper'>
-		<span>
-		    {{ product|discount_price:sale|currency }}
-		</span>
-		</div>	
+
 	{% for option_group in options %}
 	    <div class="styled-select">	
 		    <select id="{{option_group.id}}" name="{{ option_group.id }}" class="select other-option" title="{{option_group.name}}:" >

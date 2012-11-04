@@ -1,6 +1,6 @@
 {% load thumbnail %}
 {% spaceless %}
-    	<div style="width:440px;float:left;margin-bottom:100px;">
+    	<div style="width:440px;float:left;">
     		<div id="product">
     			<div class='content' >
 	    	    <ul class="pagination">
@@ -72,6 +72,8 @@
 	    	</div>
 	    	<div class="clearfix"></div>
             {% include 'product/sharing-buttons.html' with product=product %}
+            <div class="clearfix"></div>
+            <br><br>
     	</div>
         <div id='outer_container'>
         	<div id='zoomPan'>

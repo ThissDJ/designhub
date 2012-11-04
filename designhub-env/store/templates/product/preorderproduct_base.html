@@ -11,9 +11,7 @@ width:80px;
 {% endblock %}
 {% comment %}
 -------------------------------------------------------------------
-This is the base product detail page.
-To modify the templates of specific types of products, such as
-ProductVariations or CustomProducts, look for product/detail_xxx.html
+This is the base pre order product detail page.
 -------------------------------------------------------------------
 {% endcomment %}
 {% load i18n %}
@@ -22,7 +20,7 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% load satchmo_currency satchmo_category %}
 {% load satchmo_util satchmo_discounts %}
 {% load app_plugins %}
-{% block title %}{{product.name}} | {{product.mynewproduct.brand.name}} by {{product.mynewproduct.designer.name}} | {{ shop_name }}, a platform for local creativity.{% endblock %}
+{% block title %}{{product.name}} | by {{product.preorderproduct.designer.name}} | {{ shop_name }}, a platform for local creativity.{% endblock %}
 {% block extra-head %}
 {% if product.meta %}
     <meta name="description" content="{{product.meta}}">
@@ -34,34 +32,6 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 {% load cache %}
 {% block content %}
 
-    {% block productdetail %}
-    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;" id='product-detail'>
-    	{% cache 3600 productDetail::leftcol1 product.slug %}
-        {% include 'product/product-detail-leftcol.html' with product=product %}
-        {% endcache %}
-        {% include 'product/product-detail-rightcol-base.html' with product=product %}
-        <div class="clearfix" ></div>
-        {% cache 3600 productDetail::designer1 product.slug %}
-        <div style='width:60%;float:left;'>
-        	{% include "product/designer.html" %}
-        </div>
-        {% endcache %}
-        <div style='width:40%;float:left;'>
-        	{% if user.is_active %}
-        	{% include "product/comments/form.html" %}
-        	{% else %}
-        	{% include "product/comments/login_form.html" %}
-        	{% endif %}
-        	{% include "product/comments/comments_list.html" %}
-        </div>
-        <div class="clearfix" ></div>
-		{% block productfooter %}
-		<!--{% if sale %}{% include "product/product_discount_eligible.html" %}{% endif %}-->
-		{% endblock %}
-    </div>
-    
-
-    {% endblock %}
 {% endblock %}
 {% block mainextrajs %}
 <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>

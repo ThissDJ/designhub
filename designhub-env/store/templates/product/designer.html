@@ -1,7 +1,7 @@
 {% load thumbnail %}
 {% spaceless %}
         {% if product.mynewproduct.designer %}
-        <div style='float:left;width:200px;'>
+        <div style='float:left;width:160px;'>
 		    {% if product.mynewproduct.designer.main_image %}
 		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x150"  crop="center" as image %}
 		            <a href='{{product.mynewproduct.designer.get_absolute_url}}'>
@@ -14,9 +14,9 @@
 		           {% endthumbnail %}
 		    {% endif %}
         </div>
-        <div style='float:right;width:300px;margin-right:66px;'>
+        <div style='float:right;width:370px;margin-right:26px;'>
         	
-        		<a href='{{product.mynewproduct.designer.get_absolute_url}}'>
+        		<a href='{{product.mynewproduct.designer.get_absolute_url}}' class='designer-name'>
         			<h2>{{product.mynewproduct.designer.name}}</h2>
         		</a>
         	

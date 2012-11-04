@@ -11,31 +11,61 @@
 {% endblock %}
 {% load cache %}
 {% block content-product %}
-    {% cache 3600 productListing category.slug %}
-		<div id="product_category">
-		{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
-	    {% if category.main_image %}
-	            {% thumbnail category.main_image.picture "200x200" as image %}
-	           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-	           {% endthumbnail %}
-	    {% endif %}
-        {% include 'product/product_box.html' with productBoxesList=products %}         
-                   
-		{% if child_categories %}
-		        {% for cat in child_categories %}
-		            <!--<h4>{{cat.translated_name}}</h4>-->
-		            {% if cat.translated_description %}<!--<p class="product_category_description">{{ cat.translated_description }}</p>-->{% endif %}
-		            {% if order_by %}
-			            {% ifequal order_by 'price_inc' %}
-			                {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_inc %}
-				        {% else %}
-				            {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_dec %}
-				        {% endifequal %}
-		            {% else %}
-		                {% include 'product/product_box.html' with productBoxesList=cat.active_products %}
-		            {% endif %}
-		        {% endfor %}
-		{% endif %}
-		</div>
-	{% endcache %}
+    {% if order_by %}
+	    {% cache 3600 productListing1 category.slug order_by %}
+			<div id="product_category">
+			{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
+		    {% if category.main_image %}
+		            {% thumbnail category.main_image.picture "200x200" as image %}
+		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		           {% endthumbnail %}
+		    {% endif %}
+	        {% include 'product/product_box.html' with productBoxesList=products %}         
+	                   
+			{% if child_categories %}
+			        {% for cat in child_categories %}
+			            <!--<h4>{{cat.translated_name}}</h4>-->
+			            {% if cat.translated_description %}<!--<p class="product_category_description">{{ cat.translated_description }}</p>-->{% endif %}
+			            {% if order_by %}
+				            {% ifequal order_by 'price_inc' %}
+				                {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_inc %}
+					        {% else %}
+					            {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_dec %}
+					        {% endifequal %}
+			            {% else %}
+			                {% include 'product/product_box.html' with productBoxesList=cat.active_products %}
+			            {% endif %}
+			        {% endfor %}
+			{% endif %}
+			</div>
+		{% endcache %}
+	{% else %}
+	    {% cache 3600 productListing1 category.slug%}
+			<div id="product_category">
+			{% if category.translated_description %}<!--<p class="product_category_description">{{ category.translated_description }}</p>-->{% endif %}
+		    {% if category.main_image %}
+		            {% thumbnail category.main_image.picture "200x200" as image %}
+		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+		           {% endthumbnail %}
+		    {% endif %}
+	        {% include 'product/product_box.html' with productBoxesList=products %}         
+	                   
+			{% if child_categories %}
+			        {% for cat in child_categories %}
+			            <!--<h4>{{cat.translated_name}}</h4>-->
+			            {% if cat.translated_description %}<!--<p class="product_category_description">{{ cat.translated_description }}</p>-->{% endif %}
+			            {% if order_by %}
+				            {% ifequal order_by 'price_inc' %}
+				                {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_inc %}
+					        {% else %}
+					            {% include 'product/product_box.html' with productBoxesList=cat.active_products_price_dec %}
+					        {% endifequal %}
+			            {% else %}
+			                {% include 'product/product_box.html' with productBoxesList=cat.active_products %}
+			            {% endif %}
+			        {% endfor %}
+			{% endif %}
+			</div>
+		{% endcache %}
+	{% endif %}
 {% endblock %}

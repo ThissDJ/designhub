@@ -1,0 +1,23 @@
+{% load thumbnail %}
+{% spaceless %}
+    <div style="width:600px;float:left;" id='preorderproduct-leftcol'>
+		<div id="index-slider" class='preorderslider'>
+			<div class="slides_container">
+				{% for preOrderImage in product.preorderproduct.preorderimage_set.all %}
+			    <a href="javascript:void(0);" class='slides-image-container'>
+			    	{% if debug %}
+			    	    {% thumbnail preOrderImage.picture "600x400" crop='center' as image %}
+			    	        <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
+			    	    {% endthumbnail %}
+			    	{% else %}
+			    	    <img src="{{MEDIA_URL}}images/index/1-950x480.jpg"/>
+			    	{% endif %}
+			    </a>
+			    {% endfor %}
+			</div>
+		</div>
+        {% include 'product/sharing-buttons.html' with product=product %}
+        <div class="clearfix"></div>
+        <br><br>
+    </div>
+{% endspaceless %}
