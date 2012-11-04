@@ -35,7 +35,7 @@ satchmo.thumbnails = new Array();
     {% include "product/product_path.html" with product=product %}
 {% endblock breadcrumbs-category %}
 {% block productdetail %}
-    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;">
+    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;" id='product-detail'>
     	{% include 'product/product-detail-leftcol.html' with product=product %} 
         
     	{% include 'product/product-detail-rightcol-configurable-product.html' with product=product %}
