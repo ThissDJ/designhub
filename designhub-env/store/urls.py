@@ -43,8 +43,10 @@ else:
         url(r'^comments/', include('django.contrib.comments.urls')),
         url(r"^talents/$", DesignerListView.as_view(),{'SSL': True}, 
                 name='designer-list'),
-        url(r"^talents/ajax/$", DesignerAjaxListView.as_view(),{'SSL': True}, 
-                name='designer-list-ajax'),
+        url(r"^designers/ajax/$", DesignerAjaxListView.as_view()
+               ,{'SSL': True}, name='designer-list-ajax'),
+        url(r"^artists/ajax/$", ArtistAjaxListView.as_view()
+            ,{'SSL': True},name='artist-list-ajax'),
         url(r'^fbtab/$','localsite.views.fabtabFeaturedToday',{'SSL': True}),
         url(r'^aboutus/$','localsite.views.aboutus',{'SSL': True},name='aboutus'),
         url(r'^dhcontact/$','localsite.views.dhcontact',{'SSL': True},name='dhcontact'),
