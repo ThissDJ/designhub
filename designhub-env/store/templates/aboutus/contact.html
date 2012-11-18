@@ -1,0 +1,33 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block pretitle %}About DesignHub.hk {% endblock pretitle %}
+{% block extrastyle %}
+<style>
+    .contact-content p{
+    	text-align:center;
+    }
+</style>
+{% endblock extrastyle %}
+{% block breadcrumbs-inner %}
+	{% block breadcrumbs-category %}
+	    <span class="seperator">/</span><span>Contact</span>
+	{% endblock breadcrumbs-category %}
+{% endblock breadcrumbs-inner %}
+{% block content %}
+{% spaceless %}
+
+<h1>Contact</h1>
+<div class='contact-content'>
+	<p>
+		Cooperation &#38; Press welcome, please email to press@designhub.hk
+	</p>
+	<p>
+		For General Enquiry, please email to info@designhub.hk
+	</p>
+	<p>
+		For Customer service, please email to help@designhub.hk 
+	</p>
+</div>
+
+{% endspaceless %}
+{% endblock %}

@@ -6,7 +6,8 @@ from localsite.views import home, done, logout, error, form, form2
 from localsite.facebook import facebook_view
 
 #designers
-from localsite.views import DesignerListView, DesignerDetailView, DesignerAjaxListView
+from localsite.views import DesignerListView, DesignerDetailView \
+                   , DesignerAjaxListView, ArtistAjaxListView
 
 from local_settings import LOCAL_DEV
 if LOCAL_DEV:
@@ -14,13 +15,19 @@ if LOCAL_DEV:
         url(r'^comments/', include('django.contrib.comments.urls')),
         url(r"^talents/$", DesignerListView.as_view(), 
                 name='designer-list'),
-        url(r"^talents/ajax/$", DesignerAjaxListView.as_view(),
+        url(r"^designers/ajax/$", DesignerAjaxListView.as_view(),
                 name='designer-list-ajax'),
+        url(r"^artists/ajax/$", ArtistAjaxListView.as_view(),
+                name='artist-list-ajax'),
         url(r'^fbtab/$','localsite.views.fabtabFeaturedToday'),
+        url(r'^aboutus/$','localsite.views.aboutus',name='aboutus'),
+        url(r'^dhcontact/$','localsite.views.dhcontact',name='dhcontact'),
+        url(r'^faq/$','localsite.views.faq',name='faq'),
         url(r'^launching/$','localsite.views.launching'),
         url(r"^talents/(?P<slug>[\-\/\w]+)/$", DesignerDetailView.as_view(), name="designer-detail"),     
         url(r"^sale/$", 'localsite.views.saleindex', name='sale-index'), 
-        url(r"^invite/$", 'localsite.views.invite', name='invite'),          
+        url(r"^invite/$", 'localsite.views.invite', name='invite'),
+        url(r'^tinymce/', include('tinymce.urls')),
         url(r'^social/$', home, name='home'),
         url(r'^social/done/$', done, name='done'),
         url(r'^social/error/$', error, name='error'),

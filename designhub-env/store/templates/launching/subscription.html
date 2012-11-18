@@ -4,7 +4,6 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta property="wb:webmaster" content="b33503664b41138d" />
 	<link href="{{ MEDIA_URL }}css/bootstrap.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
     {% block extra-head %}{% endblock %}
@@ -112,9 +111,9 @@
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
+    {% block extrajs %}
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.cookie.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery.autocsrftoken.js"></script>
-    {% block extrajs %}
     <script type="text/javascript">
 	    $(document).ready(function() {
 	    	$('#launching-form').submit(function() {
@@ -136,6 +135,28 @@
 				  }
 				  return false;
 				});
+				//solving the plaoceholder problem
+			    $('input[placeholder]').each(function(){  
+			        
+			        var input = $(this);        
+			        var originalColor = input.css('color');
+			        var placeholderColor = '#bbb'
+			        $(input).val(input.attr('placeholder'));
+			        $(input).css('color',placeholderColor);    
+			        $(input).focus(function(){
+			             if (input.val() == input.attr('placeholder')) {
+			                 input.val('');
+			                 $(input).css('color',originalColor);   
+			             }
+			        });
+			        
+			        $(input).blur(function(){
+			            if (input.val() == '' || input.val() == input.attr('placeholder')) {
+			                input.val(input.attr('placeholder'));
+			                $(input).css('color',placeholderColor);
+			            }
+			        });
+			    });
 	    });
     </script>
     {% endblock %}

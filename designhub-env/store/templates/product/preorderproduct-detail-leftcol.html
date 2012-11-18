@@ -19,5 +19,10 @@
         {% include 'product/sharing-buttons.html' with product=product %}
         <div class="clearfix"></div>
         <br><br>
+        <div>
+        	{% autoescape off %}
+        	{{product.preorderproduct.intro}}
+        	{% endautoescape %}
+        </div>
     </div>
 {% endspaceless %}

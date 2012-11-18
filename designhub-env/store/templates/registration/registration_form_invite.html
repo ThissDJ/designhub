@@ -30,26 +30,26 @@
 	    outline:0;outline:0;-webkit-box-shadow:none;-moz-box-shadow:none;box-shadow:none;
 	}
 	#login-panel-container, input.login-input{
-	    background-color: #F8FFB0;
+	    background-color: #fff;/*#F8FFB0;*/
 	}
 	#login-panel-container-container{
-		width:100%;text-align:center;font-size:18px;padding-top:14px;
+		width:100%;text-align:center;font-size:18px;padding-top:35px;
 	}
 	#login-panel-container{
 		width:16em;
 		margin-left:auto;
 		margin-right:auto;
 /*			color: #D04526;*/
-		border: 5px solid #7F0000;
-		border: 5px solid rgba(255, 0, 0, .5);
+		border: 1px dashed #D52027;
+		border: 1px dashed #D52027;
 		-webkit-background-clip: padding-box;
 		background-clip: padding-box;
 	    -webkit-border-radius:3px;
 	    -moz-border-radius:3px;
 	    border-radius:3px;
-	    -moz-box-shadow:   0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
+/*	    -moz-box-shadow:   0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
 	    -webkit-box-shadow:  0px 1px 7px rgba(0,0,0,0.8),inset 0 0 10px #000000;
-	    box-shadow: 0px 1px 7px rgba(0,0,0,0.8),  inset 0 0 10px #000000;
+	    box-shadow: 0px 1px 7px rgba(0,0,0,0.8),  inset 0 0 10px #000000;*/
 	}
 	p.error{
 		color:red;
@@ -65,8 +65,8 @@
 		margin-left:auto;
 		margin-right:auto;
 		padding-left:1em;padding-right:1em;
-		border-top:1px solid #FEFFE6; /*brighter*/
-		border-bottom:1px solid #E1E5A1;
+		border-top:1px solid #Fff; /*brighter*/
+		border-bottom:1px solid #eee;
 		padding-top:14px;
 		padding-bottom:14px;
 	}
@@ -89,18 +89,29 @@
     #login-submit-container .btn-login,#login-sns-container .login-sns-button,#signup-btn{
     	font-size:18px;
     	height:2em;
-    	border:2px solid #fff;
-	    -webkit-border-radius:18px;
-	    -moz-border-radius:18px;
-	    border-radius:18px;
-	    -moz-box-shadow:   0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
-	    -webkit-box-shadow:  0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
-	    box-shadow:0px 1px 7px rgba(0,0,0,0.8), inset 0 0 10px #000000;
-        text-shadow: 0 1px 0 #ccc, 
-		               0 2px 0 #aaa,
-		               0 4px 1px rgba(0,0,0,.1),
-		               0 6px 6px rgba(0,0,0,.15);
-
+    	border:2px solid transparent;
+		display: inline-block;
+		padding: 4px;
+		margin-bottom: 0;
+		font-size: 14px;
+		font-weight:bold;
+		line-height: 20px;
+		text-align: center;
+		vertical-align: middle;
+		cursor: pointer;
+		color: #fff;
+		text-shadow: none;
+		background-color: #D52027;
+		background-image: none;
+		filter: none;
+		border: 0px solid #BBB;
+		border-bottom-color: #A2A2A2;
+		-webkit-border-radius: 0px;
+		-moz-border-radius: 0px;
+		border-radius: 0px;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
     }
     #login-sep-line-container{
     	margin-top:8%;
@@ -185,16 +196,37 @@
     }
     
     #signup-title{
-    	text-shadow: 3px 2px 0px rgba(216,216,216,.8);
+    	font-size:14px;
+    	text-transform:uppercase;
+    	/*text-shadow: 3px 2px 0px rgba(216,216,216,.8);*/
+    }
+    /*<img src='{{MEDIA_URL}}img/invite-bg-1.png'><img src='{{MEDIA_URL}}img/invite-bg-2.png'>*/
+    .mycontainer{
+    	z-index:3;
+    	position:relative;
+    }
+
+    .wrapper,html,body{
+    	background:url({{MEDIA_URL}}img/invite-bg.png) center center no-repeat;
+    }
+    .container, .mycontainer{
+    	background:transparent;
     }
 </style>
 <!-- <div class="wrapper"> -->
 <div class="wrapper" id="beautiful-login">
+
     <div class='mycontainer'>
+<!-- 		<div class='invite-bg-wrapper-right'>
+	    	
+	    </div>
+	    <div class='invite-bg-wrapper-left'>
+	    	
+	    </div> -->
     	<div class='container'>
     		<div style='margin-top:5%;'></div>
     		<div id='left-col'>
-    			<p style='text-align:center;'><img src='{{MEDIA_URL}}img/squre-logo.jpg' width=200></p>
+    			<p style='text-align:center;padding-top:50px;'><img src='{{MEDIA_URL}}img/dhubLogo500x105px.png' width=250></p>
     			<div style='width:100%;text-align:center;'><img src='{{MEDIA_URL}}img/curve-shadow.png'></div>
     			<div id='introduction-wrapper' >
     				<p>
@@ -262,7 +294,7 @@
 						    {% endif %}
 						</div>
 						<div id='login-submit-container'>
-						    <button class="btn btn-login" id="login-submit" name="login-submit" type="submit">Start your journey!</button>
+						   <div class="dhbtn-wrapper"> <button class="btn btn-login" id="login-submit" name="login-submit" type="submit">REGISTER</button></div>
 						</div>
 						</form>
 					{% endblock loginsignupform %}

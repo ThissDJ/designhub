@@ -9,11 +9,14 @@
 
 <div class='mycontainer'>
 	<div class='container header'>
-		<div style='width:100%;position:relative;overflow:visible;margin-top:0px;margin-bottom:10px;height:80px;'>
-			<div style='text-align:center;width:379px;top:14px;left:-60px;position:absolute;'>
-				<a href="/"><img src='{{MEDIA_URL}}img/weblogo(transparent,smaller).png' width='250'></a>
+		<div style='width:100%;position:relative;overflow:visible;margin-top:0px;margin-bottom:0px;height:80px;'>
+			<div style='text-align:left;width:270px;top:0px;left:0px;position:absolute;border-left:0px #888 solid;padding-top:0px;padding-bottom:px;margin-top:18px;'><!--  border-top:6px transparent solid;border-bottom:6px solid transparent; -->
+				<a href="/" style='text-align:center;'><!-- <img src='{{MEDIA_URL}}img/tryingv1.0.png' width='40'>&nbsp;&nbsp;&nbsp; --><img src='{{MEDIA_URL}}img/dhubLogo200x42px.png' width='200'></a>
+				<div style="margin-top:-10px;padding-left:100px;">
+					<span class='logoMiniLine'>A Platform For Local Creativity</span>
+				</div>
 			</div>
-			<div style='position:absolute;left:280px;bottom:0px;text-align:left;'>
+			<div style='position:absolute;left:285px;bottom:5px;text-align:left;'>
 	            <a class='sns-button-wrapper' href='http://www.facebook.com/pages/Design-Hub/445993645420664' target='_blank' title='Visit our Homepage in Facebook'><button class='facbook-home-page sns'></button></a>
 	            <!--<a class='sns-button-wrapper' href='javascript:void(0);' target='_blank' title='Visit our Homepage in Twitter'><button class='twitter-home-page sns'></button></a>-->
 			</div>
@@ -35,12 +38,12 @@
 					{% endif %}
 					<span class="seperator">/</span>
 					{% if user.is_active %}
-						<a href='{% url invite %}' style='color:#D04526;font-weight:bold;'>Invite</a>
+						<a href='{% url invite %}' style='color:#D52027;font-weight:bold;'>Invite</a>
 						<span class="seperator">/</span>
 					{% endif %}
-					<a id='qtip-testing-ele' href='#'>About Us</a>
+					<a id='qtip-testing-ele' href='{% url aboutus %}'>About Us</a>
 					<span class="seperator">/</span>
-					<a href='javascript:void(0);'>Worldwide Delivery</a>
+					<a href='javascript:void(0);' title='Worldwide Delivery provided'>Worldwide Delivery</a>
 					{% url satchmo_cart as carturl %}
 				    {% if carturl %}<span class="seperator">/</span><a href="{{ carturl }}">{% trans "Cart" %}</a>{% endif %}
 				    {% if not cart.is_empty and cart%}
@@ -51,7 +54,7 @@
 					</p>
 				</div>
 			</div>
-			<div style='position:absolute;right:0px;top:40px;width:610px;overflow:visible;'>
+			<div style='position:absolute;right:0px;top:45px;width:593px;overflow:visible;'>
 			    <div id="navbar-header0" class="navbar navbar-static">
 			      <div class="navbar-inner">
 			        <div  style="width: auto;">
@@ -92,6 +95,26 @@
 var categoryListInfoNode = document.getElementById('category-list-info').childNodes[0];
 var navbarHeader0ContainerNode = document.getElementById('navbar-header0').childNodes[0].childNodes[0];
 var categoryNum = 3;
+var catItems = categoryListInfoNode.childNodes;
+var catItemsArr = [];
+for (var i in catItems) {
+    if (catItems[i].nodeType == 1) { // get rid of the whitespace text nodes
+        catItemsArr.push(catItems[i]);
+    }
+}
+
+catItemsArr.sort(function(a, b) {
+  return a.id == b.id
+          ? 0
+          : (a.id.split('-')[1] > b.id.split('-')[1] ? 1 : -1);
+  // return a.innerHTML == b.innerHTML
+          // ? 0
+          // : (a.innerHTML > b.innerHTML ? 1 : -1);
+});
+
+for (i = 0; i < catItemsArr.length; ++i) {
+  categoryListInfoNode.appendChild(catItemsArr[i]);
+}
 var newCategoryNode = navbarHeader0ContainerNode.appendChild(categoryListInfoNode);
 newCategoryNode.className = 'nav';
 newCategoryNode.setAttribute('role','navigation');
@@ -139,8 +162,13 @@ for(var i = 0; i < newCategoryNode.childNodes.length; i++){
 navbarHeader0ContainerNode.innerHTML += [
           '<ul class="nav pull-left">',
            ' <li class="dropdown" id="drop4">',
-             ' <a href="javascript:void(0);" role="button">Talents<span class="caret"></span></a>',
-			 '<ul class="subnav0 hide dropdown-menu" id="talents-ajax-container">',
+             ' <a href="javascript:void(0);" role="button">Designers<span class="caret"></span></a>',
+			 '<ul class="subnav0 hide dropdown-menu" id="designers-ajax-container">',
+			 '</ul>',
+             ' </li>',
+           ' <li class="dropdown" id="drop44">',
+             ' <a href="javascript:void(0);" role="button">Artists<span class="caret"></span></a>',
+			 '<ul class="subnav0 hide dropdown-menu" id="artists-ajax-container">',
 			 '</ul>',
              ' </li>',
             ' <li class="dropdown" id="drop5" >',
@@ -162,15 +190,15 @@ function addClass(id,stylestr){
 }
 var activeStr = 'active';
 if(currentUrl.substring(0,13) === "/category/art"){
-	addClass('category-3',activeStr);
+	addClass('category-5',activeStr);
 }else{
 	if(currentUrl.substring(0,19) === "/category/lifestyle"){
-		addClass('category-2',activeStr);
+		addClass('category-3',activeStr);
 	}else{
 		if(currentUrl.substring(0,17) === "/category/fashion"){
 			addClass('category-1',activeStr);
 		}else{
-			if(currentUrl.substring(0,8) === "/talents"){
+			if(currentUrl.substring(0,8) === "/designers"){
 				addClass('drop4',activeStr);
 			}else{
 				if(currentUrl.substring(0,5) === "/sale"){
@@ -178,6 +206,10 @@ if(currentUrl.substring(0,13) === "/category/art"){
 				}else{
 					if(currentUrl.substring(0,6) === "/ideas"){
 						addClass('drop6',activeStr);
+					}else{
+						if(currentUrl.substring(0,7) === "/artists"){
+							addClass('drop44',activeStr);
+						}
 					}	
 				}
 			}

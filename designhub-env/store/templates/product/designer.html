@@ -5,11 +5,7 @@
 		    {% if product.mynewproduct.designer.main_image %}
 		            {% thumbnail product.mynewproduct.designer.main_image.picture "150x150"  crop="center" as image %}
 		            <a href='{{product.mynewproduct.designer.get_absolute_url}}'>
-		            {% if debug %}
-     		           <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-     		        {% else %}
-		            <img src="{{MEDIA_URL}}images/index/none-150.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-		            {% endif %}
+     		           <img  src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 		           </a>
 		           {% endthumbnail %}
 		    {% endif %}

@@ -42,5 +42,52 @@
 	            </div>       
 			</div>
 		</div>
+		{% for option_group in options %}
+		   {% ifequal option_group.name "Pre-order Plans" %}
+		       <ul>
+			       {% for choice in option_group.items %}
+			           <li>
+			           	   <p>
+			           	   	   {{ choice.translated_name }}
+			           	   </p>
+			           	   <form id="options" style='text-align:center;' class='form-inline' action="{% url satchmo_smart_add %}" method="post">{% csrf_token %}
+								{% for inner_option_group in options %}
+								    {% ifnotequal option_group.name "Pre-order Plans" %}
+								    <div class="styled-select">	
+									    <select id="{{option_group.id}}" name="{{ option_group.id }}" class="select other-option" title="{{option_group.name}}:" >
+										    {% for inner_choice in inner_option_group.items %}
+											     <option value="{{ inner_choice.value }}" {% if inner_choice.selected %}selected="selected"{% endif %}>{{ inner_choice.translated_name }}
+											        {% if inner_choice.price_change %}
+											            {% option_price inner_choice %}
+											        {% endif %}
+											     </option>
+										    {% endfor %}
+								        </select>
+							       </div>
+							       {% else %}
+							           <input type='hidden' name="{{ option_group.id }}" value='{{ choice.value }}'>
+							       {% endifnotequal %}
+								{% endfor %}
+								<div class="styled-select">	
+									<select id="quantity"  name="quantity"  class="select" title="Qty:" >
+								        <option value='1' style='font-size:12px;line-height:24px;'>Qty:1</option>
+								        <option value='2' style='font-size:12px;line-height:24px;'>2</option>
+								        <option value='3' style='font-size:12px;line-height:24px;'>3</option>
+								        <option value='4' style='font-size:12px;line-height:24px;'>4</option>
+								        <option value='5' style='font-size:12px;line-height:24px;'>5</option>
+								    </select>
+							    </div>
+										<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+										<div class='dhbtn-wrapper'>
+										    <button class="btn dhbtn" id="addcart"  name="addcart"  type="submit">{% trans "Add to cart" %}</button>
+										</div>
+							
+							<input type="hidden" name="productname" id="productname" value="{{product.slug}}" />
+			           	   </form>
+			           </li>
+			       {% endfor %}		       	
+		       </ul>
+		   {% endifequal %}
+		{% endfor %}
     </div>
 {% endspaceless %}

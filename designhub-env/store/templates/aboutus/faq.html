@@ -1,0 +1,155 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block pretitle %}About DesignHub.hk {% endblock pretitle %}
+{% block extrastyle %}
+<style>
+    #faq-container{
+    	padding:0px;margin:0px;
+    }
+    #faq-container .leftcol, #faq-container .rightcol{
+    	width:45%;
+    }
+    #faq-container .leftcol h2, #faq-container .rightcol h2{
+    	text-align:center;
+    }
+    #faq-container .leftcol{
+    	float:left;
+    }
+    #faq-container .rightcol{
+    	float:right;
+    }
+	#faq-container li{
+		list-style:none;
+	}
+	#faq-container li.for-whom-container a.headerlink{
+		color:#D04526;
+		display:none;
+	}
+	#faq-container li.for-whom-container a.headerlink:hover{
+		text-decoration:none;
+	}
+	#faq-container li.for-whom-container h2:hover a.headerlink{
+		display:inline;
+	}
+	.faq-content li{
+		margin-bottom:20px;
+	}
+</style>
+{% endblock extrastyle %}
+{% block breadcrumbs-inner %}
+	{% block breadcrumbs-category %}
+	    <span class="seperator">/</span><span>About Us</span>
+	{% endblock breadcrumbs-category %}
+{% endblock breadcrumbs-inner %}
+{% block content %}
+{% spaceless %}
+
+<h1>FAQ</h1>
+<ul id='faq-container'>
+	<li class='leftcol for-whom-container'>
+		<h2>For Unborn Idea’s Owner
+			<a class="headerlink" href="#unborn-idea-owner" title="Permalink to this headline">¶</a>
+		</h2>
+		<ul class='faq-content'>
+			<li>
+				<p class='question'>
+					1. What kind of idea you are looking for.
+				</p>
+				<p class='answer'>
+					A: We are looking for idea that is extraordinary, creative and wow. If you are not sure, give it a try. (Usually people underestimated their ideas)
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					2. What's next after leaving my contact?
+				</p>
+				<p class='answer'>
+					A: Our team will contact you within 2 working days to discuss details with you.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					3. When can I launch my campaign?
+				</p>
+				<p class='answer'>
+					A: After leaving your contact right now, you can launch your campaign within a week.(start counting)
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					4. Will I get the funds if the campaign is not 100% achieved?
+				</p>
+				<p class='answer'>
+					A: It’s an all-or-nothing approach, so the money will be refunded to supporters.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					5: Is there any cost of launching a campaign on Design Hub?
+				</p>
+				<p class='answer'>
+					A: It costs $0 to launch a campaign.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					6. Will Design Hub take a percentage of ownership or intellectual property?
+				</p>
+				<p class='answer'>
+					A: Absolutely not. You’ll keep 100% ownership of your work.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					7. So what am I still waiting for?
+				</p>
+				<p class='answer'>
+					A: Act now! :)
+				</p>
+			</li>
+		</ul>
+	</li>
+	<li class='rightcol for-whom-container'>
+		<h2>For Designers and Artists
+			<a class="headerlink" href="#designers-artists" title="Permalink to this headline">¶</a>
+		</h2>
+		<ul class='faq-content'>
+			<li>
+				<p class='question'>
+					1. What's next if I want to sell on Design Hub?
+				</p>
+				<p class='answer'>
+					A: Leave your contact right now and our team will contact you within 2 working days to discuss details.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					2: Is there any cost of selling my works on Design Hub?
+				</p>
+				<p class='answer'>
+					A: It costs $0 to sell.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					3: What are your criteria in choosing designs/artworks?
+				</p>
+				<p class='answer'>
+					A: Originality.
+				</p>
+			</li>
+			<li>
+				<p class='question'>
+					4: What else can I achieve through Design Hub?
+				</p>
+				<p class='answer'>
+					A: We serve as a social platform for local creativity. We encourage interaction between designers & artists and consumers.
+				</p>
+			</li>
+		</ul>
+	</li>
+	</li>
+</ul>
+
+{% endspaceless %}
+{% endblock %}

@@ -35,8 +35,27 @@ satchmo.thumbnails = new Array();
     {% include "product/product_path.html" with product=product %}
 {% endblock breadcrumbs-category %}
 {% block productdetail %}
-    <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;">
-        <h1> Thiss preorder</h1>
-    </div>
+        <div class="container" style="margin-top:0px;margin-bottom:20px;padding-bottom:20px;">
+            {% include 'product/preorderproduct-detail-leftcol.html' with product=product %}
+            {% include 'product/preorderproduct-detail-rightcol-base.html' with product=product %}
+        </div>
 
 {% endblock %}
+{% block preloadextrajs %}
+<script type="text/javascript" src="{{MEDIA_URL}}js/slides.min.jquery.js"></script>
+<script type="text/javascript">
+(function ($) {
+	$('#index-slider').slides({
+		preload: true,
+		preloadImage: '{{ MEDIA_URL }}img/loading.gif',
+		effect: 'slide, fade',
+		crossfade: true,
+		slideSpeed: 350,
+		fadeSpeed: 500,
+		generateNextPrev: true,
+		generatePagination: false,
+		play: 5000
+	});
+})(jQuery);
+</script>
+{% endblock preloadextrajs %}

@@ -25,26 +25,18 @@
 			<div id="index-slider">
 	    		<div class="slides_container">
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	{% if debug %}
 				    	<img src="{{MEDIA_URL}}images/index/1-950x480.jpg"/>
-				    	{% else %}
-				    	<img src="{{MEDIA_URL}}images/index/none-950x480.jpg"/>
-				    	{% endif %}
 				    </a>
 				    <a href="javascript:void(0);" class='slides-image-container'>
-				    	{% if debug %}
 				    	<img src="{{MEDIA_URL}}images/index/2-950x480.jpg"/>
-				    	{% else %}
-				    	<img src="{{MEDIA_URL}}images/index/none-950x480.jpg"/>
-				    	{% endif %}
 				    </a>
 	    		</div>
 	    	</div>
 	</div>
 	{% endcache %}
-	{% cache 3600 index::talentToday1 %}
-	<div class='container index-section' style='padding-bottom:3px;'>
-		<div class='index-section-title-wrapper'>
+	{% cache 1 index::talentToday %}
+	<div class='container index-section' style='padding-bottom:20px;margin-top:20px;'>
+		<div class='index-section-title-wrapper talent-today'>
 			<div class='index-section-title-decor-left'></div>
 			<h2>
 				Talent Today
@@ -54,8 +46,7 @@
 		</div>
 		<div style='float:left;width:550px;height:350px;position:relative;' class='designer-today-avater-wrapper'>
 	        {% thumbnail designer.main_image.picture "550x350"  crop="center" as image %}
-	         {% if debug %}<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-	         {% else %}<img src="{{MEDIA_URL}}images/index/none-550x350.png" /> {% endif %}
+	         <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
 	        {% endthumbnail %}
 	        <a class='designer-today' href='{{designer.get_absolute_url}}'>{{designer.name}}</a>
 		</div>
@@ -69,8 +60,7 @@
 				    	<div class='black-bg-designer-today-featured-design'>
 				    	
 					    {% thumbnail p.product.productimage_set.all.1.picture "131x174" crop='center' as image %}
-	                     {% if debug %}<img src="{{ image.url }}" />{% else %}
-	                     <img src="{{MEDIA_URL}}images/index/none-131x174.png" /> {% endif %}
+	                     <img src="{{ image.url }}" />
 					    {% endthumbnail %}
 					    </div>
 				    </a>
@@ -85,7 +75,7 @@
 	{% if featured_cats %}
 	    
 	    {% for fc in featured_cats %}
-	        {% cache 3600 index::featuredCats1  fc.name %}
+	        {% cache 1 index::featuredCats  fc.name %}
 			<div class='container index-section'>
 				<div class='index-section-title-wrapper'>
 					<div class='index-section-title-decor-left'></div>
@@ -103,7 +93,7 @@
 	    
 	{% endif %}
 	
-	{% cache 3600 index::featuredIdeas1 %}
+	{% cache 1 index::featuredIdeas %}
 	{% if featured_preorder_products_list %}
 		<div class='container index-section'>
 			<div class='index-section-title-wrapper'>

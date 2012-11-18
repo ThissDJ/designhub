@@ -1,0 +1,51 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% block pretitle %}About DesignHub.hk {% endblock pretitle %}
+{% block extrastyle %}
+<style>
+    #aboutus-container{
+    	padding:0px;margin:0px;
+    }
+	#aboutus-container li{
+		list-style:none;
+	}
+	#aboutus-container li.section-container a.headerlink{
+		color:#D04526;
+		display:none;
+	}
+	#aboutus-container li.section-container a.headerlink:hover{
+		text-decoration:none;
+	}
+	#aboutus-container li.section-container h2:hover a.headerlink{
+		display:inline;
+	}
+    h1{
+    	text-align:left;
+    }
+</style>
+{% endblock extrastyle %}
+{% block breadcrumbs-inner %}
+	{% block breadcrumbs-category %}
+	    <span class="seperator">/</span><span>About Us</span>
+	{% endblock breadcrumbs-category %}
+{% endblock breadcrumbs-inner %}
+{% block content %}
+{% spaceless %}
+
+<ul id='aboutus-container'>
+	<li>
+		<h1>About Us</h1>
+		<p>Every day we introduce extraordinary local ideas, products and artworks, with the best service that serves your needs of being extraordinary. We believe what we are doing is to provide an unique experience to you. We want you enjoy every extraordinary moment with us.</p>
+	</li>
+	<li class='section-container'>
+		<h2>How Do We Work
+			<a class="headerlink" href="#how-do-we-work" title="Permalink to this headline">¶</a>
+			</h2>
+		<p>
+			We cooperate with designers and artists to showcase their ideas and works to the audience. With the synergy designers and artists, we create a platform for local creativity.
+		</p>
+	</li>
+</ul>
+
+{% endspaceless %}
+{% endblock %}

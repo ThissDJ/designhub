@@ -189,12 +189,14 @@ class MyNewProduct(models.Model):
         verbose_name = _('My New Product')
         verbose_name_plural = _('My New Products')
 
+from tinymce import models as tinymce_models
 class PreOrderProduct(models.Model):
     product = models.OneToOneField(Product, verbose_name=_('Product'),
         primary_key=True)
     designer = models.ForeignKey(Designer, null=True, blank=True)
     end = models.DateTimeField(_("Preorder Ending Date"), null=True, blank=True)
     description = models.TextField(null=True, blank=True, max_length=200)
+    intro = tinymce_models.HTMLField(null=True, blank=True)
     ship = models.TextField(null=True, blank=True, max_length=2000)
     featured = models.BooleanField(_("Featured"), default=False, help_text=_("Featured items will show on the front page"))
     def _get_subtype(self):

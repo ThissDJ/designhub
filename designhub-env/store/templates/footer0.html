@@ -8,9 +8,9 @@
 		</div>
 		<div style="float:right;">
 			<div id="credits" class="pull-right">
-				<a href="javascript:void(0)"  title="How Do We work ?">How Do We work ?</a> &nbsp;/&nbsp;
-				<a href="javascript:void(0)"  title="FAQ">FAQ</a> &nbsp;/&nbsp;
-				<a href="javascript:void(0)"  title="Blog">Blog</a> &nbsp;/&nbsp;<a href="/#aboutus" title="About Us">About Us</a> &nbsp;/&nbsp; <a href="javascript:void(0)" title="Team">Team</a> &nbsp;/&nbsp; <a href="javascript:void(0)" title="Contact">Contact</a> &nbsp;/&nbsp; <a href="javascript:void(0)" title="Privacy Policy">Privacy Policy</a></div>
+				<a href="{% url aboutus %}#how-do-we-work"  title="How Do We work ?">How Do We work ?</a> &nbsp;/&nbsp;
+				<a href="{% url faq %}"  title="FAQ">FAQ</a> &nbsp;/&nbsp;
+				<a href="{% url aboutus %}" title="About Us">About Us</a> &nbsp;/&nbsp; <a href="javascript:void(0)" title="Team">Team</a> &nbsp;/&nbsp; <a href="{% url dhcontact %}" title="Contact">Contact</a> &nbsp;/&nbsp; <a href="javascript:void(0)" title="Privacy Policy">Privacy Policy</a></div>
 		</div>
     </div>
 </div>

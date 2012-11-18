@@ -1,36 +1,38 @@
 {% load thumbnail %}
 {% spaceless %}
-    	<div style="width:440px;float:left;">
+    	<div style="width:470px;float:left;">
     		<div id="product">
-    			<div class='content' >
-	    	    <ul class="pagination">
-	    			{% for pic in product.productimage_set.all %}
-					    {% thumbnail pic.picture "80x120" crop='center' as image %}
-					    <li>
-					    	<a href="#" class="product-detail-thumnail" style='background:transparent;'>
-					    	{% if debug %}
-					    	<img src="{{ image.url }}"  width="{{ image.width }}" height="{{ image.height }}"/>
-					    	{% else %}
-					    	<img src="{{MEDIA_URL}}images/index/none-80x120.jpg" />
-					    	{% endif %}
-					    </a>
-					    </li>
-					    {% endthumbnail %}
-					{% endfor %}	    			
-	    		</ul>
-	    		</div>
 	    		<div class="slides_container">
+	    			
+	    			{% if product.mynewproduct %}
+	    			    {% load satchmo_currency %}
+                        {% load satchmo_discounts satchmo_tax %}
+	    			    {% ifnotequal  product|discount_price:"" product|sale_price %}
+	    			        {% load saved_percentage %}
+								<div class='discount-tip'>
+									<span class="discount"></span>
+									<span class="discount-text">
+										{% with product|discount_price:"" as original_unit_price %}
+										    {% with product|sale_price as sale_price %}
+										        {% with original_unit_price|sub:sale_price as saved_money %}
+										            -{% widthratio saved_money original_unit_price  100 %}%
+										        {% endwith %}
+										    {% endwith %}
+										{% endwith %}
+			                        </span>
+								</div>
+	    			    {% endifnotequal %}
+	    			{% endif %}
 	    			{% for pic in product.productimage_set.all %}
-	    			    {% thumbnail pic.picture "300x400" crop='center'  as image %}
-					    {% thumbnail pic.picture "1000x1334" crop='center' as image_b %}
-					    {% if debug %}
-					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{ image_b.url }}' href="#" data-index='{{ forloop.counter}}'>
-					    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
-					    {% else %}
-					    <a class="fancybox-thumb zoom-in qtip-zoom-in" title='Click to enlarge' rel="fancybox-thumb" data-bigimage-src='{{MEDIA_URL}}images/index/none-1000x1334.jpg' href="#" data-index='{{ forloop.counter}}'>
-					    	<img src="{{MEDIA_URL}}images/index/none-300x400.jpg" width="300" height="400"/>
-                        {% endif %} 
-					    </a>
+	    			
+	    			    {% thumbnail pic.picture "340x400"  as image %}
+					    {% thumbnail pic.picture "1000x1334" as image_b %}
+					    {% ifequal forloop.counter 1 %}
+						    <a class="zoom-in fullscreen-zoom-in" title='Click to enlarge' data-bigimage-src='{{ image_b.url }}' rel='gal1' href="{{ image_b.url }}" data-index='{{ forloop.counter}}'><!--  style='overflow:hidden;' -->
+						    	<img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
+						    </a>
+					    {% endifequal %}
+					        <a class="fullscreen-zoom-in fullscreen-zoom-in-hide" data-index='{{ forloop.counter}}' href="{{ image_b.url }}"  style='display:none;'></a>
 					    {% endthumbnail %}
 					    {% endthumbnail %}
 					{% endfor %}
@@ -69,7 +71,25 @@
 						</script>
 					</div>
 	    		</div>
+    			<div class='content' >
+	    	    <ul class="pagination">
+	    			{% for pic in product.productimage_set.all %}
+					    {% thumbnail pic.picture "90x120" crop='center' as image %}
+					        {% thumbnail pic.picture "340x400" as image_small %}
+					             {% thumbnail pic.picture "1000x1334" as image_b %}
+					    <li>
+					    	<a href="#" class="product-detail-thumnail {% ifequal forloop.counter 1 %}zoomThumbActive{% endifequal %}" style='background:transparent;'   rel="{gallery: 'gal1', smallimage:'{{ image_small.url }}', largeimage: '{{ image_b.url }}'}"  data-index='{{ forloop.counter}}'>
+					    	<img src="{{ image.url }}"  width="{{ image.width }}" height="{{ image.height }}"/>
+					    </a>
+					    </li>
+					            {% endthumbnail %}
+					        {% endthumbnail %}
+					    {% endthumbnail %}
+					{% endfor %}	    			
+	    		</ul>
+	    		</div>
 	    	</div>
+
 	    	<div class="clearfix"></div>
             {% include 'product/sharing-buttons.html' with product=product %}
             <div class="clearfix"></div>

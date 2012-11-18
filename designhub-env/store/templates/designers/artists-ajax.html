@@ -27,19 +27,22 @@
 		list-style-type:none;
 		text-align:center;
 	}
-	#designers-ajax-container{
+	#artists-ajax-container{
+		margin-top:0px;
+	}
+/*	#artists-ajax-container{
 		margin-top:0px;
 		margin-left:0px;
 		min-width:950px;
 		left:-747px;
 		right:auto;
 	}
-    #designers-ajax-container::before{
+    #artists-ajax-container::before{
     	left:760px;
     }
-    #designers-ajax-container::after{
+    #artists-ajax-container::after{
     	left:761px;
-    }
+    }*/
      .talent-group-container a{
      	text-align:center;
      }
@@ -48,16 +51,9 @@
 	<ul class='talent-groups-container-li-parent'>
 		<li class='talent-groups-container-li'>
 			<ul id='talent-list' class='talent-groups-container'>
-				{% for dgroup in designers %}
-				    <li class='talent-group-container'>
-				    <h6> {{dgroup.name}}</h6>
-				    <ul>
-				    {% for d in dgroup.list %}
-				            <li><a href='{{ d.get_absolute_url }}'>{{d.name}}</a></li>
-				    {% endfor %}
-				    </ul>
-				    </li>
-				{% endfor %}
+			    {% for d in artists %}
+			            <li><a href='{{ d.get_absolute_url }}'>{{d.name}}</a></li>
+			    {% endfor %}
 			</ul>
 		</li>
 	</ul>

@@ -6,10 +6,10 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/imports.p2.20121030.css">
-	<link href="{{ MEDIA_URL }}css/bootstrap.min.p2.20121030.css" rel="stylesheet">
-	<link rel="shortcut icon" href="{{ MEDIA_URL }}favicon.ico">
+	<link href="{{ MEDIA_URL }}css/bootstrap.min.20121117.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ MEDIA_URL }}img/favicon3.png">
     {% block extra-head %}{% endblock %}
-    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20121030.p2.css" />
+    {% block stylesheet %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/style.20121117.css" />
     {% endblock %}
     <title>{% block pretitle %}{% endblock pretitle %}{% block title %}{{ shop_name }}, a platform for local creativity.{% if pagetitle %}: {{ pagetitle }}{% endif %}{% endblock %}</title>
     {% block extrastyle %}<link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox.css" />{% endblock %}
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 		{% endblock breadcrumbs %}
-		<div class='mycontainer' style='padding-top:10px;padding-bottom:50px;'>
+		<div class='mycontainer' style='padding-top:10px;padding-bottom:10px;'>
 			<style>
 				.various-hide{
 					position:absolute;top:-10000px;
@@ -68,14 +68,14 @@
 			</div>
 			{% block indexfooter %}
 			{% endblock indexfooter %}
-		    <div class='push'></div>
 		</div>
+		<div class='push'></div>
 	</div>
 	{% block footer %}{% include "footer0.html" %}{% endblock %}
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{MEDIA_URL}}js/libs/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/main.20121005.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/main.20121117.js"></script>
     <script type="text/javascript" >
 	    (function ($) {
             $('.qtip-title-tip').tooltip();
@@ -87,10 +87,10 @@
     {% endblock preloadextrajs  %}
     {% block mainextrajs %}
     <!-- launching page part optional-->
-    <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
+<!--     <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script> -->
     <!-- launching page part -->
-    <style>
-    	.fancybox-close-launching{
+   <style>
+     /*	.fancybox-close-launching{
     		top:1px;
     		right:1px;
     		width:45px;
@@ -98,31 +98,31 @@
             background:url('{{MEDIA_URL}}img/close-button-launching.png') no-repeat;
     		background-position: center center;
     		background-size: 50% 50%;
-    	}
-    	.fancybox-skin-launching{/*,.fancybox-overlay{*/
-    		background:transparent;
-    	}
-    	#gradient-bg-wrapper{
-			background-image: -ms-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
+    	} */
+    	/*.fancybox-skin-launching{*//*,.fancybox-overlay{*/
+    	/*	background:transparent;
+    	}*/
+/*    	#gradient-bg-wrapper{*/
+/*			background-image: -ms-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);*/
 			
 			/* Mozilla Firefox */ 
-			background-image: -moz-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
+/*			background-image: -moz-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);*/
 			
 			/* Opera */ 
-			background-image: -o-radial-gradient(center, ellipse farthest-side,   rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
+/*			background-image: -o-radial-gradient(center, ellipse farthest-side,   rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);*/
 			
 			/* Webkit (Safari/Chrome 10) */ 
-			background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0.2, #FFFFFF), color-stop(1.5, rgba(0,0,0,0.8)));
+/*			background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0.2, #FFFFFF), color-stop(1.5, rgba(0,0,0,0.8)));*/
 			
 			/* Webkit (Chrome 11+) */ 
-			background-image: -webkit-radial-gradient(center, ellipse farthest-side, rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
+/*			background-image: -webkit-radial-gradient(center, ellipse farthest-side, rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);*/
 			
 			/* W3C Markup, IE10 Release Preview */ 
-			background-image: radial-gradient(ellipse farthest-side at center,  rgba(126,126,126,0.5) 20%,rgba(0,0,0,0.8) 150%);
+/*			background-image: radial-gradient(ellipse farthest-side at center,  rgba(126,126,126,0.5) 20%,rgba(0,0,0,0.8) 150%);*/
 
-    	}
+/*    	}*/
     </style>
-    <script type="text/javascript" >
+    <!-- <script type="text/javascript" >
 		$(document).ready(function() {
 			{% if user.is_active %}
 			{% else %}
@@ -197,7 +197,7 @@
 			    });
 			    {% endif %}
 	    });
-    </script>
+    </script> -->
     <!-- launching page part -->
     {% endblock mainextrajs %}
     {% endblock extrajs %}

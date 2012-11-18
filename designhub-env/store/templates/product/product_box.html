@@ -6,7 +6,7 @@
     {% if forloop.first %} <div class="pic-list-container"> {% endif %}
     	{% cache 1 productListing::productbox1 product.slug %}
         <div style="width:235px;float:left;" class='toggleImage-container product-index-container'>
-        	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }} | coming soon!"> 
+        	<a href="{{ product.get_absolute_url }}"  class="pic-container-a hover-tip" title="{{ product.translated_name }}"> 
         		<!--<div class="tip-content-when-hover">
         			Sample
         	 </div>-->
@@ -14,17 +14,10 @@
         	        <div class='pic-container-img-wrapper'>
         	        {% if product.productimage_set.all.count > 1 %}
         	            {% thumbnail product.productimage_set.all.1.picture "209x230" crop='center' as image1 %}
-        	                {% if debug %}
                             <img class='toggleImage' src="{{ image.url }}" data-other='{{ image1.url}}' width="{{ image.width }}" height="{{ image.height }}" />
-                            {% else %}<img class='toggleImage' src="{{MEDIA_URL}}images/index/none-180x230.jpg" data-other='{{MEDIA_URL}}images/index/none-180x230.jpg' width="{{ image.width }}" height="{{ image.height }}" /> 
-                            {% endif %}
         	            {% endthumbnail %}
         	        {% else %}
-        	            {% if debug %}
                             <img src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}" />
-                        {% else %}
-            	            <img src="{{MEDIA_URL}}images/index/none-180x230.jpg" width="{{ image.width }}" height="{{ image.height }}" />
-        	            {% endif %}
         	        {% endif %}
         	        </div>
                 {% endthumbnail %}
@@ -32,14 +25,40 @@
             <a href='{{ product.get_absolute_url }}' class='product-name-container'>
             	<span class='brand-name-index'>{{product.mynewproduct.brand.name}}</span>
             	<span class='product-name-index'>{{product.name}}</span>
-            	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
-			    <span class='product-original-price-index'>
-			    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
-			    </span>
-			    {% endifnotequal %}
-				<span class='product-price-index'>{{ product|sale_price|currency }}</span>
-				
+            	{% if product.mynewproduct %}
+            	    <span class='product-box-hover-show'>by</span><span class='designer-name product-box-hover-show'> {{product.mynewproduct.designer.name}}</span>
+	            	{% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+				    <span class='product-original-price-index'>
+				    	<strike style="display: block;" id="fullprice">{{ product|discount_price:""|currency }}</strike>
+				    </span>
+				    {% endifnotequal %}
+					<span class='product-price-index'>{{ product|sale_price|currency }}</span>
+				{% else %}
+				    <span class='product-box-hover-show'>by</span><span class='designer-name product-box-hover-show'> {{product.preorderproduct.designer.name}}</span>
+				{% endif %}
             </a>
+            {% if product.mynewproduct %}
+                {% ifnotequal  product|discount_price:""|currency product|sale_price|currency %}
+                    {% load saved_percentage %}
+					<div class='discount-tip'>
+						<span class="discount"></span>
+						<span class="discount-text">
+							{% with product|discount_price:"" as original_unit_price %}
+							    {% with product|sale_price as sale_price %}
+							        {% with original_unit_price|sub:sale_price as saved_money %}
+							            -{% widthratio saved_money original_unit_price  100 %}%
+							        {% endwith %}
+							    {% endwith %}
+							{% endwith %}
+                        </span>
+					</div>
+			    {% endifnotequal %}
+			{% endif %}
+			{% if product.preorderproduct %}
+			<div class='preorder-tip'>
+				<span>Pre Order</span>
+			</div>
+			{% endif %}
         </div>
         {% endcache %}
     {% if forloop.last %} </div>{% endif %}

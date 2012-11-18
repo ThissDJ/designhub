@@ -3,6 +3,7 @@
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox.css" />
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.fancybox-thumbs.css" />
 <link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.mCustomScrollbar.css" />
+<link rel="stylesheet" href="{{ MEDIA_URL }}css/jquery.jqzoom.css" />
 <style>
 #fancybox-thumbs{
 width:80px;
@@ -36,12 +37,12 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
 
     {% block productdetail %}
     <div class="container" style="margin-top:10px;margin-bottom:20px;padding-bottom:20px;" id='product-detail'>
-    	{% cache 3600 productDetail::leftcol1 product.slug %}
+    	{% cache 3 productDetail::leftcol product.slug %}
         {% include 'product/product-detail-leftcol.html' with product=product %}
         {% endcache %}
         {% include 'product/product-detail-rightcol-base.html' with product=product %}
         <div class="clearfix" ></div>
-        {% cache 3600 productDetail::designer1 product.slug %}
+        {% cache 1 productDetail::designer product.slug %}
         <div style='width:60%;float:left;'>
         	{% include "product/designer.html" %}
         </div>
@@ -64,35 +65,72 @@ ProductVariations or CustomProducts, look for product/detail_xxx.html
     {% endblock %}
 {% endblock %}
 {% block mainextrajs %}
-<script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
+<!-- <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/jquery.fancybox.pack.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/helpers/jquery.fancybox-thumbs.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/helpers/jquery.fancybox-media.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/fancybox/helpers/jquery.fancybox-media.js"></script> -->
 <script type="text/javascript" src="{{MEDIA_URL}}js/slides.min.jquery.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel.min.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mCustomScrollbar.js"></script>
-<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.zoom-min.js"></script>
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.ui.dhub.fullscreenzoom.js"></script>
+<script type="text/javascript" src='{{MEDIA_URL}}js/jquery.jqzoom-core.js'></script>
 <script type="text/javascript">
 var productid = {{product.id}};
 </script>
 <script type="text/javascript">
 (function ($) {
 
-	$('#product').slides({
-		preload: true,
-		preloadImage: '{{ MEDIA_URL }}img/loading.gif',
-		effect: 'slide, fade',
-		crossfade: true,
-		slideSpeed: 350,
-		fadeSpeed: 500,
-		generateNextPrev: false,
-		generatePagination: false
-	});
-	$('a.zoom-in').each(function(){
-		var $that = $(this);
-		var bigImageUrl = $that.attr('data-bigimage-src');
-		$(this).zoom({url: bigImageUrl});
-	});
+	// $('#product').slides({
+		// preload: true,
+		// preloadImage: '{{ MEDIA_URL }}img/loading.gif',
+		// effect: 'slide, fade',
+		// crossfade: true,
+		// slideSpeed: 350,
+		// fadeSpeed: 500,
+		// generateNextPrev: false,
+		// generatePagination: false
+	// });
+	$(document).ready(function() {
+      $('.zoom-in').jqzoom({  
+                // zoomType: 'reverse',
+                zoomHeight: 398,
+                zoomWidth: 592,
+                xOffset:15, 
+                // showEffect : 'fadein',
+                // hideEffect : 'fadeout',
+                title: false
+      });  
+	    // var options = {  
+            // zoomType: 'standard',  
+            // lens:true,  
+            // preloadImages: true,  
+            // alwaysOn:false,  
+            // zoomWidth: 300,  
+            // zoomHeight: 400,  
+            // xOffset:90,  
+            // yOffset:30,  
+            // position:'left'  
+            // //...MORE OPTIONS  
+        // };  
+        // $('.zoom-in').jqzoom(options);
+    });
+	
+// 	
+	 // $('a.zoom-in img').each(function(){
+	 	// alert($(this).attr('src'));
+	 	// $(this).addimagezoom({
+			// zoomrange: [3, 10],
+			// magnifiersize: [300,300],
+			// magnifierpos: 'right',
+			// cursorshade: true,
+			// largeimage: 'http://i44.tinypic.com/11icnk5.jpg' //<-- No comma after last option!
+	    // });
+	// });
+	// $('#designer-avatar').addimagezoom();
+	// $('a.zoom-in').each(function(){
+		// var $that = $(this);
+		// var bigImageUrl = $that.attr('data-bigimage-src');
+		// $(this).zoom({url: bigImageUrl});
+	// });
 	/* the tables in the right columb*/
 	$('#myTab a').click(function (e) {
 	  e.preventDefault();
@@ -123,125 +161,94 @@ var productid = {{product.id}};
     })(jQuery);
 
 	(function ($) {
-        $('.qtip-zoom-in').tooltip();
+        // $('.zoom-in').tooltip();
 
 	})(jQuery);
 		$(document).ready(function() {
-			$('.fancybox-media').fancybox({
-				openEffect  : 'none',
-				closeEffect : 'none',
-				helpers : {
-					media : {}
-				}
-			});
+			// $('.fancybox-media').fancybox({
+				// openEffect  : 'none',
+				// closeEffect : 'none',
+				// helpers : {
+					// media : {}
+				// }
+			// });
 		});
 </script>
     <!-- launching page part optional-->
     <!-- launching page part -->
     <style>
-    	.fancybox-close-launching{
-    		top:1px;
-    		right:1px;
-    		width:45px;
-    		height:45px;
-            background:url('{{MEDIA_URL}}img/close-button-launching.png') no-repeat;
-    		background-position: center center;
-    		background-size: 50% 50%;
-    	}
-    	.fancybox-skin-launching{/*,.fancybox-overlay{*/
-    		background:transparent;
-    	}
-    	#gradient-bg-wrapper{
-			background-image: -ms-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
-			
-			/* Mozilla Firefox */ 
-			background-image: -moz-radial-gradient(center, ellipse farthest-side,  rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
-			
-			/* Opera */ 
-			background-image: -o-radial-gradient(center, ellipse farthest-side,   rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
-			
-			/* Webkit (Safari/Chrome 10) */ 
-			background-image: -webkit-gradient(radial, center center, 0, center center, 487, color-stop(0.2, #FFFFFF), color-stop(1.5, rgba(0,0,0,0.8)));
-			
-			/* Webkit (Chrome 11+) */ 
-			background-image: -webkit-radial-gradient(center, ellipse farthest-side, rgba(126,126,126,0.5) 20%, rgba(0,0,0,0.8) 150%);
-			
-			/* W3C Markup, IE10 Release Preview */ 
-			background-image: radial-gradient(ellipse farthest-side at center,  rgba(126,126,126,0.5) 20%,rgba(0,0,0,0.8) 150%);
-
-    	}
     </style>
     <script type="text/javascript" >
 		$(document).ready(function() {
-			$(".various").fancybox({
-				padding     : 0,
-				margin      : 0,
-				tpl         : {
-									wrap     : '<div id="gradient-bg-wrapper" class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin fancybox-skin-launching"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
-									image    : '<img class="fancybox-image" src="{href}" alt="" />',
-									iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0"' + ($.browser.msie ? ' allowtransparency="true"' : '') + '></iframe>',
-									error    : '<p class="fancybox-error">The requested content cannot be loaded.<br/>Please try again later.</p>',
-									closeBtn : '<a title="Close" class="fancybox-item fancybox-close fancybox-close-launching" href="javascript:;"></a>',
-									next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
-									prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
-								},
-				fitToView	: false,
-				width		: '100%',
-				height		: '100%',
-				autoSize	: false,
-				closeClick	: false,
-				openEffect	: 'none',
-				closeEffect	: 'none',
-				helpers : { 
-						   overlay: {
-						    css: {}} // overlay 
-						  } //helpers
-			});
-			$(".various").click();
+			// $(".various").fancybox({
+				// padding     : 0,
+				// margin      : 0,
+				// tpl         : {
+									// wrap     : '<div id="gradient-bg-wrapper" class="fancybox-wrap" tabIndex="-1"><div class="fancybox-skin fancybox-skin-launching"><div class="fancybox-outer"><div class="fancybox-inner"></div></div></div></div>',
+									// image    : '<img class="fancybox-image" src="{href}" alt="" />',
+									// iframe   : '<iframe id="fancybox-frame{rnd}" name="fancybox-frame{rnd}" class="fancybox-iframe" frameborder="0" vspace="0" hspace="0"' + ($.browser.msie ? ' allowtransparency="true"' : '') + '></iframe>',
+									// error    : '<p class="fancybox-error">The requested content cannot be loaded.<br/>Please try again later.</p>',
+									// closeBtn : '<a title="Close" class="fancybox-item fancybox-close fancybox-close-launching" href="javascript:;"></a>',
+									// next     : '<a title="Next" class="fancybox-nav fancybox-next" href="javascript:;"><span></span></a>',
+									// prev     : '<a title="Previous" class="fancybox-nav fancybox-prev" href="javascript:;"><span></span></a>'
+								// },
+				// fitToView	: false,
+				// width		: '100%',
+				// height		: '100%',
+				// autoSize	: false,
+				// closeClick	: false,
+				// openEffect	: 'none',
+				// closeEffect	: 'none',
+				// helpers : { 
+						   // overlay: {
+						    // css: {}} // overlay 
+						  // } //helpers
+			// });
+			// $(".various").click();
 		});
 
 	    $(document).ready(function() {
-	    	$('#launching-form').submit(function() {
-				  var reg = new RegExp(/^\S+@\S+\.\S+$/);
-				  var em = $("#launching-input").val();
-				  var $that = $(this);
-				  if (!reg.test(em)) {
-				    alert('Please correct your email address.');
-				    $("#launching-input").focus();
-				  } else {
-				    $.ajax({
-				      type: "POST",
-				      url: '/launching/',
-				      data : 'email=' + em,
-				      success: function(msg) {
-                           $that.replaceWith("<p class='launching-line thanks'>Thanks for your attention, we'll contact you soon!</p>");
-				      }
-				    });   
-				  }
-				  return false;
-				});
-				//solving the plaoceholder problem
-			    $('input[placeholder]').each(function(){  
-			        
-			        var input = $(this);        
-			        var originalColor = input.css('color');
-			        var placeholderColor = '#bbb'
-			        $(input).val(input.attr('placeholder'));
-			        $(input).css('color',placeholderColor);    
-			        $(input).focus(function(){
-			             if (input.val() == input.attr('placeholder')) {
-			                 input.val('');
-			                 $(input).css('color',originalColor);   
-			             }
-			        });
-			        
-			        $(input).blur(function(){
-			            if (input.val() == '' || input.val() == input.attr('placeholder')) {
-			                input.val(input.attr('placeholder'));
-			                $(input).css('color',placeholderColor);
-			            }
-			        });
-			    });
+	    	// $('#launching-form').submit(function() {
+				  // var reg = new RegExp(/^\S+@\S+\.\S+$/);
+				  // var em = $("#launching-input").val();
+				  // var $that = $(this);
+				  // if (!reg.test(em)) {
+				    // alert('Please correct your email address.');
+				    // $("#launching-input").focus();
+				  // } else {
+				    // $.ajax({
+				      // type: "POST",
+				      // url: '/launching/',
+				      // data : 'email=' + em,
+				      // success: function(msg) {
+                           // $that.replaceWith("<p class='launching-line thanks'>Thanks for your attention, we'll contact you soon!</p>");
+				      // }
+				    // });   
+				  // }
+				  // return false;
+				// });
+				// //solving the plaoceholder problem
+			    // $('input[placeholder]').each(function(){  
+// 			        
+			        // var input = $(this);        
+			        // var originalColor = input.css('color');
+			        // var placeholderColor = '#bbb'
+			        // $(input).val(input.attr('placeholder'));
+			        // $(input).css('color',placeholderColor);    
+			        // $(input).focus(function(){
+			             // if (input.val() == input.attr('placeholder')) {
+			                 // input.val('');
+			                 // $(input).css('color',originalColor);   
+			             // }
+			        // });
+// 			        
+			        // $(input).blur(function(){
+			            // if (input.val() == '' || input.val() == input.attr('placeholder')) {
+			                // input.val(input.attr('placeholder'));
+			                // $(input).css('color',placeholderColor);
+			            // }
+			        // });
+			    // });
 			    // style the select
 			    if (!$.browser.opera) {
 

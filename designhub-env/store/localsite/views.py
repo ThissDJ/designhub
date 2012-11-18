@@ -85,16 +85,13 @@ class DesignerAjaxListView(ListView):
     def get_context_data(self, **kwargs):
         context = super(DesignerAjaxListView, self).get_context_data(**kwargs)
         designers = Designer.objects.filter(artist=False).order_by('name')
-        artists = Designer.objects.filter(artist=True).order_by('name')
-        talents = [list(designers),list(artists)]
-        groupNum1 = 5.0
-        groupNum2 = 2.0
-        groupNums = [groupNum1,groupNum2]
+        talents = [list(designers)]
+        groupNum1 = 7.0
+        groupNums = [groupNum1]
         averagePersonNum1 =  len(designers) / groupNum1
-        averagePersonNum2 =  len(artists) / groupNum2
-        averagePersonNums = [averagePersonNum1, averagePersonNum2]
-        talentGroups = [[],[]]
-        for i_t in [0,1]:
+        averagePersonNums = [averagePersonNum1]
+        talentGroups = [[]]
+        for i_t in [0]:
             for i_d in range(0, len(talents[i_t])):
                 d = talents[i_t][i_d]
                 if len(talentGroups[i_t]) == 0:
@@ -119,15 +116,72 @@ class DesignerAjaxListView(ListView):
         for d in talentGroups[0]:
             azGroups = AZGroups(name=d[0] , list = d[1])
             designersList.append(azGroups)
-        artistsList = []    
-        for d in talentGroups[1]:
-            azGroups = AZGroups(name=d[0] , list = d[1])
-            artistsList.append(azGroups)
         context.update(
-            designers = designersList ,
-            artists = artistsList
+            designers = designersList
         )
         return context
+class ArtistAjaxListView(ListView):
+    context_object_name = 'talents'
+    template_name = 'designers/artists-ajax.html'
+    model = Designer
+    def get_context_data(self, **kwargs):
+        context = super(ArtistAjaxListView, self).get_context_data(**kwargs)
+        artists = Designer.objects.filter(artist=True).order_by('name')
+        context.update(
+            artists = artists
+        )
+        return context
+
+#class DesignerAjaxListView(ListView):
+#    context_object_name = 'talents'
+#    template_name = 'designers/designers-ajax.html'
+#    model = Designer
+#    def get_context_data(self, **kwargs):
+#        context = super(DesignerAjaxListView, self).get_context_data(**kwargs)
+#        designers = Designer.objects.filter(artist=False).order_by('name')
+#        artists = Designer.objects.filter(artist=True).order_by('name')
+#        talents = [list(designers),list(artists)]
+#        groupNum1 = 5.0
+#        groupNum2 = 2.0
+#        groupNums = [groupNum1,groupNum2]
+#        averagePersonNum1 =  len(designers) / groupNum1
+#        averagePersonNum2 =  len(artists) / groupNum2
+#        averagePersonNums = [averagePersonNum1, averagePersonNum2]
+#        talentGroups = [[],[]]
+#        for i_t in [0,1]:
+#            for i_d in range(0, len(talents[i_t])):
+#                d = talents[i_t][i_d]
+#                if len(talentGroups[i_t]) == 0:
+#                    talentGroups[i_t].append(['A-',[d]])
+#                else:
+#                    currentLetter = d.name[0:1].upper()
+#                    if talentGroups[i_t][-1][1][-1].name[0:1].upper() == currentLetter:
+#                        talentGroups[i_t][-1][1].append(d)
+#                    else:
+#                        if len(talentGroups[i_t][-1][1]) <= averagePersonNums[i_t] :
+#                            talentGroups[i_t][-1][1].append(d)
+#                        else :
+#                            talentGroups[i_t][-1][0] += talentGroups[i_t][-1][1][-1].name[0:1].upper()
+#                            talentGroups[i_t].append([d.name[0:1].upper() + '-',[d]])
+#            if talentGroups[i_t][-1][0].upper()[-1] == '-':
+#                 talentGroups[i_t][-1][0] += 'Z'
+#        class AZGroups:
+#            def __init__(self,name='',list=[]):
+#                self.name = name
+#                self.list = list
+#        designersList = []    
+#        for d in talentGroups[0]:
+#            azGroups = AZGroups(name=d[0] , list = d[1])
+#            designersList.append(azGroups)
+#        artistsList = []    
+#        for d in talentGroups[1]:
+#            azGroups = AZGroups(name=d[0] , list = d[1])
+#            artistsList.append(azGroups)
+#        context.update(
+#            designers = designersList ,
+#            artists = artistsList
+#        )
+#        return context
 class DesignerDetailView(DetailView):
     model = Designer
     template_name = 'designers/designer-details.html'
@@ -300,4 +354,25 @@ def invite(request,
                             current_app=current_app)
     
     
+def aboutus(request,
+                    template_name='aboutus/base.html',
+                    current_app=None, extra_context=None):
+    context = {}
+    return TemplateResponse(request, template_name, context,
+                            current_app=current_app)
+    
+def dhcontact(request,
+                    template_name='aboutus/contact.html',
+                    current_app=None, extra_context=None):
+    context = {}
+    return TemplateResponse(request, template_name, context,
+                            current_app=current_app)
 
+def faq(request,
+                    template_name='aboutus/faq.html',
+                    current_app=None, extra_context=None):
+    context = {}
+    return TemplateResponse(request, template_name, context,
+                            current_app=current_app)
+        
+        
